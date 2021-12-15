@@ -1,0 +1,62 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@1,500&display=swap');
+
+p,h1,h2,h3,h4 {
+  font-family: 'Source Sans 3', sans-serif;
+}
+.nerodyti{
+  display: none !important;
+}
+
+.img-cart {
+  height: 8.5em;
+}
+
+.img-article {
+  height: 9em;
+}
+.img-home {
+  height: 11em;
+}
+
+.img-modal {
+  height: 4.5em;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.table-is-selected:hover {
+  background-color: #3a88e5;
+  color: #fff;
+}
+
+.line-through {
+  text-decoration: line-through;
+}
+
+.bg {
+  background-color: #CA9A6F;
+}
+
+.card-home {
+  background-color: #BE834F !important;
+  
+  border-top-left-radius: 10em !important;
+  border-start-end-radius: 10em !important;
+  border-end-start-radius: 5em !important;
+}
+
+
+.nav-color {
+  background-color:    #A56D3D !important;
+  
+}
+.a{
+  color:#000000 !important;
+}
+
+.navbar-item:hover {
+  background-color: #B57843 !important;
+}
