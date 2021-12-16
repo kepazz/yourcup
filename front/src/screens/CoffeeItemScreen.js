@@ -97,7 +97,7 @@ export default function CoffeeItemScreen(props) {
                       </div>
                     )}
                   </p>
-                  <p>Brand: <Link to={`/brand/${coffeeUnit.brand}`}>{coffeeUnit.brand}</Link> </p>
+                  <p>Brand: <Link to={`/brand/${coffeeUnit.brand.name}`}>{coffeeUnit.brand.name}</Link> </p>
 
                   {coffeeUnit.sale === false ? (
                     <p>Price: {coffeeUnit.price.toFixed(2)} €</p>

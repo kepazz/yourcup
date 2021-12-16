@@ -24,14 +24,20 @@ app.use(cors())
 const calculateOrderAmount = (items) => {
   return items.reduce((a, c) => a + c.price * c.qty, 0) * 100 || 50;
 };
-mongoose.connect(process.env.MONGO_URL || "mongodb://localhost/yourcup");
+
+if(process.env.NODE_ENV === "production"){
+  mongoose.connect(process.env.MONGO_URL)
+} else {
+  mongoose.connect("mongodb://localhost/yourcup");
+}
+//mongoose.connect(process.env.MONGO_URL || "mongodb://localhost/yourcup");
 app.use("/api/users", userRouter);
 app.use("/api/products", productRouter);
 app.use("/api/orders", orderRouter);
 app.use("/api/articles", articleRouter);
 app.use("/api/brand", brandRouter);
 
-console.log('miau')
+
 const __dirname = path.resolve()
 
 if(process.env.NODE_ENV === "production"){

@@ -14,21 +14,21 @@ export default function Card(props) {
   };
 
   return (
-    <div className="card" key={information._id}>
+    <div className="card mx-2" key={information._id}>
       <div className="card-image has-text-centered px-6">
         <Link to={`/coffee/${information._id}`}>
-          <figure className="image is-3by5">
+          <figure className="image is-3by4">
             <img src={information.image} alt={information.name} />
           </figure>
         </Link>
       </div>
       <div className="card-content">
         {information.sale === false ? (
-          <p>{information.price.toFixed(2)} €</p>
+          <p>{information.price} €</p>
         ) : (
           <p>
-            <span className="line-through has-text-danger">{information.price.toFixed(2)} €</span>{" "}
-            <span>{(((100-information.saleAmount)/100)*information.price).toFixed(2)} €</span>
+            <span className="line-through has-text-danger">{information.price} €</span>{" "}
+            <span>{(((100-information.saleAmount)/100)*information.price)} €</span>
           </p>
         )}
 

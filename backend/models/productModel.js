@@ -14,7 +14,8 @@ const commentSchema = new mongoose.Schema(
 const productSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
-    brand: { type: String, required: true },
+    //brand: { type: String, required: true },
+    brand :{type: mongoose.Schema.Types.ObjectId, ref:'Brand'},
     price: { type: Number, required: true },
     packageSize: { type: Number, required: true },
     image: { type: String, required: true },

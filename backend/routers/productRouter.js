@@ -16,19 +16,36 @@ productRouter.get(
 );
 
 productRouter.get(
-  '/threeRandom',
-  expressAsyncHandler(async (req,res) => {
-    const productUnit = await Product.aggregate([{$sample: {size:3}}]);
+  "/threeRandom",
+  expressAsyncHandler(async (req, res) => {
+    //const productUnit = await Product.aggregate([{$sample: {size:3}}]);
+    const productUnit = await Product.aggregate([
+      { $sample: { size: 3 } },
+      {
+        $lookup: {
+          from: "brands",
+          localField: "brand",
+          foreignField: "_id",
+          as: "brands",
+        },
+      },
+      { $unwind: "$brands" },
+      { $project: { brand: "$brands.name", name: 1 , image: 1} },
+    ]);
+    //console.log(productUnit);
     res.send(productUnit);
   })
-)
+);
 
 productRouter.get(
   "/:id",
   expressAsyncHandler(async (req, res) => {
     console.log(req.params);
-    const productUnit = await Product.findById(req.params.id);
-
+    //const productUnit = await Product.findById(req.params.id);
+    const productUnit = await Product.findById(req.params.id).populate(
+      "brand",
+      "name"
+    );
     if (productUnit) {
       res.send(productUnit);
     } else {
@@ -122,7 +139,7 @@ productRouter.post(
       type: req.body.type,
       species: req.body.species,
       sale: false,
-      saleAmount:30,
+      saleAmount: 30,
       comments: [],
     });
     const newProduct = await product.save();
@@ -135,11 +152,10 @@ productRouter.put(
   isAuth,
   isAdmin,
   expressAsyncHandler(async (req, res) => {
-    
     const productFound = await Product.findOne({ _id: req.body.id });
     if (productFound) {
       productFound.name = req.body.name;
-      productFound.brand = req.body.brand;
+      //productFound.brand = req.body.brand;
       productFound.price = req.body.price;
       productFound.packageSize = req.body.packageSize;
       productFound.image = req.body.image;
@@ -148,8 +164,8 @@ productRouter.put(
       productFound.species = req.body.species;
       productFound.sale = req.body.sale;
       productFound.saleAmount = req.body.saleAmount;
-      await productFound.save()
-      
+      await productFound.save();
+
       res.send(productFound);
     } else {
       res.status(404).send({ message: "Something went wrong " });

@@ -127,6 +127,9 @@ export const listFavoriteProducts = (favorites) => async (dispatch) => {
   }
 };
 
+
+//const { data } = await Axios.post(`/api/products/addNew`, newProduct, {
+
 export const productAdd = (newProduct) => async (dispatch, getState) => {
   dispatch({ type: PRODUCT_ADD_REQUEST });
   console.log(newProduct);
@@ -134,7 +137,7 @@ export const productAdd = (newProduct) => async (dispatch, getState) => {
     userSignIn: { userInfo },
   } = getState();
   try {
-    const { data } = await Axios.post(`/api/products/addNew`, newProduct, {
+    const { data } = await Axios.post(`/api/brand/test`, newProduct, {
       headers: { Authorization: `Bearer ${userInfo.token}` },
     });
 

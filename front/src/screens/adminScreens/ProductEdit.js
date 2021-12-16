@@ -40,7 +40,7 @@ export default function ProductEdit(props) {
   useEffect(() => {
     if (coffeeUnit) {
       setName(coffeeUnit.name);
-      setBrand(coffeeUnit.brand);
+      setBrand(coffeeUnit.brand.name);
       setPrice(coffeeUnit.price);
       setPackageSize(coffeeUnit.packageSize);
       setImage(coffeeUnit.image);
@@ -133,7 +133,7 @@ export default function ProductEdit(props) {
                       id="brand"
                       required
                       onChange={(e) => setBrand(e.target.value)}
-                      defaultValue={coffeeUnit.brand}
+                      defaultValue={coffeeUnit.brand.name}
                     >
                       
                       {brands.map((item) => {
