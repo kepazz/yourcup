@@ -37,7 +37,6 @@ app.use("/api/orders", orderRouter);
 app.use("/api/articles", articleRouter);
 app.use("/api/brand", brandRouter);
 
-
 const __dirname = path.resolve()
 
 if(process.env.NODE_ENV === "production"){
@@ -73,6 +72,4 @@ app.post("/create-payment-intent", async (req, res) => {
 });
 
 const port = process.env.PORT || 5000;
-app.listen(port, () => {
-  console.log(`Serve at http://localhost:${port}`);
-});
+app.listen(port);

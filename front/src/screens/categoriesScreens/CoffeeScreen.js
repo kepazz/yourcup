@@ -46,7 +46,7 @@ export default function CoffeeScreen() {
               <h1 className="py-3">Products screen</h1>
               <hr />
             </div>
-            <button onClick={()=> setFilterToogle(!filterToogle)} className="button">Turn filter {filterToogle && true ? 'on' :'off'}</button>
+            <button onClick={()=> setFilterToogle(!filterToogle)} className="button is-rounded btn-prim">Turn filter {filterToogle && true ? 'on' :'off'}</button>
             <section class={`hero bg ${filterToogle ? 'nerodyti': ''}`}>
             <div class="hero-body">
               <div class="container">
@@ -101,7 +101,7 @@ export default function CoffeeScreen() {
                   </div>
                 </div>
 
-                <h2 class="subtitle">Fullheight subtitle</h2>
+                
               </div>
             </div>
           </section>
@@ -123,7 +123,7 @@ export default function CoffeeScreen() {
                     lowestPrice === "" || product.price >= lowestPrice
                 )
                 .map((productUnit) => (
-                  <div className="column is-one-quarter ">
+                  <div className="column is-one-quarter is-four-fifths-mobile is-offset-1-mobile">
                     <Card
                       key={productUnit._id}
                       information={productUnit}

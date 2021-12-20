@@ -9,7 +9,7 @@ const articleRouter = express.Router();
 articleRouter.get(
   "/",
   expressAsyncHandler(async (req, res) => {
-    console.log(req.params.type);
+    
     const articles = await Article.find({}, "title image1");
     res.send(articles);
   })

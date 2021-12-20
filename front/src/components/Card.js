@@ -14,8 +14,11 @@ export default function Card(props) {
   };
 
   return (
-    <div className="card mx-2" key={information._id}>
-      <div className="card-image has-text-centered px-6">
+    <div className="card card-categories mx-2 " key={information._id}>
+      <div class="card-title has-text-centered">
+        <h3 className="title is-4 pt-5 pb-3 is-size-3-mobile">{information.name}</h3>
+      </div>
+      <div className="card-image has-text-centered px-5 ">
         <Link to={`/coffee/${information._id}`}>
           <figure className="image is-3by4">
             <img src={information.image} alt={information.name} />
@@ -27,27 +30,30 @@ export default function Card(props) {
           <p>{information.price} €</p>
         ) : (
           <p>
-            <span className="line-through has-text-danger">{information.price} €</span>{" "}
-            <span>{(((100-information.saleAmount)/100)*information.price)} €</span>
+            <span className="line-through has-text-danger">
+              {information.price} €
+            </span>{" "}
+            <span>
+              {((100 - information.saleAmount) / 100) * information.price} €
+            </span>
           </p>
         )}
 
-        <p className="is-size-4">
-          <strong>{information.name}</strong>
-        </p>
-        <p className="is-size-6">{information.species}</p>
+       
+        {information.type === 'coffee' ? (<p className="is-size-5"> Species: {information.species}</p>) : (<p className="is-size-5">{information.species}</p>)}
+        
       </div>
       <footer className="card-footer">
         <p className="card-footer-item">
-          <button class="button is-info is-rounded" onClick={addToCartHandler}>
+          <button class="button btn-prim is-rounded" onClick={addToCartHandler}>
             Add to cart
           </button>
         </p>
       </footer>
       {userInfo && userInfo.isAdmin && (
-        <div className="has-text-centered">
+        <div className="has-text-centered pb-2">
           <Link to={`/product_edit/${information._id}`}>Edit</Link>
-          <hr />
+          
         </div>
       )}
     </div>

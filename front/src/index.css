@@ -1,7 +1,8 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@1,500&display=swap');
+/* #956337 color */
 
-p,h1,h2,h3,h4 {
+* {
   font-family: 'Source Sans 3', sans-serif;
 }
 .nerodyti{
@@ -42,21 +43,37 @@ p,h1,h2,h3,h4 {
 
 .card-home {
   background-color: #BE834F !important;
-  
   border-top-left-radius: 10em !important;
   border-start-end-radius: 10em !important;
   border-end-start-radius: 5em !important;
 }
 
-
-.nav-color {
+.nav-color{
   background-color:    #A56D3D !important;
   
 }
-.a{
-  color:#000000 !important;
+
+.navbar-item:hover,.navbar-item:focus {
+  background-color: #B57843 !important;
 }
 
-.navbar-item:hover {
-  background-color: #B57843 !important;
+
+.btn-prim {
+  background-color: #D6B08F !important;
+  border-color: #402A18 !important;
+}
+.btn-prim:hover{
+  background-color: #C48E5F !important;
+}
+
+.card-categories {
+  border-color: #402A18 !important;
+  background-color: #BE834F !important;
+}
+
+.card-footer {
+  border-top: 1px solid #6A4727 !important;
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
 }

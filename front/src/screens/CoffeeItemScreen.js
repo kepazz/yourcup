@@ -21,6 +21,8 @@ export default function CoffeeItemScreen(props) {
   const userSignIn = useSelector((state) => state.userSignIn);
   const { userInfo } = userSignIn;
 
+  
+
   useEffect(() => {
     dispatch(listProductDetails(coffeeId));
   }, [dispatch, coffeeId]);
@@ -58,7 +60,7 @@ export default function CoffeeItemScreen(props) {
       ) : (
         <>
           <div className="container">
-            <div className="content is-medium has-text-centered">
+            <div className="content is-medium has-text-centered pt-5">
               <h1>Coffee item screen</h1>
             </div>
             <div className="columns">
@@ -74,30 +76,36 @@ export default function CoffeeItemScreen(props) {
                   <p class="">
                     <strong>{coffeeUnit.name}</strong>
                     {userInfo && (
-                      <div>
+                      <span className="ml-3">
                         {" "}
                         {/*  WHAT IF THERE IS NOTHING               */}
                         {userInfo.favorites.some(
                           (item) => item.product === coffeeUnit._id
                         ) ? (
                           <button
-                            onClick={favoriteDeleteHandler}
-                            className="button is-warning"
+                          onClick={favoriteDeleteHandler}
+                            className="button btn-prim is-rounded is-small"
                           >
-                            Delete from favorites
+                             Delete from favorites
                           </button>
                         ) : (
                           <button
+                            
                             onClick={favoriteAddHandler}
-                            className="button is-warning"
+                            className="button btn-prim is-rounded is-small"
                           >
-                            Add to favorites
+                            {" "} Add to favorites
                           </button>
                         )}
-                      </div>
+                      </span>
                     )}
                   </p>
-                  <p>Brand: <Link to={`/brand/${coffeeUnit.brand.name}`}>{coffeeUnit.brand.name}</Link> </p>
+                  <p>
+                    Brand:{" "}
+                    <Link to={`/brand/${coffeeUnit.brand.name}`}>
+                      {coffeeUnit.brand.name}
+                    </Link>{" "}
+                  </p>
 
                   {coffeeUnit.sale === false ? (
                     <p>Price: {coffeeUnit.price.toFixed(2)} €</p>
@@ -117,19 +125,19 @@ export default function CoffeeItemScreen(props) {
                     </p>
                   )}
                   <p>Package size: {coffeeUnit.packageSize}g.</p>
-                  <p>Package size: {coffeeUnit.description}g.</p>
+
                   <p>
-                    Description: Lorem Ipsum is simply dummy text of the
-                    printing and typesetting industry. Lorem Ipsum has been the
-                    industry's standard dummy text ever since the 1500s, when an
-                    unknown printer took a galley of type and scrambled it to
-                    make a type specimen book. It has survived not only five
-                    centuries, but also the leap into electronic typesetting,
-                    remaining essentially unchanged. It was popularised in the
-                    1960s with the release of Letraset sheets containing Lorem
-                    Ipsum passages, and more recently with desktop publishing
-                    software like Aldus PageMaker including versions of Lorem
-                    Ipsum.
+                    Description:[ {coffeeUnit.description} ]Lorem Ipsum is
+                    simply dummy text of the printing and typesetting industry.
+                    Lorem Ipsum has been the industry's standard dummy text ever
+                    since the 1500s, when an unknown printer took a galley of
+                    type and scrambled it to make a type specimen book. It has
+                    survived not only five centuries, but also the leap into
+                    electronic typesetting, remaining essentially unchanged. It
+                    was popularised in the 1960s with the release of Letraset
+                    sheets containing Lorem Ipsum passages, and more recently
+                    with desktop publishing software like Aldus PageMaker
+                    including versions of Lorem Ipsum.
                   </p>
                   <div className="has-text-centered ">
                     <input

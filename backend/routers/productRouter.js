@@ -114,9 +114,7 @@ productRouter.post(
     let temp = [];
 
     favorites.forEach((item) => temp.push(item.product));
-
     const productUnit = await Product.find({ _id: { $in: temp } });
-
     res.send(productUnit);
   })
 );

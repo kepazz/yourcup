@@ -32,8 +32,8 @@ export default function HomeScreen() {
                       Find yourself a hot drink that suits your taste desires
                     </h2>
                     <div class="buttons">
-                      <Link to='/coffee' class="button  is-rounded ">Discover</Link>
-                      <Link to='/articles' class="button is-rounded">Check articles</Link>
+                      <Link to='/coffee' class="button  is-rounded btn-prim">Discover</Link>
+                      <Link to='/articles' class="button is-rounded btn-prim">Check articles</Link>
                     </div>
                   </div>
                   <div class="column is-4">
@@ -74,7 +74,7 @@ export default function HomeScreen() {
                     </div>
                     <div class="card-action">
                       <Link to={`/coffee/${item._id}`}>
-                        <button class="button is-rounded is-link mb-4">
+                        <button class="button is-rounded btn-prim mb-4">
                           Check this out
                         </button>
                       </Link>

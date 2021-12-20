@@ -13,11 +13,7 @@ export default function CheckoutScreen(props) {
   const cart = useSelector((state) => state.cart);
   const { shippingInformation } = cart;
 
-  try {
-    const order = useSelector((state) => state.order);
-    const { paymentResult } = order;
-    console.log(paymentResult);
-  } catch (err) {}
+  
   const { cartItems } = cart;
   const [clientSecret, setClientSecret] = useState("");
 
@@ -33,7 +29,7 @@ export default function CheckoutScreen(props) {
     })
       .then((res) => res.json())
       .then((data) => setClientSecret(data.clientSecret));
-      console.log('miau')
+      console.log('miau');
   }, [cartItems]);
 
   const appearance = {
@@ -44,11 +40,7 @@ export default function CheckoutScreen(props) {
     appearance,
   };
 
-  useLayoutEffect(() => {
-    return () => {
-      //dispatch(removeShippingInformation());
-    };
-  }, []);
+ 
 
   const paymentData = (payId) => {
     console.log(payId);

@@ -13,10 +13,14 @@ export default function Navbar() {
   const dispatch = useDispatch();
 
   return (
-    <nav class="navbar nav-color" role="navigation" aria-label="main navigation">
+    <nav
+      class="navbar nav-color"
+      role="navigation"
+      aria-label="main navigation"
+    >
       <div class="navbar-brand">
-        <Link  class="navbar-item" to="/">
-          <img src={'/images/hello.png'} width="125" alt='logo'></img>
+        <Link class="navbar-item" to="/">
+          <img src={"/images/hello.png"} width="125" alt="logo"></img>
         </Link>
 
         <div
@@ -52,10 +56,9 @@ export default function Navbar() {
             <p>Coffee</p>
           </Link>
 
-          
           <div class="navbar-item has-dropdown is-hoverable">
             <Link to="/coffee" class="navbar-link">
-             <p>Tea</p> 
+              <p>Tea</p>
             </Link>
 
             <div class="navbar-dropdown ">
@@ -68,39 +71,39 @@ export default function Navbar() {
             </div>
           </div>
           <Link to="/cup" class="navbar-item">
-            Cups
+            <p>Cups</p>
           </Link>
 
           {userInfo && (
             <Link to="/favorites" class="navbar-item">
-              Favorites
+              <p>Favorites</p>
             </Link>
           )}
 
           {userInfo && userInfo.isAdmin && (
             <div class="navbar-item has-dropdown is-hoverable">
               <Link to="/coffee" class="navbar-link">
-                Admin
+                <p>Admin</p>
               </Link>
 
               <div class="navbar-dropdown ">
                 <Link to="/dashboard" class="navbar-item">
-                  Dashboard
+                  <p>Dashboard</p>
                 </Link>
                 <Link to="/pendingorders" class="navbar-item">
-                  Pending orders
+                  <p>Pending orders</p>
                 </Link>
                 <Link to="/sendorders" class="navbar-item">
-                  Send orders
+                  <p>Send orders</p>
                 </Link>
                 <Link to="/product_add" class="navbar-item">
-                  Product add
+                  <p>Product add</p>
                 </Link>
                 <Link to="/article_add" class="navbar-item">
-                  Article add
+                  <p>Article add</p>
                 </Link>
                 <Link to="/brand_modify" class="navbar-item">
-                  Brands
+                  <p>Brands</p>
                 </Link>
               </div>
             </div>
@@ -108,44 +111,49 @@ export default function Navbar() {
         </div>
 
         <div class="navbar-end">
-          <div class="navbar-item">
-            <div class="buttons">
-              <Link to="/cart" class="button is-light">
-                Shopping cart (<span>&nbsp;</span>
-                <strong>
-                  {cartItems.length > 0 &&
-                    cartItems.reduce((a, c) => a + c.qty, 0)}
-                  <span>&nbsp;</span>{" "}
-                </strong>
-                )
+          <Link to="/cart" class="navbar-item">
+            Shopping cart (<span>&nbsp;</span>
+            <strong>
+              {cartItems.length > 0 && cartItems.reduce((a, c) => a + c.qty, 0)}
+              <span>&nbsp;</span>{" "}
+            </strong>
+            )
+          </Link>
+
+          {userInfo ? (
+            <div class="navbar-item has-dropdown is-hoverable mr-1">
+              <Link to="/" class="navbar-link">
+                {userInfo.name}
               </Link>
-              {userInfo ? (
-                <div>
-                  <Link to="/profile" class="button is-danger">
-                    Profile
-                  </Link>
-                  <Link
-                    to="/"
-                    onClick={() => {
-                      dispatch(signOut());
-                    }}
-                    class="button is-light"
-                  >
-                    Sign out
-                  </Link>
-                </div>
-              ) : (
-                <div>
-                  <Link to="/register" class="button is-danger">
-                    Sign up
-                  </Link>
-                  <Link to="/signin" class="button is-light">
-                    Sign in
-                  </Link>
-                </div>
-              )}
+
+              <div class="navbar-dropdown is-right">
+                <Link to="/orders" class="navbar-item">
+                  Orders
+                </Link>
+                <Link to="/update" class="navbar-item">
+                  Update password
+                </Link>
+                <Link
+                  to="/"
+                  onClick={() => {
+                    dispatch(signOut());
+                  }}
+                  class="navbar-item"
+                >
+                  Sign out
+                </Link>
+              </div>
             </div>
-          </div>
+          ) : (
+            <>
+              <Link to="/register" class="navbar-item">
+                Sign up
+              </Link>
+              <Link to="/signin" class="navbar-item">
+                Sign in
+              </Link>
+            </>
+          )}
         </div>
       </div>
     </nav>
