@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { signIn } from "../../actions/userActions";
 import { toast } from 'react-toastify';
 import ToastComponent from "../../components/ToastComponent";
+import LoadingComponent from "../../components/LoadingComponent";
 
 
 
@@ -12,7 +13,7 @@ export default function SignInScreen(props) {
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
   const userSignIn = useSelector((state) => state.userSignIn);
-  const { userInfo, loading, error } = userSignIn;
+  const { userInfo, loading, error  } = userSignIn;
 
   const redirect = props.location.search
     ? props.location.search.split("=")[1]
@@ -21,16 +22,6 @@ export default function SignInScreen(props) {
   const submitHandler = (e) => {
     e.preventDefault();
     dispatch(signIn(email, password));
-    toast.error('🦄 Wow so easy!', {
-      position: "top-center",
-      autoClose: 2500,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      });
-    
   };
 
   useEffect(() => {
@@ -85,11 +76,14 @@ export default function SignInScreen(props) {
                     Dont have an account ?
                     <Link to="/register"> Create one</Link>{" "}
                   </p>
-                  <br />
-                  <div class="field has-text-centered">
+                 
+                  
+                  {error && <p className="has-text-danger pt-3">Sign in failed</p>}
+                   
+                  {loading ? (<LoadingComponent></LoadingComponent>): (<div class="field has-text-centered">
                     <button class="button btn-prim is-rounded">Login</button>
-                    <ToastComponent/>
-                  </div>
+                   
+                  </div>)}
                 </form>
               </div>
             </div>

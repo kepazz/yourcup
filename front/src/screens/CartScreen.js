@@ -23,13 +23,16 @@ export default function CartScreen(props) {
   return (
     <div>
       {cartItems.length === 0 ? (
-        <h2>Cart is empty</h2>
+        <div className="content is-medium has-text-centered">
+          <h1 className="py-5">Cart is empty</h1>
+          <hr />
+        </div>
       ) : (
         <div className="container">
           <div className="content is-medium has-text-centered">
-              <h1 className="py-5">Cart</h1>
-              <hr />
-            </div>
+            <h1 className="py-5">Cart</h1>
+            <hr />
+          </div>
           {cartItems.map((item) => (
             <div>
               <div className="columns has-text-centered is-vcentered">
@@ -38,16 +41,20 @@ export default function CartScreen(props) {
                 </div>
                 <div className="column is-size-5">{item.name}</div>
                 <div className="column is-size-5">
-                  
                   {item.sale === false ? (
-          <p>Unit price: {item.price.toFixed(2)} €</p>
-        ) : (
-          <p>Unit price:
-            <span className="line-through has-text-danger">{(item.price*100/(100-item.saleAmount)).toFixed(2)}€</span>{" "}
-            <span >{item.price} €</span>{" "}
-          </p>
-        )}
-                  
+                    <p>Unit price: {item.price.toFixed(2)} €</p>
+                  ) : (
+                    <p>
+                      Unit price:
+                      <span className="line-through has-text-danger">
+                        {((item.price * 100) / (100 - item.saleAmount)).toFixed(
+                          2
+                        )}
+                        €
+                      </span>{" "}
+                      <span>{item.price} €</span>{" "}
+                    </p>
+                  )}
                 </div>
                 <div className="column is-size-5">
                   <button

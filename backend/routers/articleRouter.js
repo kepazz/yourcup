@@ -10,7 +10,7 @@ articleRouter.get(
   "/",
   expressAsyncHandler(async (req, res) => {
     
-    const articles = await Article.find({}, "title image1");
+    const articles = await Article.find({}, "title subtitle image1");
     res.send(articles);
   })
 );

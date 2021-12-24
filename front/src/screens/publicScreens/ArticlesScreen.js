@@ -23,7 +23,7 @@ export default function ArticlesScreen() {
           <hr />
           <div className="columns is-multiline">
             {articles.map((article) => (
-              <div className="column is-one-third">
+              <div className="column is-one-third is-8-mobile is-offset-2-mobile">
                 <ArticleCard
                   key={article._id}
                   information={article}
