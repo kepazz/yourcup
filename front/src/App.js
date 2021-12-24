@@ -2,10 +2,18 @@ import React from "react";
 import { BrowserRouter, Route } from "react-router-dom";
 import "bulma/css/bulma.css";
 
-import HomeScreen from "./screens/HomeScreen";
-import CoffeeItemScreen from "./screens/CoffeeItemScreen";
-import SignInScreen from "./screens/SignInScreen";
-import RegisterScreen from "./screens/RegisterScreen";
+import HomeScreen from "./screens/publicScreens/HomeScreen";
+import RegisterScreen from "./screens/publicScreens/RegisterScreen";
+import ArticlesScreen from "./screens/publicScreens/ArticlesScreen";
+import ArticleUnitScreen from "./screens/publicScreens/ArticleUnitScreen";
+import BrandScreen from "./screens/publicScreens/BrandScreen";
+import BeveragesScreen from "./screens/publicScreens/BeveragesScreen";
+import CoffeeItemScreen from "./screens/publicScreens/CoffeeItemScreen";
+import SignInScreen from "./screens/publicScreens/SignInScreen";
+
+
+
+
 import CartScreen from "./screens/CartScreen";
 import ShippingScreen from "./screens/ShippingScreen";
 import CheckoutScreen from "./screens/CheckoutScreen";
@@ -17,23 +25,20 @@ import Navbar from "./components/Navbar";
 import FavoritesScreen from "./screens/FavoritesScreen";
 import CoffeeScreen from "./screens/categoriesScreens/CoffeeScreen";
 
-import BlackTeaScreen from "./screens/categoriesScreens/BlackTeaScreen";
-import GreenTeaScreen from "./screens/categoriesScreens/GreenTeaScreen";
+
 import CupScreen from "./screens/categoriesScreens/CupScreen";
 import DashboardScreen from "./screens/DashboardScreen";
-import AdminRoute from "./components/AdminRoute";
 import PendingOrders from "./screens/PendingOrders";
 import SendOrders from "./screens/SendOrders";
+
+import AdminRoute from "./components/AdminRoute";
 import UserSummaryScreen from "./screens/adminScreens/UserSummaryScreen";
 import UserOrderSummary from "./screens/adminScreens/UserOrderSummary";
 import ProductAdd from "./screens/adminScreens/ProductAdd";
 import ProductEdit from "./screens/adminScreens/ProductEdit";
-import ArticlesScreen from "./screens/ArticlesScreen";
 import ArticleAdd from "./screens/adminScreens/ArticleAdd";
-import ArticleUnitScreen from "./screens/ArticleUnitScreen";
 import ArticleEdit from "./screens/adminScreens/ArticleEdit";
 import BrandModify from "./screens/adminScreens/BrandModify";
-import BrandScreen from "./screens/BrandScreen";
 
 function App() {
   return (
@@ -52,8 +57,8 @@ function App() {
         <Route path="/update" component={UpdatePasswordScreen}></Route>
         <Route path="/favorites" component={FavoritesScreen}></Route>
         <Route exact path="/coffee" component={CoffeeScreen}></Route>
-        <Route path="/blacktea" component={BlackTeaScreen}></Route>
-        <Route path="/greentea" component={GreenTeaScreen}></Route>
+        <Route path="/beverages" component={BeveragesScreen}></Route>
+        
         <Route path="/cup" component={CupScreen}></Route>
         <Route exact path="/articles" component={ArticlesScreen}></Route>
         <Route exact path="/articles/:id" component={ArticleUnitScreen}></Route>

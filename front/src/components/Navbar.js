@@ -45,7 +45,7 @@ export default function Navbar() {
       >
         <div class="navbar-start">
           <Link to="/" class="navbar-item">
-            <p>Home</p>
+            <p><strong>Home</strong></p>
           </Link>
 
           <Link to="/articles" class="navbar-item">
@@ -56,20 +56,11 @@ export default function Navbar() {
             <p>Coffee</p>
           </Link>
 
-          <div class="navbar-item has-dropdown is-hoverable">
-            <Link to="/coffee" class="navbar-link">
-              <p>Tea</p>
-            </Link>
+          <Link to="/beverages" class="navbar-item">
+            <p>Beverages</p>
+          </Link>
 
-            <div class="navbar-dropdown ">
-              <Link to="/blacktea" class="navbar-item">
-                Black tea
-              </Link>
-              <Link to="/greentea" class="navbar-item">
-                Green tea
-              </Link>
-            </div>
-          </div>
+          
           <Link to="/cup" class="navbar-item">
             <p>Cups</p>
           </Link>

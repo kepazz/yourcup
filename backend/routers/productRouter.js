@@ -1,6 +1,8 @@
 import express from "express";
 import expressAsyncHandler from "express-async-handler";
+
 import Product from "../models/productModel.js";
+import Brand from "../models/brandModel.js";
 import { isAdmin, isAuth } from "../utils.js";
 
 const productRouter = express.Router();
@@ -9,9 +11,15 @@ productRouter.get(
   "/category/:type",
   expressAsyncHandler(async (req, res) => {
     console.log(req.params.type);
-    const productUnit = await Product.find({ type: req.params.type });
+    if (req.params.type === "drinks") {
+      const productUnit = await Product.find({
+        type: { $in: ["coffee", "tea"] },
+      });
+      res.send(productUnit);
+    }
+
     //const productUnit = await Product.aggregate([{$match : {type: req.params.type}}, {$sample: {size:3}}])
-    res.send(productUnit);
+    //res.send(productUnit);
   })
 );
 
@@ -30,7 +38,7 @@ productRouter.get(
         },
       },
       { $unwind: "$brands" },
-      { $project: { brand: "$brands.name", name: 1 , image: 1} },
+      { $project: { brand: "$brands.name", name: 1, image: 1 } },
     ]);
     //console.log(productUnit);
     res.send(productUnit);
@@ -169,6 +177,32 @@ productRouter.put(
       res.status(404).send({ message: "Something went wrong " });
     }
   })
+);
+
+productRouter.delete(
+  "/deleteProduct",
+  isAuth,
+  isAdmin,
+  expressAsyncHandler(async (req, res) => {
+    console.log(req.body);
+    //const deletedProduct = await Product.findByIdAndDelete(req.params.productId)
+
+    Brand.findOneAndUpdate({_id: req.body.brandId}, {
+      $pull:{
+        'products': req.body.productId
+      }
+    }, function (err){
+      if(!err){
+        Product.findByIdAndRemove({_id: req.body.productId}, (err) => {
+          if (err) res.status(404).send(err)
+          else res.send({message: `Deleted ${req.body.productId}`})
+        })
+      }
+      
+    })
+    
+  })
+  
 );
 
 export default productRouter;

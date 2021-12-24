@@ -11,9 +11,7 @@ const brandRouter = express.Router();
 brandRouter.get(
   "/",
   expressAsyncHandler(async (req, res) => {
-    console.log(req.params.type);
-
-    const brands = await Brand.find({});
+    const brands = await Brand.find({}).populate("products");
     res.send(brands);
   })
 );
@@ -38,7 +36,9 @@ brandRouter.get(
   expressAsyncHandler(async (req, res) => {
     console.log(req.params.brand);
     //const brandInfo = await Brand.findOne({ name: req.params.brand });
-    const brandInfo = await Brand.findOne({ name: req.params.brand }).populate('products');
+    const brandInfo = await Brand.findOne({ name: req.params.brand }).populate(
+      "products"
+    );
     if (brandInfo) {
       //const productsInfo = await Product.find({ brand: req.params.brand });
       //res.send({ brandData: brandInfo, productsData: productsInfo });
@@ -77,9 +77,9 @@ brandRouter.post(
         if (err) return err;
       });
       brand.products.push(newProduct._id);
-      brand.save()
+      brand.save();
     });
-    console.log(brand)
+    //console.log(brand);
     res.send(brand);
   })
 );

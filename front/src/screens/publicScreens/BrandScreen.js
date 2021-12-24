@@ -1,9 +1,9 @@
 import React from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { listBrandDetails } from "../actions/brandActions";
-import Card from "../components/Card";
-import LoadingComponent from "../components/LoadingComponent";
+import { listBrandDetails } from "../../actions/brandActions";
+import Card from "../../components/Card";
+import LoadingComponent from "../../components/LoadingComponent";
 
 export default function BrandScreen(props) {
   const brandName = props.match.params.brand;
@@ -22,6 +22,7 @@ export default function BrandScreen(props) {
         <p>klaida</p>
       ) : (
         <div className="container">
+          
             <h1 className="title has-text-centered pt-4">{details.name}</h1>
             <div class="content">
             <h1>Description</h1>

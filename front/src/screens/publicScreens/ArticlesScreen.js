@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { listArticles } from "../actions/articleActions";
-import ArticleCard from "../components/ArticleCard";
-import LoadingComponent from "../components/LoadingComponent";
+import { listArticles } from "../../actions/articleActions";
+import ArticleCard from "../../components/ArticleCard";
+import LoadingComponent from "../../components/LoadingComponent";
 
 export default function ArticlesScreen() {
   const dispatch = useDispatch();

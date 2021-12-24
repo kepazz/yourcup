@@ -1,7 +1,7 @@
 import { BRAND_ADD_FAIL, BRAND_ADD_REQUEST, BRAND_ADD_SUCCESS, BRAND_DETAILS_FAIL, BRAND_DETAILS_REQUEST, BRAND_DETAILS_SUCCESS, BRAND_LIST_FAIL, BRAND_LIST_REQUEST, BRAND_LIST_SUCCESS } from "../constants/brandConstants";
 
 export const brandListReducer = (
-    state = { loading: true, articles: [] },
+    state = { loading: true, brands: [] },
     action
   ) => {
     switch (action.type) {
@@ -33,7 +33,7 @@ export const brandListReducer = (
   };
 
   export const brandDetailsReducer = (
-    state = { loading: true, articles: [] },
+    state = { loading: true, details: [] },
     action
   ) => {
     switch (action.type) {

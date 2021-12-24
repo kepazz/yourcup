@@ -5,135 +5,126 @@ import { listProducts } from "../../actions/productsActions";
 import Card from "../../components/Card";
 
 export default function CoffeeScreen() {
-  const dispatch = useDispatch();
-  const coffeeList = useSelector((state) => state.productList);
+  const selectableVariables = {
+    coffee: [
+      { value: "arabica", displayName: "Arabica" },
+      { value: "robusta", displayName: "Robusta" },
+      { value: "liberica", displayName: "Liberica" },
+      { value: "excelsa", displayName: "Excelsa" },
+    ],
+    tea: [
+      { value: "white", displayName: "White" },
+      { value: "green", displayName: "Green" },
+      { value: "black", displayName: "Black" },
+    ],
+    cups: [
+      { value: "mug", displayName: "Mug" },
+      { value: "teacup", displayName: "Teacup" },
+    ],
+    machines: [
+      { value: "mokapot", displayName: "Moka pot" },
+      { value: "kettle", displayName: "Kettle" },
+    ],
+  };
+  const [country, setCountry] = useState("coffee");
+  const [city, setCity] = useState("paris");
+  const [cities, setCities] = useState(selectableVariables["coffee"]);
 
-  
+  const handleChangeCountry = (event) => {
+    setCountry(event.target.value);
+    setCities(selectableVariables[event.target.value]);
+    setCity(selectableVariables[event.target.value][0].value);
+  };
 
-  const [filterToogle, setFilterToogle]= useState(true)
-
-
-  const { loading, coffee } = coffeeList;
-  let allCategories = [];
-  if (coffee) {
-    allCategories = ["All", ...new Set(coffee.map((item) => item.species))];
-  }
-
-  useEffect(() => {
-    dispatch(listProducts("coffee"));
-  }, [dispatch]);
-
-  const [selectedCategory, setSelectedCategory] = useState("All");
-  const [lowestPrice, setLowestPrice] = useState("");
-  const [highestPrice, setHighestPrice] = useState("");
-
-  console.log(` lowest - ${lowestPrice}`);
-  const handleClick = (category) => setSelectedCategory(category);
-
-  console.log(selectedCategory);
+  const handleChangeCity = (event) => {
+    setCity(event.target.value);
+  };
 
   return (
     <div>
-      {loading ? (
-        <LoadingComponent></LoadingComponent>
-      ) : (
-        <div>
-          
-          
+      <select onChange={handleChangeCountry} value={country}>
+        <option value="coffee">Coffee</option>
+        <option value="tea">Tea</option>
+        <option value="cups">Cups</option>
+        <option value="machines">Machines</option>
+      </select>
+      <select onChange={handleChangeCity}>
+        {cities.map((city) => (
+          <option value={city.value}>{city.displayName}</option>
+        ))}
+      </select>
 
-          <div className="container">
-            <div className="content is-medium has-text-centered">
-              <h1 className="py-3">Products screen</h1>
-              <hr />
-            </div>
-            <button onClick={()=> setFilterToogle(!filterToogle)} className="button is-rounded btn-prim">Turn filter {filterToogle && true ? 'on' :'off'}</button>
-            <section class={`hero bg ${filterToogle ? 'nerodyti': ''}`}>
-            <div class="hero-body">
-              <div class="container">
-                <div className="columns is-vcentered">
-                  <div className="column is-5 ">
-                    <h1 class="title">Filter: </h1>
-                    <div className="buttons">
-                      {allCategories.map((item) => (
-                        <button
-                          onClick={() => handleClick(item)}
-                          key={item}
-                          className="button is-info"
-                        >
-                          {item}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                  <div className="column is-2">
-                    <div class="field">
-                      <label htmlFor="lowprice" class="label">
-                        Set lowest price
-                      </label>
-                      <div class="control">
-                        <input
-                          id="lowprice"
-                          type="email"
-                          class="input"
-                          style={{ width: "50%" }}
-                          onChange={(e) => setLowestPrice(e.target.value)}
-                          autocomplete="off"
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  <div className="column is-2 is-offset-1">
-                  <div class="field">
-                  <label htmlFor="highprice" class="label">
-                    Set highest price
-                  </label>
-                  <div class="control">
-                    <input
-                      id="highprice"
-                      type="email"
-                      class="input"
-                      style={{ width: "50%" }}
-                      onChange={(e) => setHighestPrice(e.target.value)}
-                      autocomplete="off"
-                    />
-                  </div>
-                </div>
-                  </div>
-                </div>
+      <fieldset>
+        <div className="container ">
+<div class="columns  is-multiline mx-2">
+  <div class="column is-one-quarter is-offset-one-quarter   small-padding"> <label htmlFor="name" class="label">Name</label><input name="fname" class="input" placeholder="First Name..." required/></div>
+  <div class="column is-one-quarter  small-padding"><label htmlFor="name" class="label">Name</label><input name="lname" class="input" placeholder="Last Name..." required/></div>
+  
+  <div class="column is-one-quarter is-offset-one-quarter   small-padding"> <label htmlFor="name" class="label">Name</label><input name="fname" class="input" placeholder="First Name..." required/></div>
+  <div class="column is-one-quarter  small-padding"><label htmlFor="name" class="label">Name</label><input name="lname" class="input" placeholder="Last Name..." required/></div>
 
-                
-              </div>
-            </div>
-          </section>
+  <div class="column is-full small-padding"><label>Address</label><input name="address" class="input" placeholder="Full Address..."/></div>
+  <div class="column is-full small-padding"><input name="city" class="input" placeholder="Suburb..."/></div>
+  <div class="column is-half small-padding"><input name="state" class="input" placeholder="State..."/></div>
+  <div class="column is-half small-padding"><input name="postal_code" class="input" placeholder="Postcode..."/></div>
+</div></div>
+</fieldset>
 
-            <hr />
-            <div className="columns is-multiline">
-              {coffee
-                .filter(
-                  (product) =>
-                    selectedCategory === "All" ||
-                    product.species === selectedCategory
-                )
-                .filter(
-                  (product) =>
-                    highestPrice === "" || product.price <= highestPrice
-                )
-                .filter(
-                  (product) =>
-                    lowestPrice === "" || product.price >= lowestPrice
-                )
-                .map((productUnit) => (
-                  <div className="column is-one-quarter is-four-fifths-mobile is-offset-1-mobile">
-                    <Card
-                      key={productUnit._id}
-                      information={productUnit}
-                    ></Card>
-                  </div>
-                ))}
-            </div>
-          </div>
+
+<div class="field is-horizontal container">
+  <div class="field-body">
+     
+     <div class="field">
+        <p class="control is-expanded">
+           <span class="select is-fullwidth">
+              <select name="status" id="status">
+                 <option value="">Status:</option>
+                 <option value="active">active</option>
+                 <option value="pause">pause</option>
+              </select>
+           </span>
+        </p>
+     </div>
+     <div class="field">
+        <p class="control is-expanded">
+           <span class="select is-fullwidth">
+              <select name="limit" id="limit">
+                 <option value="">Limits:</option>
+                 <option value="10">10</option>
+                 <option value="20">20</option>
+              </select>
+           </span>
+        </p>
+     </div>
+  </div>
+  </div>
+
+  <div class="level">
+  <div class="level-left">
+    <div class="level-item">
+      <div class="field">
+        <label class="label">First Name</label>
+        <div class="control">
+          <input class="input" type="text" placeholder="e.g Alex"/>
         </div>
-      )}
+      </div>
+    </div>
+    <div class="level-item">
+      <div class="field">
+        <label class="label">Middle Name</label>
+        <div class="control">
+          <input class="input" type="text" placeholder="e.g Bob"/>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div>
+  
+</div>
+
+
     </div>
   );
 }

@@ -6,7 +6,11 @@ import {
   articleListReducer,
   articleUpdateReducer,
 } from "./reducers/articleReducers";
-import { brandAddReducer, brandDetailsReducer, brandListReducer } from "./reducers/brandReducers";
+import {
+  brandAddReducer,
+  brandDetailsReducer,
+  brandListReducer,
+} from "./reducers/brandReducers";
 import { cartReducer } from "./reducers/cartReducers";
 import {
   orderChangeStatusReducer,
@@ -23,6 +27,7 @@ import {
   productCommentCreateReducer,
   productAddReducer,
   productUpdateReducer,
+  productDeleteReducer,
 } from "./reducers/productReducers";
 import {
   favoritesUpdateReducer,
@@ -65,13 +70,14 @@ const reducer = combineReducers({
   orderListByUser: orderListByUserReducer,
   productAdd: productAddReducer,
   productUpdate: productUpdateReducer,
+  productDelete: productDeleteReducer,
   articleList: articleListReducer,
   articleAdd: articleAddReducer,
   articleDetails: articleDetailsReducer,
   articleUpdate: articleUpdateReducer,
-  brandList:brandListReducer,
-  brandAdd:brandAddReducer,
-  brandDetails:brandDetailsReducer,
+  brandList: brandListReducer,
+  brandAdd: brandAddReducer,
+  brandDetails: brandDetailsReducer,
 });
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

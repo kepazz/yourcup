@@ -27,8 +27,9 @@ export default function CartScreen(props) {
       ) : (
         <div className="container">
           <div className="content is-medium has-text-centered">
-            <h1>Cart</h1>
-          </div>
+              <h1 className="py-5">Cart</h1>
+              <hr />
+            </div>
           {cartItems.map((item) => (
             <div>
               <div className="columns has-text-centered is-vcentered">

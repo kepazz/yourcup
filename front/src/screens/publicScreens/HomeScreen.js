@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 //import logo from '../../public/images/homePageImage.png'
-import { listThreeRandomProducts } from "../actions/productsActions";
-import LoadingComponent from "../components/LoadingComponent";
+import { listThreeRandomProducts } from "../../actions/productsActions";
+import LoadingComponent from "../../components/LoadingComponent";
 
 export default function HomeScreen() {
   const dispatch = useDispatch();

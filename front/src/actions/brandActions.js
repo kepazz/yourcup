@@ -21,13 +21,16 @@ export const listBrands = () => async (dispatch) => {
     const { data } = await Axios.get("/api/brand/");
     dispatch({ type: BRAND_LIST_SUCCESS, payload: data });
   } catch (error) {
-    dispatch({ type: BRAND_LIST_FAIL, payload: error.message });
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+    dispatch({ type: BRAND_LIST_FAIL, payload: message });
   }
 };
 
 export const brandAdd = (brand) => async (dispatch, getState) => {
   dispatch({ type: BRAND_ADD_REQUEST });
-
   const {
     userSignIn: { userInfo },
   } = getState();
@@ -45,7 +48,6 @@ export const brandAdd = (brand) => async (dispatch, getState) => {
     dispatch({ type: BRAND_ADD_FAIL, payload: message });
   }
 };
-
 
 export const listBrandDetails = (brand) => async (dispatch) => {
   dispatch({

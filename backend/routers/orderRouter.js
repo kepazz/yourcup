@@ -18,7 +18,7 @@ orderRouter.post(
         shippingInformation: req.body.shippingInformation,
         paymentResult: req.body.paymentResult,
         itemsPrice: req.body.itemsPrice,
-        priceVAT: req.body.priceVAT,
+        priceVAT: req.body.priceVAT.toFixed(2),
         user: req.user._id,
         paidAt: Date.now(),
       });
@@ -110,8 +110,8 @@ orderRouter.get(
         vat += item.priceVAT;
       })
       res.send({
-        totalSpend: spend.toFixed(2),
-        totalVat: vat.toFixed(2),
+        totalSpend: spend,
+        totalVat: vat,
         activeOrders:active,
         finishedOrders:finished,
         userEmail:userInfo.email,

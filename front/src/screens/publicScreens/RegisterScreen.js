@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { register } from "../actions/userActions";
+import { Link } from "react-router-dom";
+import { register } from "../../actions/userActions";
 
 export default function RegisterScreen(props) {
   const [email, setEmail] = useState("");
@@ -39,9 +40,12 @@ export default function RegisterScreen(props) {
         <h1>Register</h1>
       </div>
 
-      <div className="columns is-centered">
-        <div className="column is-5-tablet is-4-desktop is-3-widescreen">
-          <form onSubmit={submitHandler} autocomplete="off">
+      <section class="hero halfheight">
+        <div class="hero-body">
+          <div class="container">
+            <div class="columns is-vcentered ">
+              <div class="column is-one-third  is-offset-one-third">
+              <form onSubmit={submitHandler} autocomplete="off">
             <div class="field">
               <label htmlFor="name" class="label">
                 Name
@@ -105,13 +109,20 @@ export default function RegisterScreen(props) {
                 />
               </div>
             </div>
+            <p>Have account already? <Link to='/signin'>Sign in</Link></p>
 
-            <div class="field">
-              <button class="button is-success">Register</button>
+            <div class="field has-text-centered">
+              <br/>
+              <button class="button btn-prim is-rounded">Register</button>
             </div>
           </form>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
+      </section>
+
+      
     </div>
   );
 }

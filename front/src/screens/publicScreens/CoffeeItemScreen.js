@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { addToCart } from "../actions/cartActions";
+import { addToCart } from "../../actions/cartActions";
 import {
   createComment,
   deleteComment,
   listProductDetails,
-} from "../actions/productsActions";
-import { favoritesAdd, favoritesDelete } from "../actions/userActions";
-import LoadingComponent from "../components/LoadingComponent";
+} from "../../actions/productsActions";
+import { favoritesAdd, favoritesDelete } from "../../actions/userActions";
+import LoadingComponent from "../../components/LoadingComponent";
 
 export default function CoffeeItemScreen(props) {
   const dispatch = useDispatch();
@@ -179,7 +179,7 @@ export default function CoffeeItemScreen(props) {
                                 >
                                   Delete
                                 </a>{" "}
-                                · 3 hrs
+                                · 11/12/2021
                               </small>
                             </p>
                           )}

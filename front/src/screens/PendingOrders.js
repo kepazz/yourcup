@@ -53,6 +53,10 @@ export default function PendingOrders() {
       ) : (
         <>
           <div className="container">
+          <div className="content is-medium has-text-centered">
+              <h1 className="py-5">Pending orders</h1>
+              <hr />
+            </div>
             <div className="table-container">
               <table className="table is-fullwidth is-bordered ">
                 <thead>

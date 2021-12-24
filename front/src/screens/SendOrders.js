@@ -47,6 +47,10 @@ export default function SendOrders() {
       ) : (
         <>
           <div className="container">
+            <div className="content is-medium has-text-centered">
+              <h1 className="py-5">Send orders</h1>
+              <hr />
+            </div>
             <div className="table-container">
               <table className="table is-fullwidth is-bordered ">
                 <thead>
@@ -77,7 +81,9 @@ export default function SendOrders() {
                       </td>
                       <td>{item.itemsPrice}</td>
                       <td>{item.priceVAT}</td>
-                      <td ><p className="pointer">{item.user}</p></td>
+                      <td>
+                        <p className="pointer">{item.user}</p>
+                      </td>
                       <td>{dateHandler(item.paidAt)}</td>
                       <td>{item.paymentResult.id}</td>
                       <td>

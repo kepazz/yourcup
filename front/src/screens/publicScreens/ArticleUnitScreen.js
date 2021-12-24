@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { listArticleDetails } from "../actions/articleActions";
-import LoadingComponent from "../components/LoadingComponent";
+import { listArticleDetails } from "../../actions/articleActions";
+import LoadingComponent from "../../components/LoadingComponent";
 
 export default function ArticleUnitScreen(props) {
   const dispatch = useDispatch();

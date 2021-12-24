@@ -8,7 +8,6 @@ import LoadingComponent from "../../components/LoadingComponent";
 import FileBase64 from "react-file-base64";
 import { listBrands } from "../../actions/brandActions";
 
-
 export default function ProductEdit(props) {
   const dispatch = useDispatch();
   const coffeeId = props.match.params.id;
@@ -16,7 +15,7 @@ export default function ProductEdit(props) {
   const { loading, error, coffeeUnit } = coffeeDetails;
 
   const brandList = useSelector((state) => state.brandList);
-  const {  brands } = brandList;
+  const { brands } = brandList;
 
   const [name, setName] = useState(coffeeUnit ? coffeeUnit.name : "");
   const [brand, setBrand] = useState("");
@@ -28,10 +27,6 @@ export default function ProductEdit(props) {
   const [species, setSpecies] = useState("");
   const [sale, setSale] = useState(false);
   const [saleAmount, setSaleAmount] = useState(0);
-
-  useEffect(() => {
-    dispatch(listBrands());
-  }, [dispatch]);
 
   useEffect(() => {
     dispatch(listProductDetails(coffeeId));
@@ -47,8 +42,8 @@ export default function ProductEdit(props) {
       setDescription(coffeeUnit.description);
       setType(coffeeUnit.type);
       setSpecies(coffeeUnit.species);
-      setSale(JSON.parse(!coffeeUnit.sale))
-      setSaleAmount(coffeeUnit.saleAmount)
+      setSale(JSON.parse(!coffeeUnit.sale));
+      setSaleAmount(coffeeUnit.saleAmount);
     }
   }, [coffeeUnit]);
 
@@ -66,7 +61,7 @@ export default function ProductEdit(props) {
       type: type,
       species: species,
       sale: JSON.parse(!sale),
-      saleAmount: saleAmount
+      saleAmount: saleAmount,
     };
     dispatch(productUpdate(product));
     console.log(product);
@@ -85,215 +80,216 @@ export default function ProductEdit(props) {
         </h1>
       ) : (
         <div className="container">
-          <h1 className="title has-text-centered">Product edit screen</h1>
-          <hr />
+           <div className="content is-medium has-text-centered">
+              <h1 className="py-5">Product edit</h1>
+              <h6>{coffeeUnit._id}</h6>
+              <hr />
+            </div>
 
-          <div className="columns   is-centered">
-            <div className="column is-5 ml-4">
+          <div className="columns  ">
+            <div className="column is-half is-offset-one-quarter">
               <form onSubmit={submitHandler}>
-                <div class="field">
-                  <label htmlFor="id" class="label">
-                    Id
-                  </label>
-                  <div class="control">
-                    <input
-                      id="id"
-                      type="type"
-                      class="input"
-                      value={coffeeUnit._id}
-                      disabled="true"
-                    />
+                <div class="level">
+                  <div class="level-left">
+                    <div class="level-item">
+                      <div class="field">
+                        <label htmlFor="name" class="label">
+                          Name
+                        </label>
+                        <div class="control">
+                          <input
+                            id="name"
+                            type="type"
+                            class="input"
+                            placeholder="Name "
+                            defaultValue={coffeeUnit.name}
+                            required
+                            onChange={(e) => setName(e.target.value)}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="level-item">
+                      <div class="field">
+                        <label htmlFor="package" class="label">
+                          Package size ( g. )
+                        </label>
+                        <div class="control">
+                          <input
+                            id="package"
+                            className="input "
+                            type="number"
+                            placeholder="amount"
+                            defaultValue={coffeeUnit.packageSize}
+                            onChange={(e) => setPackageSize(e.target.value)}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="level-item">
+                      <div class="field">
+                        <label htmlFor="package" class="label">
+                          Price ( € )
+                        </label>
+                        <div class="control">
+                          <input
+                            id="package"
+                            className="input "
+                            type="number"
+                            placeholder="amount"
+                            defaultValue={coffeeUnit.price}
+                            onChange={(e) => setPrice(e.target.value)}
+                            step="0.01"
+                          />
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
 
-                <div class="field">
-                  <label htmlFor="name" class="label">
-                    Name
-                  </label>
-                  <div class="control">
-                    <input
-                      id="name"
-                      type="type"
-                      class="input"
-                      placeholder="Name "
-                      defaultValue={coffeeUnit.name}
-                      required
-                      onChange={(e) => setName(e.target.value)}
-                    />
+                <div class="level">
+                  <div class="level-left">
+                    <div class="level-item">
+                      <div class="field">
+                        <label htmlFor="brand" class="label">
+                          Brand
+                        </label>
+                        <div class="control">
+                          <input
+                            id="brand"
+                            type="type"
+                            class="input"
+                            value={coffeeUnit.brand.name}
+                            disabled="true"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="level-item">
+                      <div class="field">
+                        <label htmlFor="type" class="label">
+                          Type
+                        </label>
+                        <div class="control select">
+                          <select
+                            id="type"
+                            class="select"
+                            required
+                            onChange={(e) => setType(e.target.value)}
+                            defaultValue={coffeeUnit.type}
+                          >
+                            <option value="" hidden>
+                              Select product type
+                            </option>
+                            <option value="coffee">Coffee</option>
+                            <option value="tea">Tea</option>
+                            <option value="cup">Cup</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="level-item">
+                      <div class="field">
+                        <label htmlFor="species" class="label">
+                          Species
+                        </label>
+                        <div class="control select">
+                          <select
+                            id="type"
+                            required
+                            onChange={(e) => setType(e.target.value)}
+                            defaultValue={coffeeUnit.type}
+                          >
+                            <option value="" hidden>
+                              Select product type
+                            </option>
+                            <option value="coffee">Coffee</option>
+                            <option value="tea">Tea</option>
+                            <option value="cup">Cup</option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
 
-
-                <div class="field">
-                  <label htmlFor="brand" class="label">
-                    Brand
-                  </label>
-                  <div class="select">
-                    <select
-                      id="brand"
-                      required
-                      onChange={(e) => setBrand(e.target.value)}
-                      defaultValue={coffeeUnit.brand.name}
-                    >
-                      
-                      {brands.map((item) => {
-                        return (
-                          <option key={item._id} value={item.name}>
-                            {item.name}
-                          </option>
-                        );
-                      })}
-                    </select>
+                <div class="level">
+                  <div class="level-left">
+                    <div class="level-item">
+                      <div class="field">
+                        <label class="label">Set sale</label>
+                        <div class="control">
+                          <button
+                            type="button"
+                            onClick={() => setSale(!sale)}
+                            className="button "
+                          >
+                            Set sale
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="level-item">
+                      <div class="field">
+                        <label htmlFor="saleAmount" class="label">
+                          Sale amount ( % )
+                        </label>
+                        <div class="control">
+                          <input
+                            id="saleAmount"
+                            className="input "
+                            type="number"
+                            placeholder="amount"
+                            defaultValue={coffeeUnit.saleAmount}
+                            onChange={(e) => setSaleAmount(e.target.value)}
+                            step="5"
+                            min="1"
+                            max="90"
+                            required
+                            disabled={sale}
+                          />
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
 
-
-
-
-
-
-
-
-                <div class="field">
-                  <label htmlFor="type" class="label">
-                    Type
-                  </label>
-                  <div class="select">
-                    <select
-                      id="type"
-                      required
-                      onChange={(e) => setType(e.target.value)}
-                      defaultValue={coffeeUnit.type}
-                    >
-                      <option value="" hidden>
-                        Select product type
-                      </option>
-                      <option value="coffee">Coffee</option>
-                      <option value="tea">Tea</option>
-                      <option value="cup">Cup</option>
-                    </select>
+                <div class="level">
+                  <div class="level-left">
+                    <div class="level-item">
+                      <div class="field">
+                        <label htmlFor="brand" class="label">
+                          Image{" "}
+                          <span className="has-text-weight-normal is-size-7">
+                            [On the left current image, on the right possible
+                            new image]
+                          </span>
+                        </label>
+                        <div class="control">
+                          <label>
+                            <FileBase64
+                              type="file"
+                              multiple={false}
+                              onDone={({ base64 }) => setImage(base64)}
+                            />
+                          </label>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
 
-                <div class="field">
-                  <label htmlFor="species" class="label">
-                    Species
-                  </label>
-                  <div class="control">
-                    <input
-                      id="species"
-                      type="text"
-                      class="input"
-                      placeholder="Specie"
-                      required
-                      defaultValue={coffeeUnit.species}
-                      onChange={(e) => setSpecies(e.target.value)}
-                    />
+                <label htmlFor="species" class="label">
+                  Preview
+                </label>
+
+                <div className="columns has-text-centered">
+                  <div className="column is-4  is-offset-4 is-6-mobile is-offset-3-mobile">
+                    <img src={image} alt={image} />
                   </div>
                 </div>
 
-                <div class="field">
-                  <label htmlFor="package" class="label">
-                    Package size ( g. )
-                  </label>
-                  <input
-                    id="package"
-                    className="input "
-                    type="number"
-                    style={{ width: "20%" }}
-                    placeholder="amount"
-                    defaultValue={coffeeUnit.packageSize}
-                    onChange={(e) => setPackageSize(e.target.value)}
-                    required
-                  />
-                </div>
-                <div class="field">
-                  <label htmlFor="package" class="label">
-                    Price ( € )
-                  </label>
-                  <input
-                    id="package"
-                    className="input "
-                    type="number"
-                    style={{ width: "20%" }}
-                    placeholder="amount"
-                    defaultValue={coffeeUnit.price}
-                    onChange={(e) => setPrice(e.target.value)}
-                    step="0.01"
-                    required
-                  />
-                </div>
-
-                
-                <div className="field">
-                  <label class="label">Set sale</label>
-                </div>
-                <button
-                  type="button"
-                  onClick={() => setSale(!sale)}
-                  className="button "
-                >
-                  Set sale
-                </button>
-
-                <div class="field">
-                  <label htmlFor="saleAmount" class="label">
-                    Sale amount ( % )
-                  </label>
-                  <input
-                    id="saleAmount"
-                    className="input "
-                    type="number"
-                    style={{ width: "20%" }}
-                    placeholder="amount"
-                    defaultValue={coffeeUnit.saleAmount}
-                    onChange={(e) => setSaleAmount(e.target.value)}
-                    step="5"
-                    min="0"
-                    max="100"
-                    required
-                    disabled={sale}
-                  />
-                </div>
-
-                <div class="field">
-                  <label htmlFor="brand" class="label">
-                    Image{" "}
-                    <span className="has-text-weight-normal is-size-7">
-                      [On the left current image, on the right possible new
-                      image]
-                    </span>
-                  </label>
-                  <div class="file has-name">
-                    <label class="file-label">
-                      <FileBase64
-                        type="file"
-                        multiple={false}
-                        onDone={({ base64 }) => setImage(base64)}
-                      />
-                    </label>
-                  </div>
-                </div>
-                <br />
-
-                <div className="columns">
-                  <div className="column has-text-centered">
-                    <img
-                      src={coffeeUnit.image}
-                      alt={coffeeUnit.name}
-                      className="img-cart"
-                    />
-                  </div>
-                  <div className="column has-text-centered">
-                    <img
-                      src={image}
-                      alt="Possible new pic"
-                      className="img-cart"
-                    />
-                  </div>
-                </div>
-
-                <div class="field">
+                <div class="field ml-2">
                   <label htmlFor="description" class="label">
                     Description
                   </label>
@@ -311,16 +307,9 @@ export default function ProductEdit(props) {
                 </div>
 
                 <div class="field has-text-centered">
-                  <button class="button is-success is-rounded">Submit</button>
+                  <button class="button btn-prim is-rounded">Update</button>
                 </div>
               </form>
-              <p>{name}</p>
-              <p>{brand}</p>
-              <p>{price}</p>
-              <p>{packageSize}</p>
-              <p>{image}</p>
-              <p>{description}</p>
-              <p>{type}</p>
             </div>
           </div>
         </div>
