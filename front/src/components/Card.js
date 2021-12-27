@@ -39,13 +39,14 @@ export default function Card(props) {
                   {information.price} €
                 </span>{" "}
                 <span>
-                  {((100 - information.saleAmount) / 100) * information.price}.toFixed(2) €
+                  {(((100 - information.saleAmount) / 100) * information.price).toFixed(2)} €
                 </span>
               </p>
             )}
 
-            {information.type === "coffee" || information.type === "tea" ? (
-              <p className="is-size-5"> Species: {information.species}</p>
+            {information.type === "coffee" || information.type === "tea" ? (<>
+              <p className="is-size-5"> {information.type}: {information.species}</p>
+              </>
             ) : (
               <p className="is-size-5">{information.species}</p>
             )}

@@ -127,6 +127,7 @@ productRouter.post(
   })
 );
 
+/* ????????????? nebereikia galimai
 productRouter.post(
   "/addNew",
   isAuth,
@@ -151,7 +152,7 @@ productRouter.post(
     const newProduct = await product.save();
     res.send(newProduct);
   })
-);
+);*/
 
 productRouter.put(
   "/update",

@@ -1,9 +1,9 @@
 import React from 'react'
 
-export default function CupScreen() {
+export default function FinishedOrders() {
     return (
         <div>
-            CupScreen
+            
         </div>
     )
 }

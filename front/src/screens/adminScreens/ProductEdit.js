@@ -242,7 +242,7 @@ export default function ProductEdit(props) {
                             placeholder="amount"
                             defaultValue={coffeeUnit.saleAmount}
                             onChange={(e) => setSaleAmount(e.target.value)}
-                            step="5"
+                            
                             min="1"
                             max="90"
                             required

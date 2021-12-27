@@ -87,6 +87,39 @@ orderRouter.put(
   })
 );
 
+orderRouter.put(
+  "/status/userChange",
+  isAuth,
+  expressAsyncHandler(async (req, res) => {
+
+    console.log(req.user._id)
+    const user = await User.findById(req.user._id);
+    if (user) {
+      const order = await Order.findOne({ "paymentResult.id": req.body.orderId });
+      if (order) {
+        console.log(req.user._id)
+        console.log(order.user.toString())
+        if (req.user._id === order.user.toString()) {
+          if (req.body.orderNewStatus === "cancelled") {
+            order.paymentResult.status = req.body.orderNewStatus;
+            order.cancelMessage = req.body.cancelMessage;
+            await order.save();
+            res.send(order);
+          } else {
+            order.paymentResult.status = "finished";
+            await order.save();
+            res.send(order);
+          }
+        } else {
+          res.status(404).send({ message: `MIAU` });
+        }
+      }
+    } else {
+      res.status(404).send({ message: `rawr` });
+    }
+  })
+);
+
 orderRouter.get(
   "/:userId/summary",
   isAuth,
@@ -94,36 +127,38 @@ orderRouter.get(
   expressAsyncHandler(async (req, res) => {
     const userId = req.params.userId;
     const userInfo = await User.findOne({ _id: userId });
-    if (userInfo){
-      const orders = await Order.find({user :userId})
+    if (userInfo) {
+      const orders = await Order.find({ user: userId });
       let spend = 0;
       let vat = 0;
-      let active=0;
-      let finished=0;
-      orders.forEach(item => {
-        if(item.paymentResult.status ==='succeeded' || item.paymentResult.status === 'send'){
+      let active = 0;
+      let finished = 0;
+      orders.forEach((item) => {
+        if (
+          item.paymentResult.status === "succeeded" ||
+          item.paymentResult.status === "send"
+        ) {
           active++;
         } else {
-          finished++
+          finished++;
         }
         spend += item.itemsPrice;
         vat += item.priceVAT;
-      })
+      });
       res.send({
         totalSpend: spend,
         totalVat: vat,
-        activeOrders:active,
-        finishedOrders:finished,
-        userEmail:userInfo.email,
-        userName:userInfo.name,
+        activeOrders: active,
+        finishedOrders: finished,
+        userEmail: userInfo.email,
+        userName: userInfo.name,
         userCreatedAt: userInfo.createdAt,
-        orders
-      })
-      console.log(active)
+        orders,
+      });
+      console.log(active);
     } else {
       res.status(404).send({ message: `Such user does not exist ` });
     }
-    
   })
 );
 

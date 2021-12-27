@@ -68,11 +68,11 @@ export default function BeveragesScreen() {
           <div className="container">
             <div className="content is-medium has-text-centered">
               <h1 className="py-5">Products screen</h1>
-              <hr />
+              <hr className="mx-4"/>
             </div>
             <button
               onClick={() => setFilterToogle(!filterToogle)}
-              className="button is-rounded btn-prim ml-3"
+              className="button is-rounded btn-prim ml-5"
             >
               Turn filter {filterToogle && true ? "on" : "off"}
             </button>

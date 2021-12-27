@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addToCart, removeFromCartSingleItem } from "../actions/cartActions";
+import { addToCart, removeFromCartSingleItem } from "../../actions/cartActions";
 
 export default function CartScreen(props) {
   const cart = useSelector((state) => state.cart);
@@ -25,7 +25,6 @@ export default function CartScreen(props) {
       {cartItems.length === 0 ? (
         <div className="content is-medium has-text-centered">
           <h1 className="py-5">Cart is empty</h1>
-          <hr />
         </div>
       ) : (
         <div className="container">
@@ -91,7 +90,7 @@ export default function CartScreen(props) {
               </div>
 
               <button
-                class="button is-medium is-fullwidth is-success is-rounded"
+                class="button is-medium  btn-prim is-rounded"
                 onClick={checkoutHandler}
               >
                 Checkout

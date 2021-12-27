@@ -1,10 +1,10 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Redirect } from "react-router";
-import { listFavoriteProducts } from "../actions/productsActions";
+import { listFavoriteProducts } from "../../actions/productsActions";
 
-import Card from "../components/Card";
-import LoadingComponent from "../components/LoadingComponent";
+import Card from "../../components/Card";
+import LoadingComponent from "../../components/LoadingComponent";
 
 export default function FavoritesScreen() {
   const dispatch = useDispatch();

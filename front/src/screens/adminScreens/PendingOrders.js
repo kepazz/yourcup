@@ -1,10 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { listOrdersByStatus, OrderStatusChange } from "../actions/orderActions";
-import LoadingComponent from "../components/LoadingComponent";
+import {
+  listOrdersByStatus,
+  orderListByUser,
+  OrderStatusChange,
+} from "../../actions/orderActions";
+import LoadingComponent from "../../components/LoadingComponent";
 import Modal from "react-modal";
+import { Link } from "react-router-dom";
 
-export default function SendOrders() {
+export default function PendingOrders() {
   const dispatch = useDispatch();
   const orderListByStatus = useSelector((state) => state.orderListByStatus);
   const { loading, error, orderList } = orderListByStatus;
@@ -23,7 +28,7 @@ export default function SendOrders() {
   };
 
   useEffect(() => {
-    dispatch(listOrdersByStatus("send"));
+    dispatch(listOrdersByStatus("succeeded"));
   }, [dispatch]);
   //  "succeeded"  |||| 'send'
   const dateHandler = (displayDate) => {
@@ -36,8 +41,9 @@ export default function SendOrders() {
   };
 
   const statusChangeHandler = (orderId) => {
-    dispatch(OrderStatusChange(orderId, "succeeded"));
+    dispatch(OrderStatusChange(orderId, "send"));
   };
+
   return (
     <div>
       {loading ? (
@@ -47,8 +53,8 @@ export default function SendOrders() {
       ) : (
         <>
           <div className="container">
-            <div className="content is-medium has-text-centered">
-              <h1 className="py-5">Send orders</h1>
+          <div className="content is-medium has-text-centered">
+              <h1 className="py-5">Pending orders</h1>
               <hr />
             </div>
             <div className="table-container">
@@ -82,10 +88,12 @@ export default function SendOrders() {
                       <td>{item.itemsPrice}</td>
                       <td>{item.priceVAT}</td>
                       <td>
-                        <p className="pointer">{item.user}</p>
+                        <Link to={`/user_summary/${item.user}`}>
+                          <p>{item.user}</p>
+                        </Link>
                       </td>
                       <td>{dateHandler(item.paidAt)}</td>
-                      <td>{item.paymentResult.id}</td>
+                      <td><Link to={{pathname :`/order_summary/${item.paymentResult.id}`, state: {orderData: item}}}>{item.paymentResult.id}</Link></td>
                       <td>
                         <p
                           className="pointer"
@@ -162,12 +170,11 @@ export default function SendOrders() {
                     <span className="line-through has-text-danger ">
                       {modalData.paymentResult.status}
                     </span>{" "}
-                    changes into{" "}
-                    <span className="has-text-success">Succeeded</span> after
-                    the confirm
+                    changes into <span className="has-text-success">Send</span>{" "}
+                    after the confirm
                   </p>
 
-                  <div class="box has-text-centered">
+                  <div class=" has-text-centered">
                     <button
                       class="button is-success mr-2"
                       onClick={() => {

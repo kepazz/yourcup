@@ -133,6 +133,49 @@ export const OrderStatusChange = (orderToChangeId,orderToChangeStatus) => async 
   }
 }
 
+
+
+
+
+export const OrderStatusChangeByUser = (orderToChangeId,orderToChangeStatus,message) => async (dispatch, getState) =>{
+  dispatch({type: ORDER_STATUS_CHANGE_REQUEST});
+  
+  const {
+    userSignIn: { userInfo },
+  } = getState();
+  try {
+     const {data} = await Axios.put(`/api/orders/status/userChange`,{orderId: orderToChangeId, orderNewStatus:orderToChangeStatus,cancelMessage: message}, {
+      headers: {
+        Authorization: `Bearer ${userInfo.token}`,
+      },
+    });
+    
+    dispatch({ type: ORDER_STATUS_CHANGE_SUCCESS});
+    
+    dispatch({ type: ORDER_DETAILS_SUCCESS, payload: data });
+
+  } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+    dispatch({ type: ORDER_STATUS_CHANGE_FAIL, payload: message });
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 export const orderListByUser = (userId) => async (dispatch, getState)=>{
   dispatch({type: ORDER_LIST_BY_USER_REQUEST});
 

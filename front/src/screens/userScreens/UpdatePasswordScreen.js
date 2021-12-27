@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateUserPassword } from "../actions/userActions";
-import LoadingComponent from "../components/LoadingComponent";
+import { updateUserPassword } from "../../actions/userActions";
+import LoadingComponent from "../../components/LoadingComponent";
 
 export default function UpdatePasswordScreen(props) {
   const userSignIn = useSelector((state) => state.userSignIn);

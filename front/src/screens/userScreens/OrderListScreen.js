@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { listOrder } from "../actions/orderActions";
-import LoadingComponent from "../components/LoadingComponent";
+import { listOrder } from "../../actions/orderActions";
+import LoadingComponent from "../../components/LoadingComponent";
 
 export default function OrderListScreen(props) {
   const dispatch = useDispatch();

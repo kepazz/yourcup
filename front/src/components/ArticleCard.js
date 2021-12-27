@@ -19,7 +19,7 @@ export default function ArticleCard(props) {
         </div>
       </div>*/}
 
-      <div className="card">
+      <div className="card mx-2">
         <div className="card-header-title is-centered">
         {information.title}
         <br/>

@@ -29,6 +29,7 @@ const orderSchema = new mongoose.Schema(
     },
     itemsPrice: { type: Number, required: true },
     priceVAT: {type:Number, required:true},
+    cancelMessage: {type:String},
     user: { type: mongoose.Schema.Types.ObjectId, ref: "User", required: true },
     paidAt: { type: Date },
   },

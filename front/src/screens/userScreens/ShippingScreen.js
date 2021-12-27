@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createShippingInformation } from "../actions/cartActions";
+import { createShippingInformation } from "../../actions/cartActions";
 
 export default function ShippingScreen(props) {
   const userSignIn = useSelector((state) => state.userSignIn);

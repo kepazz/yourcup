@@ -1,8 +1,8 @@
-import React, { useEffect, useState, useLayoutEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
-import CheckoutForm from "../components/CheckoutForm";
+import CheckoutForm from "../../components/CheckoutForm";
 
 const stripePromise = loadStripe(
   "pk_test_51Jmf2OAQNSScMjXxnBZSpjTDEpM8G5MCMAOSj8wTHwi5d4woa3IywIfc3vT5wZPgxxuyp4F0YF4URd85Xlld1tKw00jk3rHO1x",

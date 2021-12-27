@@ -11,26 +11,22 @@ import BeveragesScreen from "./screens/publicScreens/BeveragesScreen";
 import CoffeeItemScreen from "./screens/publicScreens/CoffeeItemScreen";
 import SignInScreen from "./screens/publicScreens/SignInScreen";
 
+import CartScreen from "./screens/userScreens/CartScreen";
+import ShippingScreen from "./screens/userScreens/ShippingScreen";
+import CheckoutScreen from "./screens/userScreens/CheckoutScreen";
+import OrderScreen from "./screens/userScreens/OrderScreen";
+import OrderListScreen from "./screens/userScreens/OrderListScreen";
+import UpdatePasswordScreen from "./screens/userScreens/UpdatePasswordScreen";
+import FavoritesScreen from "./screens/userScreens/FavoritesScreen";
+import CupScreen from "./screens/publicScreens/CupScreen";
+import MachinesSceen from "./screens/publicScreens/MachinesSceen";
 
 
-
-import CartScreen from "./screens/CartScreen";
-import ShippingScreen from "./screens/ShippingScreen";
-import CheckoutScreen from "./screens/CheckoutScreen";
-import OrderScreen from "./screens/OrderScreen";
-import ProfileScreen from "./screens/ProfileScreen";
-import OrderListScreen from "./screens/OrderListScreen";
-import UpdatePasswordScreen from "./screens/UpdatePasswordScreen";
-import Navbar from "./components/Navbar";
-import FavoritesScreen from "./screens/FavoritesScreen";
 import CoffeeScreen from "./screens/categoriesScreens/CoffeeScreen";
 
-
-import CupScreen from "./screens/categoriesScreens/CupScreen";
 import DashboardScreen from "./screens/DashboardScreen";
-import PendingOrders from "./screens/PendingOrders";
-import SendOrders from "./screens/SendOrders";
 
+import Navbar from "./components/Navbar";
 import AdminRoute from "./components/AdminRoute";
 import UserSummaryScreen from "./screens/adminScreens/UserSummaryScreen";
 import UserOrderSummary from "./screens/adminScreens/UserOrderSummary";
@@ -39,6 +35,9 @@ import ProductEdit from "./screens/adminScreens/ProductEdit";
 import ArticleAdd from "./screens/adminScreens/ArticleAdd";
 import ArticleEdit from "./screens/adminScreens/ArticleEdit";
 import BrandModify from "./screens/adminScreens/BrandModify";
+import PendingOrders from "./screens/adminScreens/PendingOrders";
+import SendOrders from "./screens/adminScreens/SendOrders";
+
 
 function App() {
   return (
@@ -53,13 +52,14 @@ function App() {
         <Route path="/checkout" component={CheckoutScreen}></Route>
         <Route path="/order/:id" component={OrderScreen}></Route>
         <Route path="/orders" component={OrderListScreen}></Route>
-        <Route path="/profile" component={ProfileScreen}></Route>
+
         <Route path="/update" component={UpdatePasswordScreen}></Route>
         <Route path="/favorites" component={FavoritesScreen}></Route>
         <Route exact path="/coffee" component={CoffeeScreen}></Route>
         <Route path="/beverages" component={BeveragesScreen}></Route>
-        
+
         <Route path="/cup" component={CupScreen}></Route>
+        <Route path="/machines" component={MachinesSceen}></Route>
         <Route exact path="/articles" component={ArticlesScreen}></Route>
         <Route exact path="/articles/:id" component={ArticleUnitScreen}></Route>
         <Route path="/brand/:brand" component={BrandScreen}></Route>
@@ -90,7 +90,16 @@ function App() {
         <AdminRoute path="/brand_modify" component={BrandModify}></AdminRoute>
         <Route path="/" component={HomeScreen} exact></Route>
       </main>
-      
+      <footer class="footer">
+        <hr className="mx-4" />
+        <div class="content has-text-centered">
+          <p>
+            <strong>Your Cup</strong> by{" "}
+            <a href="https://jgthms.com">Edvinas Jakstas</a>. Vilnius, 2022.
+            Source code <a href="https://github.com/kepazz/yourcup">Link</a>
+          </p>
+        </div>
+      </footer>
     </BrowserRouter>
   );
 }

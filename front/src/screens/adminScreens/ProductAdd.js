@@ -5,7 +5,7 @@ import { productAdd } from "../../actions/productsActions";
 import { listBrands } from "../../actions/brandActions";
 import LoadingComponent from "../../components/LoadingComponent";
 import ToastComponent from "../../components/ToastComponent";
-import { toast } from 'react-toastify';
+import { toast } from "react-toastify";
 
 export default function ProductAdd() {
   const brandList = useSelector((state) => state.brandList);
@@ -23,7 +23,7 @@ export default function ProductAdd() {
 
   useEffect(() => {
     dispatch(listBrands());
-    setImage('')
+    setImage("");
   }, [dispatch]);
 
   const selectableVariables = {
@@ -48,7 +48,7 @@ export default function ProductAdd() {
     ],
   };
 
-  const [type, setType] = useState("Coffee");
+  const [type, setType] = useState("coffee");
   const [specie, setSpecie] = useState("arabica");
   const [species, setSpecies] = useState(selectableVariables["coffee"]);
 
@@ -74,15 +74,13 @@ export default function ProductAdd() {
         description: description,
         type: type,
         species: specie,
-        
       };
       console.log(product);
       dispatch(productAdd(product));
       toast("Product added");
     } else {
-      toast("Product add failed")
+      toast("Product add failed");
     }
-    
   };
 
   return (
@@ -94,10 +92,10 @@ export default function ProductAdd() {
       ) : (
         <div className="container">
           <div className="content is-medium has-text-centered">
-              <h1 className="py-5">Product add</h1>
-              <hr />
-            </div>
-          
+            <h1 className="py-5">Product add</h1>
+            <hr />
+          </div>
+
           <div className="columns  ">
             <div className="column is-half is-offset-one-quarter">
               <form onSubmit={submitHandler} autoComplete="off">
@@ -228,8 +226,6 @@ export default function ProductAdd() {
                   </div>
                 </div>
 
-                
-
                 <div class="field">
                   <label htmlFor="brand" class="label">
                     Image
@@ -263,7 +259,7 @@ export default function ProductAdd() {
 
                 <div class="field has-text-centered">
                   <button class="button is-success is-rounded">Submit</button>
-                  <ToastComponent/>
+                  <ToastComponent />
                 </div>
               </form>
               {image && (

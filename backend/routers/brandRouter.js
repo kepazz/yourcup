@@ -51,7 +51,7 @@ brandRouter.get(
 );
 
 brandRouter.post(
-  "/test",
+  "/productAdd",
   isAuth,
   isAdmin,
   expressAsyncHandler(async (req, res) => {

@@ -45,56 +45,82 @@ export default function Navbar() {
       >
         <div class="navbar-start">
           <Link to="/" class="navbar-item">
-            <p><strong>Home</strong></p>
+            <p>
+              <strong>Home</strong>
+            </p>
           </Link>
 
           <Link to="/articles" class="navbar-item">
-            <p>Articles</p>
-          </Link>
-
-          <Link to="/coffee" class="navbar-item">
-            <p>Coffee</p>
+            <p>
+              {" "}
+              <strong>Articles</strong>
+            </p>
           </Link>
 
           <Link to="/beverages" class="navbar-item">
-            <p>Beverages</p>
+            <p>
+              <strong>Beverages</strong>
+            </p>
           </Link>
 
-          
           <Link to="/cup" class="navbar-item">
-            <p>Cups</p>
+            <p>
+              <strong>Cups</strong>
+            </p>
+          </Link>
+
+          <Link to="/#" class="navbar-item">
+            <p>
+              <strong>Machines</strong>
+            </p>
           </Link>
 
           {userInfo && (
             <Link to="/favorites" class="navbar-item">
-              <p>Favorites</p>
+              <p>
+                <strong>Favorites</strong>
+              </p>
             </Link>
           )}
 
           {userInfo && userInfo.isAdmin && (
             <div class="navbar-item has-dropdown is-hoverable">
               <Link to="/coffee" class="navbar-link">
-                <p>Admin</p>
+                <p>
+                  <strong>Admin</strong>
+                </p>
               </Link>
 
               <div class="navbar-dropdown ">
                 <Link to="/dashboard" class="navbar-item">
-                  <p>Dashboard</p>
+                  <p>
+                    <strong>Finished orders</strong>
+                  </p>
                 </Link>
                 <Link to="/pendingorders" class="navbar-item">
-                  <p>Pending orders</p>
+                  <p>
+                    <strong>Pending orders</strong>
+                  </p>
                 </Link>
                 <Link to="/sendorders" class="navbar-item">
-                  <p>Send orders</p>
+                  <p>
+                    <strong>Send orders</strong>
+                  </p>
                 </Link>
                 <Link to="/product_add" class="navbar-item">
-                  <p>Product add</p>
+                  <p>
+                    <strong>Product add</strong>
+                  </p>
                 </Link>
                 <Link to="/article_add" class="navbar-item">
-                  <p>Article add</p>
+                  <p>
+                    <strong>Article add</strong>
+                  </p>
                 </Link>
                 <Link to="/brand_modify" class="navbar-item">
-                  <p>Brands</p>
+                  <p>
+                    <strong>Brands</strong>
+                  </p>
                 </Link>
               </div>
             </div>
@@ -103,26 +129,25 @@ export default function Navbar() {
 
         <div class="navbar-end">
           <Link to="/cart" class="navbar-item">
-            Shopping cart (<span>&nbsp;</span>
             <strong>
+              Shopping cart (<span>&nbsp;</span>
               {cartItems.length > 0 && cartItems.reduce((a, c) => a + c.qty, 0)}
-              <span>&nbsp;</span>{" "}
+              <span>&nbsp;</span>)
             </strong>
-            )
           </Link>
 
           {userInfo ? (
             <div class="navbar-item has-dropdown is-hoverable mr-1">
               <Link to="/" class="navbar-link">
-                {userInfo.name}
+                <strong>{userInfo.name}</strong>
               </Link>
 
               <div class="navbar-dropdown is-right">
                 <Link to="/orders" class="navbar-item">
-                  Orders
+                  <strong>Orders</strong>
                 </Link>
                 <Link to="/update" class="navbar-item">
-                  Update password
+                  <strong>Update password</strong>
                 </Link>
                 <Link
                   to="/"
@@ -131,17 +156,17 @@ export default function Navbar() {
                   }}
                   class="navbar-item"
                 >
-                  Sign out
+                  <strong>Sign out</strong>
                 </Link>
               </div>
             </div>
           ) : (
             <>
               <Link to="/register" class="navbar-item">
-                Sign up
+                <strong>Sign up</strong>
               </Link>
               <Link to="/signin" class="navbar-item">
-                Sign in
+                <strong>Sign in</strong>
               </Link>
             </>
           )}
