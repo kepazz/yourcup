@@ -159,6 +159,10 @@ export default function BrandModify() {
               </div>
             )}
           </Modal>
+          <div className="content is-medium has-text-centered">
+            <h3 className="py-3">Include new brand</h3>
+            <hr />
+          </div>
           <div className="columns   is-centered">
             <div className="column is-5 ml-4">
               <form onSubmit={submitHandler} autoComplete="off">

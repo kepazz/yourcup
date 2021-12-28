@@ -63,17 +63,13 @@ export default function Navbar() {
             </p>
           </Link>
 
-          <Link to="/cup" class="navbar-item">
+          <Link to="/tools" class="navbar-item">
             <p>
-              <strong>Cups</strong>
+              <strong>Tools</strong>
             </p>
           </Link>
 
-          <Link to="/#" class="navbar-item">
-            <p>
-              <strong>Machines</strong>
-            </p>
-          </Link>
+          
 
           {userInfo && (
             <Link to="/favorites" class="navbar-item">
@@ -85,14 +81,14 @@ export default function Navbar() {
 
           {userInfo && userInfo.isAdmin && (
             <div class="navbar-item has-dropdown is-hoverable">
-              <Link to="/coffee" class="navbar-link">
+              <Link to="/#" class="navbar-link">
                 <p>
                   <strong>Admin</strong>
                 </p>
               </Link>
 
               <div class="navbar-dropdown ">
-                <Link to="/dashboard" class="navbar-item">
+                <Link to="/finished" class="navbar-item">
                   <p>
                     <strong>Finished orders</strong>
                   </p>

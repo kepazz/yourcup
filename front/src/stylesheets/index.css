@@ -31,7 +31,7 @@
 }
 
 .table-is-selected:hover {
-  background-color: #3a88e5;
+  background-color: #BE834F;
   color: #fff;
 }
 
@@ -60,7 +60,7 @@ html {
   border-end-start-radius: 5em !important;
 }
 
-.nav-color,.navbar-dropdown,.navbar-link {
+.nav-color,.navbar-dropdown,.navbar-link,.navbar-menu {
   background-color: #a56d3d !important;
 }
 .box {

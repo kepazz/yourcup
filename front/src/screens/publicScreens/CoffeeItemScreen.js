@@ -21,8 +21,6 @@ export default function CoffeeItemScreen(props) {
   const userSignIn = useSelector((state) => state.userSignIn);
   const { userInfo } = userSignIn;
 
-  
-
   useEffect(() => {
     dispatch(listProductDetails(coffeeId));
   }, [dispatch, coffeeId]);
@@ -56,12 +54,14 @@ export default function CoffeeItemScreen(props) {
       {loading ? (
         <LoadingComponent></LoadingComponent>
       ) : error ? (
-        <p>Sorry this item doesnt exist</p>
+        <div className="content is-medium has-text-centered pt-5">
+          <h1>Sorry item wasnt found</h1>
+        </div>
       ) : (
         <>
           <div className="container">
             <div className="content is-medium has-text-centered pt-5">
-              <h1>Coffee item screen</h1>
+              <h1>Product item screen</h1>
             </div>
             <div className="columns">
               <div className="column is-5 has-text-centered">
@@ -83,18 +83,18 @@ export default function CoffeeItemScreen(props) {
                           (item) => item.product === coffeeUnit._id
                         ) ? (
                           <button
-                          onClick={favoriteDeleteHandler}
+                            onClick={favoriteDeleteHandler}
                             className="button btn-prim is-rounded is-small"
                           >
-                             Delete from favorites
+                            Delete from favorites
                           </button>
                         ) : (
                           <button
-                            
                             onClick={favoriteAddHandler}
                             className="button btn-prim is-rounded is-small"
                           >
-                            {" "} Add to favorites
+                            {" "}
+                            Add to favorites
                           </button>
                         )}
                       </span>
@@ -126,19 +126,7 @@ export default function CoffeeItemScreen(props) {
                   )}
                   <p>Package size: {coffeeUnit.packageSize}g.</p>
 
-                  <p>
-                    Description:[ {coffeeUnit.description} ]Lorem Ipsum is
-                    simply dummy text of the printing and typesetting industry.
-                    Lorem Ipsum has been the industry's standard dummy text ever
-                    since the 1500s, when an unknown printer took a galley of
-                    type and scrambled it to make a type specimen book. It has
-                    survived not only five centuries, but also the leap into
-                    electronic typesetting, remaining essentially unchanged. It
-                    was popularised in the 1960s with the release of Letraset
-                    sheets containing Lorem Ipsum passages, and more recently
-                    with desktop publishing software like Aldus PageMaker
-                    including versions of Lorem Ipsum.
-                  </p>
+                  <p>Description: {coffeeUnit.description}</p>
                   <div className="has-text-centered ">
                     <input
                       className="input has-text-centered mr-5"
@@ -158,38 +146,41 @@ export default function CoffeeItemScreen(props) {
                 </div>
               </div>
             </div>
-
-            {coffeeUnit.comments.map((item) => (
-              <article class="media">
-                <div class="media-content mx-3">
-                  <div class="content">
-                    <p>
-                      <strong>{item.name}: </strong>---- {item.comment}------
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                      Duis porta eros lacus, nec ultricies elit blandit non.
-                      Suspendisse pellentesque mauris sit amet dolor blandit
-                      rutrum. Nunc in tempus turpis.
-                      {userInfo && (
-                        <div>
-                          {userInfo._id === item.user && (
-                            <p>
-                              <small>
-                                <a
-                                  onClick={() => commentDeleteHandler(item._id)}
-                                >
-                                  Delete
-                                </a>{" "}
-                                · 11/12/2021
-                              </small>
-                            </p>
+            <div className="columns is-multiline">
+              {coffeeUnit.comments.map((item) => (
+                <div className="column is-3">
+                  <article class="media">
+                    <div class="media-content mx-3">
+                      <div class="content box">
+                        <p>
+                          <strong>{item.name}: </strong><br/>
+                          <p class="title is-6">{item.comment}</p>
+                          {userInfo && (
+                            <>
+                              {userInfo._id === item.user && (
+                                <p>
+                                  <small>
+                                    <a
+                                      onClick={() =>
+                                        commentDeleteHandler(item._id)
+                                      }
+                                      href="#"
+                                    >
+                                      Delete
+                                    </a>{" "}
+                                    · {item.createdAt}
+                                  </small>
+                                </p>
+                              )}
+                            </>
                           )}
-                        </div>
-                      )}
-                    </p>
-                  </div>
+                        </p>
+                      </div>
+                    </div>
+                  </article>
                 </div>
-              </article>
-            ))}
+              ))}
+            </div>
 
             {userInfo && (
               <article class="media mx-2 has-text-centered">

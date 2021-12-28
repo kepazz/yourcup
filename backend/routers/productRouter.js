@@ -17,6 +17,12 @@ productRouter.get(
       });
       res.send(productUnit);
     }
+    if (req.params.type === "tools") {
+      const productUnit = await Product.find({
+        type: { $in: ["cups", "machines"] },
+      });
+      res.send(productUnit);
+    }
 
     //const productUnit = await Product.aggregate([{$match : {type: req.params.type}}, {$sample: {size:3}}])
     //res.send(productUnit);

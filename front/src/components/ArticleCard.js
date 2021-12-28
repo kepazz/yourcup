@@ -26,7 +26,7 @@ export default function ArticleCard(props) {
         </div>
         <div className="columns">
           <br/>
-          <div className=" column is-half is-offset-one-quarter">
+          <div className="column is-half is-offset-one-quarter is-6-mobile is-offset-3-mobile">
             <figure className="image is-1by1">
               <img src={information.image1} alt={"article"} />
             </figure>

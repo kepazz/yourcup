@@ -36,69 +36,88 @@ export default function UpdatePasswordScreen(props) {
   ) : (
     <div className="container">
       <div className="content is-medium has-text-centered">
-        <h1>Update password</h1>
-        {error && <h1>{error}</h1>}
-        {success && <h1>Pasikeitet slaptazodi</h1>}
+        <h1 className="py-5">Update password</h1>
+        <hr className="mx-4" />
       </div>
 
-      <div className="columns is-centered">
-        <div className="column is-5-tablet is-4-desktop is-3-widescreen">
-          <form onSubmit={submitHandler} autocomplete="off">
-            <div class="field">
-              <label htmlFor="password" class="label">
-                Current password
-              </label>
-              <div class="control">
-                <input
-                  id="password"
-                  type="password"
-                  class="input"
-                  placeholder="Enter password "
-                  required
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-              </div>
-              
-            </div>
+      <section class="hero halfheight">
+        <div class="hero-body">
+          <div class="container">
+            <div class="columns is-vcentered ">
+              <div class="column is-one-third  is-offset-one-third box">
+                <form onSubmit={submitHandler} autoComplete="off">
+                  <div class="field">
+                    <label htmlFor="password" class="label">
+                      Current password
+                    </label>
+                    <div class="control">
+                      <input
+                        id="password"
+                        type="password"
+                        class="input"
+                        placeholder="Enter password "
+                        required
+                        onChange={(e) => setPassword(e.target.value)}
+                      />
+                    </div>
+                  </div>
 
-            <div class="field">
-              <label htmlFor="newPassword" class="label">
-                New password
-              </label>
-              <div class="control">
-                <input
-                  id="newPassword"
-                  type="password"
-                  class="input"
-                  placeholder="Enter new password "
-                  required
-                  onChange={(e) => setNewPassword(e.target.value)}
-                />
-              </div>
-            </div>
+                  <div class="field">
+                    <label htmlFor="newPassword" class="label">
+                      New password
+                    </label>
+                    <div class="control">
+                      <input
+                        id="newPassword"
+                        type="password"
+                        class="input"
+                        placeholder="Enter new password "
+                        required
+                        onChange={(e) => setNewPassword(e.target.value)}
+                      />
+                    </div>
+                  </div>
 
-            <div class="field">
-              <label htmlFor="confirmNewPassword" class="label">
-                Confirm new password
-              </label>
-              <div class="control">
-                <input
-                  id="confirmNewPassword"
-                  type="password"
-                  class="input"
-                  placeholder="Enter new password"
-                  required
-                  onChange={(e) => setConfirmNewPassword(e.target.value)}
-                />
+                  <div class="field">
+                    <label htmlFor="confirmNewPassword" class="label">
+                      Confirm new password
+                    </label>
+                    <div class="control">
+                      <input
+                        id="confirmNewPassword"
+                        type="password"
+                        class="input"
+                        placeholder="Enter new password"
+                        required
+                        onChange={(e) => setConfirmNewPassword(e.target.value)}
+                      />
+                    </div>
+                  </div>
+
+                  {error && (
+                    <p className="has-text-danger-dark pt-3">
+                      Password change failed
+                    </p>
+                  )}
+                  {success && (
+                    <p className="has-text-success-dark pt-3">
+                     Password was changed 
+                    </p>
+                  )}
+
+                  {loading ? (
+                    <LoadingComponent></LoadingComponent>
+                  ) : (
+                    <div class="field has-text-centered">
+                      <button class="button btn-prim is-rounded">Submit</button>
+                    </div>
+                  )}
+                </form>
               </div>
-              
             </div>
-            <div class="field">
-              <button class="button is-success">Update</button>
-            </div>
-          </form>
+          </div>
         </div>
-      </div>
+      </section>
     </div>
   );
 }

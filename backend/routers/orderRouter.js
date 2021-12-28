@@ -62,10 +62,18 @@ orderRouter.get(
   isAdmin,
   expressAsyncHandler(async (req, res) => {
     console.log(req.params.status);
-    const orders = await Order.find({
-      "paymentResult.status": req.params.status,
-    });
-    res.send(orders);
+    if (req.params.status === "finished") {
+      const orders = await Order.find({
+        "paymentResult.status": { $in: ["arrived", "cancelled"] },
+      });
+
+      res.send(orders);
+    } else {
+      const orders = await Order.find({
+        "paymentResult.status": req.params.status,
+      });
+      res.send(orders);
+    }
   })
 );
 
@@ -91,14 +99,15 @@ orderRouter.put(
   "/status/userChange",
   isAuth,
   expressAsyncHandler(async (req, res) => {
-
-    console.log(req.user._id)
+    console.log(req.user._id);
     const user = await User.findById(req.user._id);
     if (user) {
-      const order = await Order.findOne({ "paymentResult.id": req.body.orderId });
+      const order = await Order.findOne({
+        "paymentResult.id": req.body.orderId,
+      });
       if (order) {
-        console.log(req.user._id)
-        console.log(order.user.toString())
+        console.log(req.user._id);
+        console.log(order.user.toString());
         if (req.user._id === order.user.toString()) {
           if (req.body.orderNewStatus === "cancelled") {
             order.paymentResult.status = req.body.orderNewStatus;
@@ -106,7 +115,7 @@ orderRouter.put(
             await order.save();
             res.send(order);
           } else {
-            order.paymentResult.status = "finished";
+            order.paymentResult.status = "arrived";
             await order.save();
             res.send(order);
           }

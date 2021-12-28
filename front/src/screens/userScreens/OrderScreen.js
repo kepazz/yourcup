@@ -27,6 +27,7 @@ export default function OrderScreen(props) {
     setModalActive(!modalActive);
       setmodalData(null);
   };
+  
   const cancelOrderHandler = () => {
     if (cancelReason !== "") {
       dispatch(
@@ -46,7 +47,7 @@ export default function OrderScreen(props) {
   ) : userInfo._id !== order.user ? (
     <p>blogas useriazas</p>
   ) : (
-    <div className="container">
+    <div className="container ">
       <h1 className="has-text-centered mt-3 is-size-3">
         Order : {order.paymentResult.id}
         <p>
@@ -77,7 +78,7 @@ export default function OrderScreen(props) {
       </div>
       {order.orderItems.map((item) => (
         <div>
-          <div className="columns has-text-centered is-vcentered">
+          <div className="columns has-text-centered is-vcentered ">
             <div className="column ">
               <img src={item.image} className="img-cart" alt={item.name} />
             </div>

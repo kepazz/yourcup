@@ -31,8 +31,9 @@ export default function FavoritesScreen() {
       ) : (
         <div>
           <div className="container">
-            <div className="content is-medium has-text-centered">
-              <h1>sveiki kency</h1>
+          <div className="content is-medium has-text-centered">
+              <h1 className="py-5">Favorites</h1>
+              <hr className="mx-4"/>
             </div>
             <div className="columns is-multiline">
               {coffee.map((productUnit) => (

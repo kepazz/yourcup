@@ -115,79 +115,53 @@ export default function SendOrders() {
               </table>
             </div>
           </div>
-          <Modal
-            isOpen={modalIsOpen}
-            onRequestClose={() => setModalIsOpen(false)}
-            style={customStyles}
-            ariaHideApp={false}
-          >
-            {modalData && (
-              <div class="modal-content">
-                <div>
-                  {modalData.orderItems.map((item) => (
-                    <div>
-                      <div className="columns has-text-centered is-vcentered">
-                        <div className="column ">
-                          <img
-                            src={item.image}
-                            className="img-modal"
-                            alt={item.name}
-                          />
-                          <p>
-                            <span>{item.name}</span>
-                          </p>
-                        </div>
-
-                        <div className="column ">
-                          Unit price: {item.price.toFixed(2)} €
-                        </div>
-                        <div className="column ">{item.qty} x</div>
+          {modalData && (
+            <div
+              className={`modal  ${modalIsOpen ? "is-active" : ""}`}
+              
+            >
+              <div class="modal-background "></div>
+              <div class="modal-content box mx-2">
+                <p className="title has-text-centered">Order items: </p>
+                <p className="subtitle has-text-centered">Status: {modalData.paymentResult.status} </p>
+                {modalData.orderItems.map((item) => (
+                  <div>
+                    <div className="columns has-text-centered is-vcentered">
+                      <div className="column is-3 is-6-mobile is-offset-3-mobile">
+                        <figure class="image is-3by4 ">
+                          <img src={item.image} alt={item.name} />
+                        </figure>
+                        <p>
+                          <span>{item.name}</span>
+                        </p>
                       </div>
-                      <hr />
+
+                      <div className="column ">
+                        Unit price: {item.price.toFixed(2)} €
+                      </div>
+                      <div className="column ">{item.qty} x</div>
                     </div>
-                  ))}
-                </div>
-
-                <div>
-                  <p>
-                    <strong>Total price:</strong>{" "}
-                    {modalData.itemsPrice.toFixed(2)} €
-                  </p>
-                  <p>
-                    <strong>Total price:</strong>{" "}
-                    {modalData.priceVAT.toFixed(2)} €
-                  </p>
-                  <p>
-                    <strong>Status: </strong>
-                    <span className="line-through has-text-danger ">
-                      {modalData.paymentResult.status}
-                    </span>{" "}
-                    changes into{" "}
-                    <span className="has-text-success">Succeeded</span> after
-                    the confirm
-                  </p>
-
-                  <div class="box has-text-centered">
-                    <button
-                      class="button is-success mr-2"
-                      onClick={() => {
-                        setModalIsOpen(false);
-                        statusChangeHandler(modalData.paymentResult.id);
-                      }}
-                    >
-                      Change status
-                    </button>
-                    <button
-                      class="button is-danger"
-                      onClick={() => setModalIsOpen(false)}
-                    >
-                      Cancel
-                    </button>
+                    <hr />
                   </div>
+                ))}
+                {modalData.paymentResult.status === "cancelled" && (<><p className="title has-text-centered">Cancel reason: </p>
+                <p>{modalData.cancelMessage}</p> <hr/></>) }
+                <div className="has-text-centered">
+                    <button className="button is-rounded is-danger is-centered" onClick={() => {
+                setModalIsOpen(!modalIsOpen);
+                setModalData(null);
+              }}>Turn off</button>
                 </div>
+                
               </div>
-            )}
-          </Modal>
+
+              
+              <button class="modal-close is-large" aria-label="close" onClick={() => {
+                setModalIsOpen(!modalIsOpen);
+                setModalData(null);
+              }}></button>
+            </div>
+          )}
         </>
       )}
     </div>

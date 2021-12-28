@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   listOrdersByStatus,
-  orderListByUser,
   OrderStatusChange,
 } from "../../actions/orderActions";
 import LoadingComponent from "../../components/LoadingComponent";
@@ -53,7 +52,7 @@ export default function PendingOrders() {
       ) : (
         <>
           <div className="container">
-          <div className="content is-medium has-text-centered">
+            <div className="content is-medium has-text-centered">
               <h1 className="py-5">Pending orders</h1>
               <hr />
             </div>
@@ -93,7 +92,16 @@ export default function PendingOrders() {
                         </Link>
                       </td>
                       <td>{dateHandler(item.paidAt)}</td>
-                      <td><Link to={{pathname :`/order_summary/${item.paymentResult.id}`, state: {orderData: item}}}>{item.paymentResult.id}</Link></td>
+                      <td>
+                        <Link
+                          to={{
+                            pathname: `/order_summary/${item.paymentResult.id}`,
+                            state: { orderData: item },
+                          }}
+                        >
+                          {item.paymentResult.id}
+                        </Link>
+                      </td>
                       <td>
                         <p
                           className="pointer"
@@ -195,6 +203,89 @@ export default function PendingOrders() {
               </div>
             )}
           </Modal>
+
+          {modalData && (
+            <div className={`modal  ${modalIsOpen ? "is-active" : ""}`}>
+              <div class="modal-background "></div>
+              <div class="modal-content box mx-2">
+                <p className="title has-text-centered">Order items: </p>
+                <p className="subtitle has-text-centered">
+                  Status: {modalData.paymentResult.status}{" "}
+                </p>
+                {modalData.orderItems.map((item) => (
+                  <div>
+                    <div className="columns has-text-centered is-vcentered">
+                      <div className="column is-3 is-6-mobile is-offset-3-mobile">
+                        <figure class="image is-3by4 ">
+                          <img src={item.image} alt={item.name} />
+                        </figure>
+                        <p>
+                          <span>{item.name}</span>
+                        </p>
+                      </div>
+
+                      <div className="column ">
+                        Unit price: {item.price.toFixed(2)} €
+                      </div>
+                      <div className="column ">{item.qty} x</div>
+                    </div>
+                    <hr />
+                  </div>
+                ))}
+                {modalData.paymentResult.status === "cancelled" && (
+                  <>
+                    <p className="title has-text-centered">Cancel reason: </p>
+                    <p>{modalData.cancelMessage}</p> <hr />
+                  </>
+                )}
+                <p>
+                    <strong>Total price:</strong>{" "}
+                    {modalData.itemsPrice.toFixed(2)} €
+                  </p>
+                  <p>
+                    <strong>Total price:</strong>{" "}
+                    {modalData.priceVAT.toFixed(2)} €
+                  </p>
+                <p>
+                    <strong>Status: </strong>
+                    <span className="line-through has-text-danger-dark ">
+                      {modalData.paymentResult.status}
+                    </span>{" "}
+                    changes into <span className="has-text-success-dark">Send</span>{" "}
+                    after the confirm
+                  </p>
+                <div class="buttons is-centered">
+                  <button
+                    class="button is-success is-rounded "
+                    onClick={() => {
+                      setModalIsOpen(false);
+                      statusChangeHandler(modalData.paymentResult.id);
+                    }}
+                  >
+                    Change status
+                  </button>
+                  <button
+                    class="button is-rounded is-danger"
+                    onClick={() => {
+                      setModalIsOpen(!modalIsOpen);
+                      setModalData(null);
+                    }}
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </div>
+
+              <button
+                class="modal-close is-large"
+                aria-label="close"
+                onClick={() => {
+                  setModalIsOpen(!modalIsOpen);
+                  setModalData(null);
+                }}
+              ></button>
+            </div>
+          )}
         </>
       )}
     </div>

@@ -18,8 +18,6 @@ import OrderScreen from "./screens/userScreens/OrderScreen";
 import OrderListScreen from "./screens/userScreens/OrderListScreen";
 import UpdatePasswordScreen from "./screens/userScreens/UpdatePasswordScreen";
 import FavoritesScreen from "./screens/userScreens/FavoritesScreen";
-import CupScreen from "./screens/publicScreens/CupScreen";
-import MachinesSceen from "./screens/publicScreens/MachinesSceen";
 
 
 import CoffeeScreen from "./screens/categoriesScreens/CoffeeScreen";
@@ -37,6 +35,8 @@ import ArticleEdit from "./screens/adminScreens/ArticleEdit";
 import BrandModify from "./screens/adminScreens/BrandModify";
 import PendingOrders from "./screens/adminScreens/PendingOrders";
 import SendOrders from "./screens/adminScreens/SendOrders";
+import ToolsScreen from "./screens/publicScreens/ToolsScreen";
+import FinishedOrders from "./screens/adminScreens/FinishedOrders";
 
 
 function App() {
@@ -57,13 +57,14 @@ function App() {
         <Route path="/favorites" component={FavoritesScreen}></Route>
         <Route exact path="/coffee" component={CoffeeScreen}></Route>
         <Route path="/beverages" component={BeveragesScreen}></Route>
+        <Route path="/tools" component={ToolsScreen}></Route>
 
-        <Route path="/cup" component={CupScreen}></Route>
-        <Route path="/machines" component={MachinesSceen}></Route>
+      
         <Route exact path="/articles" component={ArticlesScreen}></Route>
         <Route exact path="/articles/:id" component={ArticleUnitScreen}></Route>
         <Route path="/brand/:brand" component={BrandScreen}></Route>
         <AdminRoute path="/dashboard" component={DashboardScreen}></AdminRoute>
+        <AdminRoute path='/finished' component={FinishedOrders}></AdminRoute>
         <AdminRoute
           path="/pendingorders"
           component={PendingOrders}

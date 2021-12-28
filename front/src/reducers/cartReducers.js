@@ -12,12 +12,18 @@ export const cartReducer = (state = { cartItems: [] }, action) => {
       const item = action.payload;
       console.log(item);
       const existItem = state.cartItems.find((x) => x.name === item.name);
-      if(item.sale ===true){
-        item.price = (((100-item.saleAmount)/100)*item.price).toFixed(2);
+      if (item.sale === true) {
+        item.price = (((100 - item.saleAmount) / 100) * item.price).toFixed(2);
+      }
+      console.log(existItem);
+
+      if (existItem.sale !== item.sale) {
+        existItem.sale = item.sale;
+        existItem.price = item.price;
       }
 
       if (existItem) {
-        existItem.qty = (+existItem.qty) + (+item.qty);
+        existItem.qty = +existItem.qty + +item.qty;
         return {
           ...state,
           cartItems: state.cartItems.map((x) =>

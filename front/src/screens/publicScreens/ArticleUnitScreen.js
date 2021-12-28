@@ -22,7 +22,6 @@ export default function ArticleUnitScreen(props) {
     <>
       <div className="content is-medium has-text-centered">
         <h1 className="py-3">Article screen</h1>
-
       </div>
       {loading ? (
         <LoadingComponent></LoadingComponent>
@@ -44,7 +43,11 @@ export default function ArticleUnitScreen(props) {
                     </span>
                   )}
                 </p>
-                <p>{article.content}</p>
+                <p>
+                  {article.content
+                    .split(",")
+                    .reduce((all, cur) => [...all, <br />, cur])}
+                </p>
               </div>
             </div>
             <div class="tile is-3  is-vertical is-parent">
@@ -73,21 +76,23 @@ export default function ArticleUnitScreen(props) {
             </div>
           </div>
 
-          {imageData && (<div
-            className={`modal  ${imageActive ? "is-active" : ""}`}
-            onClick={() => {
-              setImageActive(!imageActive)
-              setImageData(null);
-            }}
-          >
-            <div class="modal-background "></div>
-            <div class="modal-content ">
-              <p class="image is-4by3 mx-2">
-                <img src={imageData} alt={"modal"} />
-              </p>
+          {imageData && (
+            <div
+              className={`modal  ${imageActive ? "is-active" : ""}`}
+              onClick={() => {
+                setImageActive(!imageActive);
+                setImageData(null);
+              }}
+            >
+              <div class="modal-background "></div>
+              <div class="modal-content ">
+                <p class="image is-4by3 mx-2">
+                  <img src={imageData} alt={"modal"} />
+                </p>
+              </div>
+              <button class="modal-close is-large" aria-label="close"></button>
             </div>
-            <button class="modal-close is-large" aria-label="close"></button>
-          </div>)}
+          )}
         </div>
       )}
     </>

@@ -35,7 +35,7 @@ export default function Card(props) {
               <p>{information.price} €</p>
             ) : (
               <p>
-                <span className="line-through has-text-danger">
+                <span className="line-through has-text-danger-dark">
                   {information.price} €
                 </span>{" "}
                 <span>
