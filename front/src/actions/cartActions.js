@@ -7,7 +7,7 @@ export const addToCart = (coffeeId, qty) => async (dispatch, getState) => {
     type: CART_ADD_ITEM,
     payload: {
       name: data.name,
-      price: data.price,
+      price: data.sellingPrice,
       product: data._id,
       sale: JSON.parse(data.sale),
       saleAmount:data.saleAmount,

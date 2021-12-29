@@ -167,19 +167,33 @@ productRouter.put(
   expressAsyncHandler(async (req, res) => {
     const productFound = await Product.findOne({ _id: req.body.id });
     if (productFound) {
-      productFound.name = req.body.name;
-      //productFound.brand = req.body.brand;
-      productFound.price = req.body.price;
-      productFound.packageSize = req.body.packageSize;
-      productFound.image = req.body.image;
-      productFound.type = req.body.type;
-      productFound.description = req.body.description;
-      productFound.species = req.body.species;
-      productFound.sale = req.body.sale;
-      productFound.saleAmount = req.body.saleAmount;
-      await productFound.save();
-
-      res.send(productFound);
+      if (req.body.sale === false) {
+        productFound.name = req.body.name;
+        productFound.price = req.body.price;
+        productFound.sellingPrice = req.body.price;
+        productFound.packageSize = req.body.packageSize;
+        productFound.image = req.body.image;
+        productFound.type = req.body.type;
+        productFound.description = req.body.description;
+        productFound.species = req.body.species;
+        productFound.sale = req.body.sale;
+        productFound.saleAmount = req.body.saleAmount;
+        await productFound.save();
+        res.send(productFound);
+      } else {
+        productFound.name = req.body.name;
+        productFound.price = req.body.price;
+        productFound.sellingPrice = (req.body.price * (100 - req.body.saleAmount) /100 ).toFixed(2);
+        productFound.packageSize = req.body.packageSize;
+        productFound.image = req.body.image;
+        productFound.type = req.body.type;
+        productFound.description = req.body.description;
+        productFound.species = req.body.species;
+        productFound.sale = req.body.sale;
+        productFound.saleAmount = req.body.saleAmount;
+        await productFound.save();
+        res.send(productFound);
+      }
     } else {
       res.status(404).send({ message: "Something went wrong " });
     }
@@ -194,22 +208,23 @@ productRouter.delete(
     console.log(req.body);
     //const deletedProduct = await Product.findByIdAndDelete(req.params.productId)
 
-    Brand.findOneAndUpdate({_id: req.body.brandId}, {
-      $pull:{
-        'products': req.body.productId
+    Brand.findOneAndUpdate(
+      { _id: req.body.brandId },
+      {
+        $pull: {
+          products: req.body.productId,
+        },
+      },
+      function (err) {
+        if (!err) {
+          Product.findByIdAndRemove({ _id: req.body.productId }, (err) => {
+            if (err) res.status(404).send(err);
+            else res.send({ message: `Deleted ${req.body.productId}` });
+          });
+        }
       }
-    }, function (err){
-      if(!err){
-        Product.findByIdAndRemove({_id: req.body.productId}, (err) => {
-          if (err) res.status(404).send(err)
-          else res.send({message: `Deleted ${req.body.productId}`})
-        })
-      }
-      
-    })
-    
+    );
   })
-  
 );
 
 export default productRouter;

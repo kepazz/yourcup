@@ -12,17 +12,14 @@ export const cartReducer = (state = { cartItems: [] }, action) => {
       const item = action.payload;
       console.log(item);
       const existItem = state.cartItems.find((x) => x.name === item.name);
-      if (item.sale === true) {
-        item.price = (((100 - item.saleAmount) / 100) * item.price).toFixed(2);
-      }
+
       console.log(existItem);
 
-      if (existItem.sale !== item.sale) {
-        existItem.sale = item.sale;
-        existItem.price = item.price;
-      }
-
       if (existItem) {
+        if (existItem.sale !== item.sale) {
+          existItem.sale = item.sale;
+          existItem.price = item.price;
+        }
         existItem.qty = +existItem.qty + +item.qty;
         return {
           ...state,
@@ -34,7 +31,6 @@ export const cartReducer = (state = { cartItems: [] }, action) => {
         return { ...state, cartItems: [...state.cartItems, item] };
       }
     case CART_REMOVE_ITEMS:
-      console.log(action.payload);
       return { ...state, cartItems: [] };
     case CART_REMOVE_SINGLE_ITEM:
       const itemId = action.payload;

@@ -64,6 +64,7 @@ brandRouter.post(
         name: req.body.name,
         brand: brand._id,
         price: req.body.price,
+        sellingPrice: req.body.price,
         packageSize: req.body.packageSize,
         image: req.body.image,
         description: req.body.description,

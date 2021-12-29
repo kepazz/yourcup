@@ -23,10 +23,50 @@ export default function ProductEdit(props) {
   const [packageSize, setPackageSize] = useState("");
   const [image, setImage] = useState("");
   const [description, setDescription] = useState("");
-  const [type, setType] = useState("");
-  const [species, setSpecies] = useState("");
+  //const [type, setType] = useState("");
+  //const [species, setSpecies] = useState("");
   const [sale, setSale] = useState(false);
   const [saleAmount, setSaleAmount] = useState(0);
+
+  const selectableVariables = {
+    coffee: [
+      { value: "arabica", displayName: "Arabica" },
+      { value: "robusta", displayName: "Robusta" },
+      { value: "liberica", displayName: "Liberica" },
+      { value: "excelsa", displayName: "Excelsa" },
+    ],
+    tea: [
+      { value: "white", displayName: "White" },
+      { value: "green", displayName: "Green" },
+      { value: "black", displayName: "Black" },
+    ],
+    cups: [
+      { value: "mug", displayName: "Mug" },
+      { value: "teacup", displayName: "Teacup" },
+    ],
+    machines: [
+      { value: "percolator", displayName: "Percolator" },
+      { value: "kettle", displayName: "Kettle" },
+    ],
+  };
+
+  const [type, setType] = useState("");
+  const [specie, setSpecie] = useState("");
+  const [species, setSpecies] = useState(selectableVariables[""]);
+
+console.log(`${type} +++ ${specie} ++++++ ${species}`)
+
+  const handleChangeType = (e) => {
+    setType(e.target.value);
+    setSpecies(selectableVariables[e.target.value]);
+    setSpecie(selectableVariables[e.target.value][0].value);
+  };
+
+  const handleChangeSpecie = (e) => {
+    setSpecie(e.target.value);
+  };
+
+
 
   useEffect(() => {
     dispatch(listProductDetails(coffeeId));
@@ -41,7 +81,8 @@ export default function ProductEdit(props) {
       setImage(coffeeUnit.image);
       setDescription(coffeeUnit.description);
       setType(coffeeUnit.type);
-      setSpecies(coffeeUnit.species);
+      setSpecies(selectableVariables[coffeeUnit.type]);
+      setSpecie(coffeeUnit.species);
       setSale(JSON.parse(!coffeeUnit.sale));
       setSaleAmount(coffeeUnit.saleAmount);
     }
@@ -59,7 +100,7 @@ export default function ProductEdit(props) {
       image: image,
       description: description,
       type: type,
-      species: species,
+      species: specie,
       sale: JSON.parse(!sale),
       saleAmount: saleAmount,
     };
@@ -165,7 +206,8 @@ export default function ProductEdit(props) {
                         </div>
                       </div>
                     </div>
-                    <div class="level-item">
+
+                    {species && (<><div class="level-item">
                       <div class="field">
                         <label htmlFor="type" class="label">
                           Type
@@ -173,17 +215,15 @@ export default function ProductEdit(props) {
                         <div class="control select">
                           <select
                             id="type"
-                            class="select"
                             required
-                            onChange={(e) => setType(e.target.value)}
+                            onChange={handleChangeType}
+                            value={type}
                             defaultValue={coffeeUnit.type}
                           >
-                            <option value="" hidden>
-                              Select product type
-                            </option>
                             <option value="coffee">Coffee</option>
                             <option value="tea">Tea</option>
-                            <option value="cup">Cup</option>
+                            <option value="cups">Cups</option>
+                            <option value="machines">Machines</option>
                           </select>
                         </div>
                       </div>
@@ -194,22 +234,23 @@ export default function ProductEdit(props) {
                           Species
                         </label>
                         <div class="control select">
-                          <select
-                            id="type"
+                        <select
+                            id="species"
                             required
-                            onChange={(e) => setType(e.target.value)}
-                            defaultValue={coffeeUnit.type}
+                            onChange={handleChangeSpecie}
+                            defaultValue={coffeeUnit.species}
                           >
-                            <option value="" hidden>
-                              Select product type
-                            </option>
-                            <option value="coffee">Coffee</option>
-                            <option value="tea">Tea</option>
-                            <option value="cup">Cup</option>
+                            {species.map((specie) => (
+                              <option value={specie.value}>
+                                {specie.displayName}
+                              </option>
+                            ))}
                           </select>
                         </div>
                       </div>
-                    </div>
+                    </div></>)}
+                    
+                    
                   </div>
                 </div>
 
@@ -261,8 +302,7 @@ export default function ProductEdit(props) {
                         <label htmlFor="brand" class="label">
                           Image{" "}
                           <span className="has-text-weight-normal is-size-7">
-                            [On the left current image, on the right possible
-                            new image]
+                            [ Preview]
                           </span>
                         </label>
                         <div class="control">
@@ -279,12 +319,10 @@ export default function ProductEdit(props) {
                   </div>
                 </div>
 
-                <label htmlFor="species" class="label">
-                  Preview
-                </label>
+           
 
                 <div className="columns has-text-centered">
-                  <div className="column is-4  is-offset-4 is-6-mobile is-offset-3-mobile">
+                  <div className="column is-6  is-offset-3 is-6-mobile is-offset-3-mobile">
                     <img src={image} alt={image} />
                   </div>
                 </div>

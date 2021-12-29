@@ -30,15 +30,26 @@ export default function CoffeeItemScreen(props) {
     console.log(qty);
   };
 
+  const dateHandler = (displayDate) => {
+    var d = new Date(displayDate);
+    var date = d.getDate();
+    var month = d.getMonth() + 1;
+    var year = d.getFullYear();
+    var newDate = year + "/" + month + "/" + date;
+    return newDate;
+  };
+
   const commentAddHandler = () => {
     console.log(text);
     dispatch(createComment(coffeeId, { comment: text }));
+    dispatch(listProductDetails(coffeeId));
     //window.location.reload();
   };
 
   const commentDeleteHandler = (commentId) => {
     console.log(commentId);
     dispatch(deleteComment(coffeeId, commentId));
+    dispatch(listProductDetails(coffeeId));
   };
 
   const favoriteAddHandler = () => {
@@ -64,16 +75,14 @@ export default function CoffeeItemScreen(props) {
               <h1>Product item screen</h1>
             </div>
             <div className="columns">
-              <div className="column is-5 has-text-centered">
-                <img
-                  src={coffeeUnit.image}
-                  alt={coffeeUnit.name}
-                  className="px-6"
-                />
+              <div className="column is-3 is-offset-1 is-8-mobile is-offset-2-mobile has-text-centered">
+                <figure class="image is-3by4 ">
+                  <img src={coffeeUnit.image} alt={coffeeUnit.name} />
+                </figure>
               </div>
-              <div className="column is-7 ">
-                <div class="content is-size-5 ml-5">
-                  <p class="">
+              <div className="column is-7  mx-3">
+                <div class="content is-size-5 ">
+                  <p class="is-size-4">
                     <strong>{coffeeUnit.name}</strong>
                     {userInfo && (
                       <span className="ml-3">
@@ -137,7 +146,7 @@ export default function CoffeeItemScreen(props) {
                       onChange={(e) => setQty(e.target.value)}
                     />
                     <button
-                      class="button is-info is-rounded  "
+                      class="button  is-rounded btn-prim "
                       onClick={addToCartHandler}
                     >
                       Add to cart
@@ -153,27 +162,45 @@ export default function CoffeeItemScreen(props) {
                     <div class="media-content mx-3">
                       <div class="content box">
                         <p>
-                          <strong>{item.name}: </strong><br/>
-                          <p class="title is-6">{item.comment}</p>
+                          <strong>{item.name}: </strong>
+                          <br />
+                          <p class="subtitle is-6 ">{item.comment}</p>
                           {userInfo && (
                             <>
-                              {userInfo._id === item.user && (
-                                <p>
+                              {userInfo.isAdmin === true ? (
+                                <>
                                   <small>
                                     <a
                                       onClick={() =>
                                         commentDeleteHandler(item._id)
                                       }
-                                      href="#"
+                                      href="/#"
                                     >
                                       Delete
                                     </a>{" "}
-                                    · {item.createdAt}
+                                    ·
                                   </small>
-                                </p>
+                                </>
+                              ) : userInfo._id === item.user ? (
+                                <>
+                                  <small>
+                                    <a
+                                      onClick={() =>
+                                        commentDeleteHandler(item._id)
+                                      }
+                                      href="/#"
+                                    >
+                                      Delete
+                                    </a>{" "}
+                                    ·
+                                  </small>
+                                </>
+                              ) : (
+                                <></>
                               )}
                             </>
                           )}
+                          <span> {dateHandler(item.createdAt)} </span>
                         </p>
                       </div>
                     </div>
@@ -183,8 +210,8 @@ export default function CoffeeItemScreen(props) {
             </div>
 
             {userInfo && (
-              <article class="media mx-2 has-text-centered">
-                <div class="media-content">
+              <div class="columns has-text-centered">
+                <div className="column is-6 is-offset-3 is-10-mobile is-offset-1-mobile ">
                   <div class="field">
                     <p class="control">
                       <textarea
@@ -197,7 +224,7 @@ export default function CoffeeItemScreen(props) {
                   <div class="field">
                     <p class="control">
                       <button
-                        class="button is-info is-rounded mt-2 "
+                        class="button btn-prim is-rounded mt-2 "
                         onClick={commentAddHandler}
                       >
                         Post comment
@@ -205,7 +232,7 @@ export default function CoffeeItemScreen(props) {
                     </p>
                   </div>
                 </div>
-              </article>
+              </div>
             )}
           </div>
         </>

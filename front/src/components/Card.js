@@ -38,17 +38,19 @@ export default function Card(props) {
                 <span className="line-through has-text-danger-dark">
                   {information.price} €
                 </span>{" "}
-                <span>
-                  {(((100 - information.saleAmount) / 100) * information.price).toFixed(2)} €
-                </span>
+                <span>{information.sellingPrice}€</span>
               </p>
             )}
 
-            {information.type === "coffee" || information.type === "tea" ? (<>
-              <p className="is-size-5"> {information.type}: {information.species}</p>
+            {information.type === "coffee" || information.type === "tea" ? (
+              <>
+                <p className="is-size-5">
+                  {" "}
+                  {information.type}: {information.species}
+                </p>
               </>
             ) : (
-              <p className="is-size-5">{information.species}</p>
+              <p className="is-size-5">type:{information.species}</p>
             )}
           </div>
           <footer className="card-footer">
@@ -67,7 +69,7 @@ export default function Card(props) {
             </div>
           )}
         </div>
-      ) }
+      )}
     </>
   );
 }

@@ -7,19 +7,21 @@ import {
 import "../stylesheets/Stripe.css";
 import { useDispatch } from "react-redux";
 import { createOrder } from "../actions/orderActions";
-import { removeItemsFromCart, removeShippingInformation } from "../actions/cartActions";
+import {
+  removeItemsFromCart,
+  removeShippingInformation,
+} from "../actions/cartActions";
 
 export default function CheckoutForm(props) {
   const stripe = useStripe();
   const elements = useElements();
   const dispatch = useDispatch();
- 
+
   const [isPaid, setIsPaid] = useState(false);
-  const [paymentId, setPaymentId]=useState('');
+  const [paymentId, setPaymentId] = useState("");
 
   const [message, setMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-
 
   useEffect(() => {
     if (!stripe) {
@@ -29,8 +31,6 @@ export default function CheckoutForm(props) {
     const clientSecret = new URLSearchParams(window.location.search).get(
       "payment_intent_client_secret"
     );
-
-    
 
     if (!clientSecret) {
       return;
@@ -48,15 +48,21 @@ export default function CheckoutForm(props) {
                 id: paymentIntent.id,
                 status: paymentIntent.status,
               },
-              itemsPrice: props.cartItems.reduce((a, c) => a + c.price * c.qty, 0),
-              priceVAT: props.cartItems.reduce((a, c) => a + c.price * c.qty, 0)*21/100,
+              itemsPrice: props.cartItems.reduce(
+                (a, c) => a + c.price * c.qty,
+                0
+              ),
+              priceVAT:
+                (props.cartItems.reduce((a, c) => a + c.price * c.qty, 0) *
+                  21) /
+                100,
             })
           );
           dispatch(removeShippingInformation());
           dispatch(removeItemsFromCart());
           setIsPaid(true);
           setPaymentId(paymentIntent.id);
-          
+
           break;
         case "processing":
           setMessage("Your payment is processing.");
@@ -96,23 +102,39 @@ export default function CheckoutForm(props) {
     setIsLoading(false);
   };
 
-
   return (
     <div className="stripe-form">
-      <form id="payment-form" onSubmit={handleSubmit}>
-        <PaymentElement id="payment-element" />
-        <button disabled={isLoading || !stripe || !elements} id="submit" className='stripe-button'>
-          <span id="button-text">
-            {isLoading ? (
-              <div className="spinner" id="spinner"></div>
-            ) : (
-              `Pay now ${props.price.toFixed(2)} €`
-            )}
-          </span>
+      {isPaid !== true && (
+        <form id="payment-form" onSubmit={handleSubmit}>
+          <PaymentElement id="payment-element" />
+          <button
+            disabled={isLoading || !stripe || !elements}
+            id="submit"
+            className="stripe-button"
+          >
+            <span id="button-text">
+              {isLoading ? (
+                <div className="spinner" id="spinner"></div>
+              ) : (
+                `Pay now ${props.price.toFixed(2)} €`
+              )}
+            </span>
+          </button>
+          {message && <div id="payment-message">{message}</div>}
+        </form>
+      )}
+
+      {isPaid && (
+        <div className="has-text-centered">
+        {message}<br/>
+        <button
+          className="button btn-prim is-rounded"
+          onClick={() => props.paymentData(paymentId)}
+        >
+          Continue
         </button>
-        {message && <div id="payment-message">{message}</div>}
-      </form>
-      {isPaid && <button className='stripe-button' onClick={() =>props.paymentData(paymentId)}>Continue</button>}
+        </div>
+      )}
     </div>
   );
 }

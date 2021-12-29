@@ -45,7 +45,7 @@ export default function ArticleUnitScreen(props) {
                 </p>
                 <p>
                   {article.content
-                    .split(",")
+                    .split(">")
                     .reduce((all, cur) => [...all, <br />, cur])}
                 </p>
               </div>

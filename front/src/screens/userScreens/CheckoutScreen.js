@@ -13,7 +13,6 @@ export default function CheckoutScreen(props) {
   const cart = useSelector((state) => state.cart);
   const { shippingInformation } = cart;
 
-  
   const { cartItems } = cart;
   const [clientSecret, setClientSecret] = useState("");
 
@@ -29,7 +28,7 @@ export default function CheckoutScreen(props) {
     })
       .then((res) => res.json())
       .then((data) => setClientSecret(data.clientSecret));
-      console.log('miau');
+    console.log("miau");
   }, [cartItems]);
 
   const appearance = {
@@ -40,16 +39,17 @@ export default function CheckoutScreen(props) {
     appearance,
   };
 
- 
-
   const paymentData = (payId) => {
     console.log(payId);
     props.history.push(`/order/${payId}`);
   };
 
   return (
-    <div className="App">
-      <h1>Checkout</h1>
+    <div className="App container">
+      <div className="content is-medium has-text-centered">
+        <h1 className="py-5">Checkout</h1>
+        <hr className="mx-4" />
+      </div>
       {clientSecret && (
         <Elements options={options} stripe={stripePromise}>
           <CheckoutForm

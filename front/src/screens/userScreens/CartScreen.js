@@ -41,7 +41,7 @@ export default function CartScreen(props) {
                 <div className="column is-size-5">{item.name}</div>
                 <div className="column is-size-5">
                   {item.sale === false ? (
-                    <p>Unit price: {item.price.toFixed(2)} €</p>
+                    <p>Unit price: {item.price} €</p>
                   ) : (
                     <p>
                       Unit price:

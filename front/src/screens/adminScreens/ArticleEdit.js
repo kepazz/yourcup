@@ -61,7 +61,7 @@ export default function ArticleEdit(props) {
           <hr />
 
           <div className="columns   is-centered">
-            <div className="column is-5 ml-4">
+            <div className="column is-5 mx-4">
               <form onSubmit={submitHandler}>
                 <div class="field">
                   <label htmlFor="id" class="label">
@@ -113,6 +113,56 @@ export default function ArticleEdit(props) {
                 </div>
 
                 <div class="field">
+                  <label htmlFor="brand" class="label">
+                    Image first{" "}
+                    <span className="has-text-weight-normal is-size-7">
+                      [Preview]
+                    </span>
+                  </label>
+                  <div class="file has-name">
+                    <label class="file-label">
+                      <FileBase64
+                        type="file"
+                        multiple={false}
+                        onDone={({ base64 }) => setImage1(base64)}
+                      />
+                    </label>
+                  </div>
+                </div>
+
+
+                <div className="columns has-text-centered">
+                  <div className="column is-6  is-offset-3  is-6-mobile is-offset-3-mobile">
+                    <img src={image1} alt={image1} />
+                  </div>
+                </div>
+
+
+                <div class="field">
+                  <label htmlFor="brand" class="label">
+                    Image second{" "}
+                    <span className="has-text-weight-normal is-size-7">
+                      [Preview]
+                    </span>
+                  </label>
+                  <div class="file has-name">
+                    <label class="file-label">
+                      <FileBase64
+                        type="file"
+                        multiple={false}
+                        onDone={({ base64 }) => setImage2(base64)}
+                      />
+                    </label>
+                  </div>
+                </div>
+
+                <div className="columns has-text-centered">
+                  <div className="column is-6  is-offset-3 is-6-mobile is-offset-3-mobile">
+                    <img src={image2} alt={image2} />
+                  </div>
+                </div>
+
+                <div class="field">
                   <label htmlFor="content" class="label">
                     Content
                   </label>
@@ -129,81 +179,10 @@ export default function ArticleEdit(props) {
                   </div>
                 </div>
 
-                <div class="field">
-                  <label htmlFor="brand" class="label">
-                    Image first{" "}
-                    <span className="has-text-weight-normal is-size-7">
-                      [On the left current image, on the right possible new
-                      image]
-                    </span>
-                  </label>
-                  <div class="file has-name">
-                    <label class="file-label">
-                      <FileBase64
-                        type="file"
-                        multiple={false}
-                        onDone={({ base64 }) => setImage1(base64)}
-                      />
-                    </label>
-                  </div>
-                </div>
-                <br />
+                
 
-                <div className="columns">
-                  <div className="column has-text-centered">
-                    <img
-                      src={article.image1}
-                      alt={article.image1}
-                      className="img-cart"
-                    />
-                  </div>
-                  <div className="column has-text-centered">
-                    <img
-                      src={image1}
-                      alt="Possible new pic"
-                      className="img-cart"
-                    />
-                  </div>
-                </div>
 
-                <div class="field">
-                  <label htmlFor="brand" class="label">
-                    Image second{" "}
-                    <span className="has-text-weight-normal is-size-7">
-                      [On the left current image, on the right possible new
-                      image]
-                    </span>
-                  </label>
-                  <div class="file has-name">
-                    <label class="file-label">
-                      <FileBase64
-                        type="file"
-                        multiple={false}
-                        onDone={({ base64 }) => setImage2(base64)}
-                      />
-                    </label>
-                  </div>
-                </div>
-                <br />
-
-                <div className="columns">
-                  <div className="column has-text-centered">
-                    <img
-                      src={article.image2}
-                      alt={article.image2}
-                      className="img-cart"
-                    />
-                  </div>
-                  <div className="column has-text-centered">
-                    <img
-                      src={image2}
-                      alt="Possible new pic"
-                      className="img-cart"
-                    />
-                  </div>
-                </div>
-
-                <div class="field has-text-centered">
+                <div class="field has-text-centered mt-5">
                   <button class="button is-success is-rounded">Submit</button>
                 </div>
               </form>
