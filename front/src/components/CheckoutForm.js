@@ -89,7 +89,7 @@ export default function CheckoutForm(props) {
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        return_url: "http://localhost:3000/checkout",
+        return_url: "https://yoourcup.herokuapp.com/checkout",
       },
     });
 
