@@ -203,7 +203,7 @@ export default function ShippingScreen(props) {
                   </div>
 
                   <div class="field has-text-centered py-3">
-                    <button class="button is-rounded btn-prim ">Login</button>
+                    <button class="button is-rounded btn-prim ">Continue</button>
                   </div>
                 </form>
               </div>
