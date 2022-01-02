@@ -13,12 +13,22 @@ export default function UserSummaryScreen(props) {
   useEffect(() => {
     dispatch(orderListByUser(userId));
   }, [dispatch]);
+
+  const dateHandler = (displayDate) => {
+    var d = new Date(displayDate);
+    var date = d.getDate();
+    var month = d.getMonth() + 1;
+    var year = d.getFullYear();
+    var newDate = year + "/" + month + "/" + date;
+    return newDate;
+  };
+
   return (
     <>
       {loading ? (
         <LoadingComponent></LoadingComponent>
       ) : error ? (
-        <p>klaiduze</p>
+        <p>Error</p>
       ) : (
         <div>
           <div class="content container">
@@ -35,7 +45,8 @@ export default function UserSummaryScreen(props) {
               </li>
               <li>
                 <strong>Created at: </strong>
-                {summary.userCreatedAt}
+
+                {dateHandler(summary.userCreatedAt)}
               </li>
               <li>
                 <strong>Total orders: </strong>
@@ -57,8 +68,8 @@ export default function UserSummaryScreen(props) {
                 {summary.totalVat}
               </li>
             </ul>
-            <hr/>
-            <table className='table is-fullwidth is-bordered'>
+            <hr className="mx-4" />
+            <table className="table is-fullwidth is-bordered">
               <thead>
                 <tr>
                   <th>Payment id</th>
@@ -67,15 +78,24 @@ export default function UserSummaryScreen(props) {
                 </tr>
               </thead>
               <tbody>
-              {summary.orders.map((order)=>
-              <tr>
-                <td><Link to={{pathname :`/order_summary/${order.paymentResult.id}`, state: {orderData: order}}}>{order.paymentResult.id}</Link></td>
-                <td>{order.paymentResult.status}</td>
-                <td>{order.paidAt}</td>
-              </tr>
-              )}
-            </tbody></table>
-            
+                {summary.orders.map((order) => (
+                  <tr>
+                    <td>
+                      <Link
+                        to={{
+                          pathname: `/order_summary/${order.paymentResult.id}`,
+                          state: { orderData: order },
+                        }}
+                      >
+                        {order.paymentResult.id}
+                      </Link>
+                    </td>
+                    <td>{order.paymentResult.status}</td>
+                    <td>{dateHandler(order.paidAt)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         </div>
       )}

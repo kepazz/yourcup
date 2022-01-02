@@ -58,7 +58,7 @@ export const cartReducer = (state = { cartItems: [] }, action) => {
       console.log(info);
       return { ...state, shippingInformation: info };
     case CART_SHIPPING_REMOVE:
-      return { ...state, shippingInformation: {} };
+      return { ...state, shippingInformation: [] };
     default:
       return state;
   }

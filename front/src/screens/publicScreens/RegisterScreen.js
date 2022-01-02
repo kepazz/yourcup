@@ -111,7 +111,7 @@ export default function RegisterScreen(props) {
                     <div class="control">
                       <input
                         id="confirmPassword"
-                        type="confirmPassword"
+                        type="password"
                         class="input"
                         placeholder="Enter confirm password"
                         required

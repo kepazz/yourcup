@@ -6,7 +6,8 @@ import {
 } from "../../actions/productsActions";
 import LoadingComponent from "../../components/LoadingComponent";
 import FileBase64 from "react-file-base64";
-import { listBrands } from "../../actions/brandActions";
+import { toast } from "react-toastify";
+import ToastComponent from "../../components/ToastComponent";
 
 export default function ProductEdit(props) {
   const dispatch = useDispatch();
@@ -54,7 +55,7 @@ export default function ProductEdit(props) {
   const [specie, setSpecie] = useState("");
   const [species, setSpecies] = useState(selectableVariables[""]);
 
-console.log(`${type} +++ ${specie} ++++++ ${species}`)
+  console.log(`${type} +++ ${specie} ++++++ ${species}`);
 
   const handleChangeType = (e) => {
     setType(e.target.value);
@@ -65,8 +66,6 @@ console.log(`${type} +++ ${specie} ++++++ ${species}`)
   const handleChangeSpecie = (e) => {
     setSpecie(e.target.value);
   };
-
-
 
   useEffect(() => {
     dispatch(listProductDetails(coffeeId));
@@ -105,6 +104,7 @@ console.log(`${type} +++ ${specie} ++++++ ${species}`)
       saleAmount: saleAmount,
     };
     dispatch(productUpdate(product));
+    toast("Product updated");
     console.log(product);
   };
 
@@ -115,17 +115,17 @@ console.log(`${type} +++ ${specie} ++++++ ${species}`)
       {loading ? (
         <LoadingComponent></LoadingComponent>
       ) : error ? (
-        <h1 className="title has-text-centered">
-          {" "}
-          Sorry this item doesnt exist
-        </h1>
+        <div className="content is-medium has-text-centered">
+          <h1 className="py-5">Sorry this item doesnt exist</h1>
+          
+        </div>
       ) : (
         <div className="container">
-           <div className="content is-medium has-text-centered">
-              <h1 className="py-5">Product edit</h1>
-              <h6>{coffeeUnit._id}</h6>
-              <hr />
-            </div>
+          <div className="content is-medium has-text-centered">
+            <h1 className="py-5">Product edit</h1>
+            <h6>{coffeeUnit._id}</h6>
+            <hr className="mx-4" />
+          </div>
 
           <div className="columns  ">
             <div className="column is-half is-offset-one-quarter">
@@ -207,50 +207,52 @@ console.log(`${type} +++ ${specie} ++++++ ${species}`)
                       </div>
                     </div>
 
-                    {species && (<><div class="level-item">
-                      <div class="field">
-                        <label htmlFor="type" class="label">
-                          Type
-                        </label>
-                        <div class="control select">
-                          <select
-                            id="type"
-                            required
-                            onChange={handleChangeType}
-                            value={type}
-                            defaultValue={coffeeUnit.type}
-                          >
-                            <option value="coffee">Coffee</option>
-                            <option value="tea">Tea</option>
-                            <option value="cups">Cups</option>
-                            <option value="machines">Machines</option>
-                          </select>
+                    {species && (
+                      <>
+                        <div class="level-item">
+                          <div class="field">
+                            <label htmlFor="type" class="label">
+                              Type
+                            </label>
+                            <div class="control select">
+                              <select
+                                id="type"
+                                required
+                                onChange={handleChangeType}
+                                value={type}
+                                defaultValue={coffeeUnit.type}
+                              >
+                                <option value="coffee">Coffee</option>
+                                <option value="tea">Tea</option>
+                                <option value="cups">Cups</option>
+                                <option value="machines">Machines</option>
+                              </select>
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                    </div>
-                    <div class="level-item">
-                      <div class="field">
-                        <label htmlFor="species" class="label">
-                          Species
-                        </label>
-                        <div class="control select">
-                        <select
-                            id="species"
-                            required
-                            onChange={handleChangeSpecie}
-                            defaultValue={coffeeUnit.species}
-                          >
-                            {species.map((specie) => (
-                              <option value={specie.value}>
-                                {specie.displayName}
-                              </option>
-                            ))}
-                          </select>
+                        <div class="level-item">
+                          <div class="field">
+                            <label htmlFor="species" class="label">
+                              Species
+                            </label>
+                            <div class="control select">
+                              <select
+                                id="species"
+                                required
+                                onChange={handleChangeSpecie}
+                                defaultValue={coffeeUnit.species}
+                              >
+                                {species.map((specie) => (
+                                  <option value={specie.value}>
+                                    {specie.displayName}
+                                  </option>
+                                ))}
+                              </select>
+                            </div>
+                          </div>
                         </div>
-                      </div>
-                    </div></>)}
-                    
-                    
+                      </>
+                    )}
                   </div>
                 </div>
 
@@ -283,7 +285,6 @@ console.log(`${type} +++ ${specie} ++++++ ${species}`)
                             placeholder="amount"
                             defaultValue={coffeeUnit.saleAmount}
                             onChange={(e) => setSaleAmount(e.target.value)}
-                            
                             min="1"
                             max="90"
                             required
@@ -319,8 +320,6 @@ console.log(`${type} +++ ${specie} ++++++ ${species}`)
                   </div>
                 </div>
 
-           
-
                 <div className="columns has-text-centered">
                   <div className="column is-6  is-offset-3 is-6-mobile is-offset-3-mobile">
                     <img src={image} alt={image} />
@@ -346,6 +345,7 @@ console.log(`${type} +++ ${specie} ++++++ ${species}`)
 
                 <div class="field has-text-centered">
                   <button class="button btn-prim is-rounded">Update</button>
+                  <ToastComponent />
                 </div>
               </form>
             </div>

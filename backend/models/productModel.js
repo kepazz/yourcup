@@ -14,7 +14,6 @@ const commentSchema = new mongoose.Schema(
 const productSchema = new mongoose.Schema(
   {
     name: { type: String, required: true },
-    //brand: { type: String, required: true },
     brand :{type: mongoose.Schema.Types.ObjectId, ref:'Brand'},
     price: { type: Number, required: true },
     sellingPrice: { type: Number, required: true },
@@ -33,5 +32,4 @@ const productSchema = new mongoose.Schema(
 );
 
 const Product = mongoose.model("Product", productSchema);
-
 export default Product;

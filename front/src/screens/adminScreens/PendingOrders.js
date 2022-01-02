@@ -5,7 +5,7 @@ import {
   OrderStatusChange,
 } from "../../actions/orderActions";
 import LoadingComponent from "../../components/LoadingComponent";
-import Modal from "react-modal";
+
 import { Link } from "react-router-dom";
 
 export default function PendingOrders() {
@@ -15,16 +15,6 @@ export default function PendingOrders() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [modalData, setModalData] = useState(null);
 
-  const customStyles = {
-    content: {
-      top: "50%",
-      left: "50%",
-      right: "auto",
-      bottom: "auto",
-      marginRight: "-50%",
-      transform: "translate(-50%, -50%)",
-    },
-  };
 
   useEffect(() => {
     dispatch(listOrdersByStatus("succeeded"));
@@ -54,7 +44,7 @@ export default function PendingOrders() {
           <div className="container">
             <div className="content is-medium has-text-centered">
               <h1 className="py-5">Pending orders</h1>
-              <hr />
+              <hr className="mx-4" />
             </div>
             <div className="table-container">
               <table className="table is-fullwidth is-bordered ">
@@ -131,78 +121,7 @@ export default function PendingOrders() {
               </table>
             </div>
           </div>
-          <Modal
-            isOpen={modalIsOpen}
-            onRequestClose={() => setModalIsOpen(false)}
-            style={customStyles}
-            ariaHideApp={false}
-          >
-            {modalData && (
-              <div class="modal-content">
-                <div>
-                  {modalData.orderItems.map((item) => (
-                    <div>
-                      <div className="columns has-text-centered is-vcentered">
-                        <div className="column ">
-                          <img
-                            src={item.image}
-                            className="img-modal"
-                            alt={item.name}
-                          />
-                          <p>
-                            <span>{item.name}</span>
-                          </p>
-                        </div>
-
-                        <div className="column ">
-                          Unit price: {item.price.toFixed(2)} €
-                        </div>
-                        <div className="column ">{item.qty} x</div>
-                      </div>
-                      <hr />
-                    </div>
-                  ))}
-                </div>
-
-                <div>
-                  <p>
-                    <strong>Total price:</strong>{" "}
-                    {modalData.itemsPrice.toFixed(2)} €
-                  </p>
-                  <p>
-                    <strong>Total price:</strong>{" "}
-                    {modalData.priceVAT.toFixed(2)} €
-                  </p>
-                  <p>
-                    <strong>Status: </strong>
-                    <span className="line-through has-text-danger ">
-                      {modalData.paymentResult.status}
-                    </span>{" "}
-                    changes into <span className="has-text-success">Send</span>{" "}
-                    after the confirm
-                  </p>
-
-                  <div class=" has-text-centered">
-                    <button
-                      class="button is-success mr-2"
-                      onClick={() => {
-                        setModalIsOpen(false);
-                        statusChangeHandler(modalData.paymentResult.id);
-                      }}
-                    >
-                      Change status
-                    </button>
-                    <button
-                      class="button is-danger"
-                      onClick={() => setModalIsOpen(false)}
-                    >
-                      Cancel
-                    </button>
-                  </div>
-                </div>
-              </div>
-            )}
-          </Modal>
+         
 
           {modalData && (
             <div className={`modal  ${modalIsOpen ? "is-active" : ""}`}>

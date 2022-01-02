@@ -2,9 +2,14 @@ import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { articleUpdate, listArticleDetails } from "../../actions/articleActions";
+import {
+  articleUpdate,
+  listArticleDetails,
+} from "../../actions/articleActions";
 import LoadingComponent from "../../components/LoadingComponent";
 import FileBase64 from "react-file-base64";
+import { toast } from "react-toastify";
+import ToastComponent from "../../components/ToastComponent";
 
 export default function ArticleEdit(props) {
   const articleId = props.match.params.id;
@@ -43,7 +48,7 @@ export default function ArticleEdit(props) {
       image2: image2,
     };
     dispatch(articleUpdate(article));
-    console.log(article);
+    toast("Article updated");
   };
 
   return (
@@ -51,14 +56,16 @@ export default function ArticleEdit(props) {
       {loading ? (
         <LoadingComponent></LoadingComponent>
       ) : error ? (
-        <h1 className="title has-text-centered">
-          {" "}
-          Sorry this item doesnt exist
-        </h1>
+        <div className="content is-medium has-text-centered">
+          <h1 className="py-5">Sorry this article doesnt exist</h1>
+          
+        </div>
       ) : (
         <div className="container">
-          <h1 className="title has-text-centered">Article edit screen</h1>
-          <hr />
+          <div className="content is-medium has-text-centered">
+            <h1 className="py-5">Article edit</h1>
+            <hr className="mx-4" />
+          </div>
 
           <div className="columns   is-centered">
             <div className="column is-5 mx-4">
@@ -130,13 +137,11 @@ export default function ArticleEdit(props) {
                   </div>
                 </div>
 
-
                 <div className="columns has-text-centered">
                   <div className="column is-6  is-offset-3  is-6-mobile is-offset-3-mobile">
                     <img src={image1} alt={image1} />
                   </div>
                 </div>
-
 
                 <div class="field">
                   <label htmlFor="brand" class="label">
@@ -179,11 +184,9 @@ export default function ArticleEdit(props) {
                   </div>
                 </div>
 
-                
-
-
                 <div class="field has-text-centered mt-5">
                   <button class="button is-success is-rounded">Submit</button>
+                  <ToastComponent />
                 </div>
               </form>
             </div>

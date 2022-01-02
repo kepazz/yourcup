@@ -2,7 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../actions/cartActions";
-import LoadingComponent from "./LoadingComponent";
+import { toast } from "react-toastify";
+import ToastComponent from "./ToastComponent"
 
 export default function Card(props) {
   const dispatch = useDispatch();
@@ -12,6 +13,7 @@ export default function Card(props) {
 
   const addToCartHandler = () => {
     dispatch(addToCart(information._id, 1));
+    toast("Product was added to cart");
   };
 
   return (
@@ -24,7 +26,7 @@ export default function Card(props) {
             </h3>
           </div>
           <div className="card-image has-text-centered px-5 ">
-            <Link to={`/coffee/${information._id}`}>
+            <Link to={`/product/${information._id}`}>
               <figure className="image is-3by4">
                 <img src={information.image} alt={information.name} />
               </figure>
@@ -61,6 +63,7 @@ export default function Card(props) {
               >
                 Add to cart
               </button>
+              <ToastComponent/>
             </p>
           </footer>
           {userInfo && userInfo.isAdmin && (

@@ -81,7 +81,7 @@ export default function Navbar() {
 
           {userInfo && userInfo.isAdmin && (
             <div class="navbar-item has-dropdown is-hoverable">
-              <Link to="/#" class="navbar-link">
+              <Link to="/" class="navbar-link">
                 <p>
                   <strong>Admin</strong>
                 </p>

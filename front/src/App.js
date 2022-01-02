@@ -8,7 +8,7 @@ import ArticlesScreen from "./screens/publicScreens/ArticlesScreen";
 import ArticleUnitScreen from "./screens/publicScreens/ArticleUnitScreen";
 import BrandScreen from "./screens/publicScreens/BrandScreen";
 import BeveragesScreen from "./screens/publicScreens/BeveragesScreen";
-import CoffeeItemScreen from "./screens/publicScreens/CoffeeItemScreen";
+import ProductScreen from "./screens/publicScreens/ProductScreen";
 import SignInScreen from "./screens/publicScreens/SignInScreen";
 
 import CartScreen from "./screens/userScreens/CartScreen";
@@ -20,9 +20,6 @@ import UpdatePasswordScreen from "./screens/userScreens/UpdatePasswordScreen";
 import FavoritesScreen from "./screens/userScreens/FavoritesScreen";
 
 
-import CoffeeScreen from "./screens/categoriesScreens/CoffeeScreen";
-
-import DashboardScreen from "./screens/DashboardScreen";
 
 import Navbar from "./components/Navbar";
 import AdminRoute from "./components/AdminRoute";
@@ -44,7 +41,7 @@ function App() {
     <BrowserRouter>
       <Navbar></Navbar>
       <main className="bg">
-        <Route exact path="/coffee/:id" component={CoffeeItemScreen}></Route>
+        <Route exact path="/product/:id" component={ProductScreen}></Route>
         <Route path="/register" component={RegisterScreen}></Route>
         <Route path="/signin" component={SignInScreen}></Route>
         <Route path="/cart" component={CartScreen}></Route>
@@ -52,18 +49,14 @@ function App() {
         <Route path="/checkout" component={CheckoutScreen}></Route>
         <Route path="/order/:id" component={OrderScreen}></Route>
         <Route path="/orders" component={OrderListScreen}></Route>
-
         <Route path="/update" component={UpdatePasswordScreen}></Route>
         <Route path="/favorites" component={FavoritesScreen}></Route>
-        <Route exact path="/coffee" component={CoffeeScreen}></Route>
         <Route path="/beverages" component={BeveragesScreen}></Route>
         <Route path="/tools" component={ToolsScreen}></Route>
 
-      
         <Route exact path="/articles" component={ArticlesScreen}></Route>
         <Route exact path="/articles/:id" component={ArticleUnitScreen}></Route>
         <Route path="/brand/:brand" component={BrandScreen}></Route>
-        <AdminRoute path="/dashboard" component={DashboardScreen}></AdminRoute>
         <AdminRoute path='/finished' component={FinishedOrders}></AdminRoute>
         <AdminRoute
           path="/pendingorders"
@@ -96,8 +89,8 @@ function App() {
         <div class="content has-text-centered">
           <p>
             <strong>Your Cup</strong> by{" "}
-            <a href="https://jgthms.com">Edvinas Jakstas</a>. Vilnius, 2022.
-            Source code <a href="https://github.com/kepazz/yourcup">Link</a>
+            <a href="/">Edvinas Jakstas</a>. Vilnius, 2022.
+            
           </p>
         </div>
       </footer>

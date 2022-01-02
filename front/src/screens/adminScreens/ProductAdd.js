@@ -12,8 +12,8 @@ export default function ProductAdd() {
   const { loading, error, brands } = brandList;
   const [name, setName] = useState("");
   const [brand, setBrand] = useState("");
-  const [price, setPrice] = useState("");
-  const [packageSize, setPackageSize] = useState("");
+  const [price, setPrice] = useState(1);
+  const [packageSize, setPackageSize] = useState(1);
   const [image, setImage] = useState("");
   const [description, setDescription] = useState("");
   //const [type, setType] = useState("");
@@ -79,7 +79,7 @@ export default function ProductAdd() {
       dispatch(productAdd(product));
       toast("Product added");
     } else {
-      toast("Product add failed");
+      toast("Please add image");
     }
   };
 
@@ -88,18 +88,21 @@ export default function ProductAdd() {
       {loading ? (
         <LoadingComponent></LoadingComponent>
       ) : error ? (
-        <p>klaida</p>
+        <div className="content is-medium has-text-centered">
+            <h1 className="py-5">There was an error</h1>
+            
+          </div>
       ) : (
         <div className="container">
           <div className="content is-medium has-text-centered">
             <h1 className="py-5">Product add</h1>
-            <hr />
+            <hr className="mx-4" />
           </div>
 
           <div className="columns  ">
-            <div className="column is-half is-offset-one-quarter">
+            <div className="column is-half is-offset-one-quarter ">
               <form onSubmit={submitHandler} autoComplete="off">
-                <div class="field">
+                <div class="field mx-4">
                   <label htmlFor="name" class="label">
                     Name
                   </label>
@@ -114,8 +117,8 @@ export default function ProductAdd() {
                   />
                 </div>
 
-                <div class="field is-horizontal is-vcentered">
-                  <div class="field-body">
+                <div class="field is-horizontal ">
+                  <div class="field-body mx-4">
                     <div class="field">
                       <label htmlFor="brand" class="label">
                         Brand
@@ -187,7 +190,7 @@ export default function ProductAdd() {
                 <div class="level">
                   <div className="level-left">
                     <div class="level-item">
-                      <div class="field">
+                      <div class="field mx-4">
                         <label htmlFor="package" class="label">
                           Package size ( g. )
                         </label>
@@ -226,9 +229,11 @@ export default function ProductAdd() {
                   </div>
                 </div>
 
-                <div class="field">
+                <div class="field mx-4">
                   <label htmlFor="brand" class="label">
-                    Image
+                    Image <span className="has-text-weight-normal is-size-7">
+                            [ Preview]
+                          </span>
                   </label>
                   <div class="file has-name">
                     <label class="file-label">
@@ -241,7 +246,14 @@ export default function ProductAdd() {
                   </div>
                 </div>
 
-                <div class="field">
+                <div className="columns has-text-centered">
+                  <div className="column is-6  is-offset-3 is-6-mobile is-offset-3-mobile">
+                    
+                    <img src={image} alt={image} />
+                  </div>
+                </div>
+
+                <div class="field mx-4">
                   <label htmlFor="description" class="label">
                     Description
                   </label>
@@ -262,15 +274,7 @@ export default function ProductAdd() {
                   <ToastComponent />
                 </div>
               </form>
-              {image && (
-                <div>
-                  <img
-                    style={{ width: "100%", height: 300 }}
-                    alt={image}
-                    src={image}
-                  />
-                </div>
-              )}
+              
             </div>
           </div>
         </div>

@@ -37,7 +37,8 @@ export default function OrderListScreen(props) {
   ) : (
     <div className="container">
       <h1 className="title has-text-centered mt-4">Your orders</h1>
-      <table className="table is-fullwidth is-striped is-bordered">
+      
+      <table className="table is-fullwidth is-striped is-bordered mx-2">
         <thead>
           <tr>
             <th>Order id</th>
@@ -52,6 +53,7 @@ export default function OrderListScreen(props) {
                 <Link to={`/order/${order.paymentResult.id}`}>
                   {order.paymentResult.id}
                 </Link>
+                {" "} ({order.paymentResult.status})
               </td>
 
               <td>{dateHandler(order.paidAt)}</td>

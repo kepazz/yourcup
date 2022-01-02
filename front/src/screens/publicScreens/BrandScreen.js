@@ -25,7 +25,7 @@ export default function BrandScreen(props) {
           
             <h1 className="title has-text-centered pt-4">{details.name}</h1>
             <div class="content">
-            <h1>Description</h1>
+            <h1 className="subtitle  pt-5">Description</h1>
             <p>{details.description} Lorem Ipsum is simply dummy text of the printing and typesetting industry.
              Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
               when an unknown printer took a galley of type and scrambled it to make a type specimen book.
@@ -33,19 +33,8 @@ export default function BrandScreen(props) {
                 remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages,
                  and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
             </div>
-            <hr/>
-            {/* <div className="columns is-multiline">
-              {details.productsData
-                
-                .map((productUnit) => (
-                  <div className="column is-one-quarter ">
-                    <Card
-                      key={productUnit._id}
-                      information={productUnit}
-                    ></Card>
-                  </div>
-                ))}
-            </div> */}
+            <hr className="mx-4" />
+           
 
             {
               <div className="columns is-multiline">

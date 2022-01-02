@@ -171,7 +171,7 @@ export default function ToolsScreen() {
               </div>
             </section>
 
-            <hr />
+            <hr className="mx-4" />
             <div className="columns is-multiline">
               {coffee
 
@@ -186,11 +186,11 @@ export default function ToolsScreen() {
                 )
                 .filter(
                   (product) =>
-                    highestPrice === "" || product.price <= highestPrice
+                    highestPrice === "" || product.sellingPrice <= highestPrice
                 )
                 .filter(
                   (product) =>
-                    lowestPrice === "" || product.price >= lowestPrice
+                    lowestPrice === "" || product.sellingPrice >= lowestPrice
                 )
                 .map((productUnit) => (
                   <div className="column is-one-quarter is-four-fifths-mobile is-offset-1-mobile">

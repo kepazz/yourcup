@@ -40,9 +40,7 @@ brandRouter.get(
       "products"
     );
     if (brandInfo) {
-      //const productsInfo = await Product.find({ brand: req.params.brand });
-      //res.send({ brandData: brandInfo, productsData: productsInfo });
-      //console.log(brandInfo)
+      
       res.send(brandInfo);
     } else {
       res.status(404).send({ message: "Brand does not exist " });
@@ -55,7 +53,7 @@ brandRouter.post(
   isAuth,
   isAdmin,
   expressAsyncHandler(async (req, res) => {
-    //console.log(req.body)
+    
     const brand = await Brand.findOne({ name: req.body.brand });
 
     brand.save(function (err) {
@@ -80,7 +78,7 @@ brandRouter.post(
       brand.products.push(newProduct._id);
       brand.save();
     });
-    //console.log(brand);
+    
     res.send(brand);
   })
 );

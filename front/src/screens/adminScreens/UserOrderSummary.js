@@ -47,7 +47,7 @@ export default function UserOrderSummary(props) {
                 Total price: {(item.price * item.qty).toFixed(2)}€
               </div>
             </div>
-            <hr />
+            <hr className="mx-4" />
           </div>
         ))}
 

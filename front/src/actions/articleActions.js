@@ -36,7 +36,6 @@ export const articleAdd = (article) => async (dispatch, getState) => {
     const { data } = await Axios.post(`/api/articles/addArticle`, article, {
       headers: { Authorization: `Bearer ${userInfo.token}` },
     });
-
     dispatch({ type: ARTICLES_ADD_SUCCESS, payload: data });
   } catch (error) {
     const message =

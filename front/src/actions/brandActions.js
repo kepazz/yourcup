@@ -11,7 +11,7 @@ import {
   BRAND_LIST_SUCCESS,
 } from "../constants/brandConstants";
 
-// https://stackoverflow.com/questions/36205673/how-do-i-create-a-dynamic-drop-down-list-with-react-bootstrap
+
 
 export const listBrands = () => async (dispatch) => {
   dispatch({

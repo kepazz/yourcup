@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import FileBase64 from "react-file-base64";
 import { articleAdd } from "../../actions/articleActions";
+import { toast } from "react-toastify";
+import ToastComponent from "../../components/ToastComponent";
 
 export default function ArticleAdd() {
   const [title, setTitle] = useState("");
@@ -26,6 +28,9 @@ export default function ArticleAdd() {
       };
       console.log(article);
       dispatch(articleAdd(article));
+      toast("Article added");
+    } else {
+      toast("Please add images");
     }
   };
 
@@ -33,7 +38,7 @@ export default function ArticleAdd() {
     <>
       <div className="container">
         <h1 className="title has-text-centered mt-3">Article add page</h1>
-        <hr />
+        <hr className="mx-4" />
         <div className="columns   is-centered">
           <div className="column is-5 ml-4">
             <form onSubmit={submitHandler} autoComplete="off">
@@ -71,7 +76,9 @@ export default function ArticleAdd() {
 
               <div class="field">
                 <label htmlFor="brand" class="label">
-                  Image 1
+                  Image 1 <span className="has-text-weight-normal is-size-7">
+                            [ Preview]
+                          </span>
                 </label>
                 <div class="file has-name">
                   <label class="file-label">
@@ -83,10 +90,17 @@ export default function ArticleAdd() {
                   </label>
                 </div>
               </div>
+              <div className="columns has-text-centered">
+                  <div className="column is-6  is-offset-3  is-6-mobile is-offset-3-mobile">
+                    <img src={image1} alt={image1} />
+                  </div>
+                </div>
 
               <div class="field">
                 <label htmlFor="brand" class="label">
-                  Image 2
+                  Image 2 <span className="has-text-weight-normal is-size-7">
+                            [ Preview]
+                          </span>
                 </label>
                 <div class="file has-name">
                   <label class="file-label">
@@ -98,10 +112,17 @@ export default function ArticleAdd() {
                   </label>
                 </div>
               </div>
+              <div className="columns has-text-centered">
+                  <div className="column is-6  is-offset-3  is-6-mobile is-offset-3-mobile">
+                    <img src={image2} alt={image2} />
+                  </div>
+                </div>
 
               <div class="field">
                 <label htmlFor="content" class="label">
-                  Content
+                  Content <span className="has-text-weight-normal is-size-7">
+                            [ Seperate paragraph with " > " symbol ]
+                          </span>
                 </label>
                 <div class="control">
                   <textarea
@@ -117,17 +138,10 @@ export default function ArticleAdd() {
 
               <div class="field has-text-centered">
                 <button class="button is-success is-rounded">Submit</button>
+                <ToastComponent/>
               </div>
             </form>
-            {image1 && (
-              <div>
-                <img
-                  style={{ width: "100%", height: 300 }}
-                  alt={image1}
-                  src={image1}
-                />
-              </div>
-            )}
+            
           </div>
         </div>
       </div>

@@ -55,7 +55,7 @@ productRouter.get(
   "/:id",
   expressAsyncHandler(async (req, res) => {
     console.log(req.params);
-    //const productUnit = await Product.findById(req.params.id);
+    
     const productUnit = await Product.findById(req.params.id).populate(
       "brand",
       "name"
@@ -84,7 +84,7 @@ productRouter.post(
       const updatedProduct = await product.save();
       res.status(201).send({
         message: "Comment added",
-        comment: updatedProduct.comments,
+        comment: updatedProduct.comments[updatedProduct.comments.length - 1],
       });
     } else {
       res.status(404).send({ message: "Failed" });
@@ -110,10 +110,10 @@ productRouter.delete(
         }
       });
       product.comments.splice(commentIndex, 1);
-      const productInfo = await product.save();
+       await product.save();
       res.status(201).send({
         message: "Comment deleted",
-        productInfoAfterChange: productInfo,
+        commentId: commentId,
       });
     } else {
       res.status(404).send({ message: "Comment does not exist ?" });
@@ -133,32 +133,7 @@ productRouter.post(
   })
 );
 
-/* ????????????? nebereikia galimai
-productRouter.post(
-  "/addNew",
-  isAuth,
-  isAdmin,
-  expressAsyncHandler(async (req, res) => {
-    console.log("---------hello -------");
-    console.log(req.body.price);
 
-    const product = new Product({
-      name: req.body.name,
-      brand: req.body.brand,
-      price: req.body.price,
-      packageSize: req.body.packageSize,
-      image: req.body.image,
-      description: req.body.description,
-      type: req.body.type,
-      species: req.body.species,
-      sale: false,
-      saleAmount: 30,
-      comments: [],
-    });
-    const newProduct = await product.save();
-    res.send(newProduct);
-  })
-);*/
 
 productRouter.put(
   "/update",

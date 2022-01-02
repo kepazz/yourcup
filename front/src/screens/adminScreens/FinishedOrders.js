@@ -15,16 +15,7 @@ export default function FinishedOrders() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [modalData, setModalData] = useState(null);
 
-  const customStyles = {
-    content: {
-      top: "50%",
-      left: "50%",
-      right: "auto",
-      bottom: "auto",
-      marginRight: "-50%",
-      transform: "translate(-50%, -50%)",
-    },
-  };
+ 
 
   useEffect(() => {
     dispatch(listOrdersByStatus("finished"));
@@ -54,7 +45,7 @@ export default function FinishedOrders() {
           <div className="container">
             <div className="content is-medium has-text-centered">
               <h1 className="py-5">Pending orders</h1>
-              <hr />
+              <hr className="mx-4" />
             </div>
             <div className="table-container">
               <table className="table is-fullwidth is-bordered ">

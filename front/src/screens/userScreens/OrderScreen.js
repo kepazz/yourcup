@@ -91,7 +91,7 @@ export default function OrderScreen(props) {
               Total price: {(item.price * item.qty).toFixed(2)}€
             </div>
           </div>
-          <hr />
+          <hr className="mx-4" />
         </div>
       ))}
 
@@ -144,7 +144,7 @@ export default function OrderScreen(props) {
           <div class="modal-content box has-text-centered">
             {modalData === "arrived" ? (
               <>
-                <p className="title">Are u sure it arrived ?</p>
+                <p className="title">Are you sure it arrived ?</p>
                 <div className="buttons is-centered">
                   <button
                     className="button is-success is-rounded"

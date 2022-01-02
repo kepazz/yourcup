@@ -43,13 +43,13 @@ export default function SendOrders() {
       {loading ? (
         <LoadingComponent></LoadingComponent>
       ) : error ? (
-        <p>sorry mate there is an error </p>
+        <p>There is an error </p>
       ) : (
         <>
           <div className="container">
             <div className="content is-medium has-text-centered">
               <h1 className="py-5">Send orders</h1>
-              <hr />
+              <hr className="mx-4" />
             </div>
             <div className="table-container">
               <table className="table is-fullwidth is-bordered ">

@@ -4,6 +4,7 @@ import LoadingComponent from "../../components/LoadingComponent";
 import { listProducts } from "../../actions/productsActions";
 import Card from "../../components/Card";
 
+
 export default function BeveragesScreen() {
   const dispatch = useDispatch();
   const coffeeList = useSelector((state) => state.productList);
@@ -171,7 +172,7 @@ export default function BeveragesScreen() {
               </div>
             </section>
 
-            <hr />
+            <hr className="mx-4" />
             <div className="columns is-multiline">
               {coffee
 
@@ -186,11 +187,11 @@ export default function BeveragesScreen() {
                 )
                 .filter(
                   (product) =>
-                    highestPrice === "" || product.price <= highestPrice
+                    highestPrice === "" || product.sellingPrice <= highestPrice
                 )
                 .filter(
                   (product) =>
-                    lowestPrice === "" || product.price >= lowestPrice
+                    lowestPrice === "" || product.sellingPrice >= lowestPrice
                 )
                 .map((productUnit) => (
                   <div className="column is-one-quarter is-four-fifths-mobile is-offset-1-mobile">

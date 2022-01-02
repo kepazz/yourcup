@@ -9,8 +9,11 @@ import {
 } from "../../actions/productsActions";
 import { favoritesAdd, favoritesDelete } from "../../actions/userActions";
 import LoadingComponent from "../../components/LoadingComponent";
+import { toast } from "react-toastify";
+import ToastComponent from "../../components/ToastComponent";
 
-export default function CoffeeItemScreen(props) {
+
+export default function ProductScreen(props) {
   const dispatch = useDispatch();
   const [qty, setQty] = useState(1);
   const [text, setText] = useState("");
@@ -27,6 +30,7 @@ export default function CoffeeItemScreen(props) {
 
   const addToCartHandler = () => {
     dispatch(addToCart(coffeeUnit._id, qty));
+    toast(`Product ${qty}x amount were added to cart`);
     console.log(qty);
   };
 
@@ -42,14 +46,13 @@ export default function CoffeeItemScreen(props) {
   const commentAddHandler = () => {
     console.log(text);
     dispatch(createComment(coffeeId, { comment: text }));
-    dispatch(listProductDetails(coffeeId));
-    //window.location.reload();
+   
   };
 
   const commentDeleteHandler = (commentId) => {
     console.log(commentId);
     dispatch(deleteComment(coffeeId, commentId));
-    dispatch(listProductDetails(coffeeId));
+    
   };
 
   const favoriteAddHandler = () => {
@@ -65,14 +68,15 @@ export default function CoffeeItemScreen(props) {
       {loading ? (
         <LoadingComponent></LoadingComponent>
       ) : error ? (
-        <div className="content is-medium has-text-centered pt-5">
-          <h1>Sorry item wasnt found</h1>
+        <div className="content is-medium has-text-centered">
+          <h1 className="py-5">Sorry item wasnt found</h1>
         </div>
       ) : (
         <>
           <div className="container">
-            <div className="content is-medium has-text-centered pt-5">
-              <h1>Product item screen</h1>
+            <div className="content is-medium has-text-centered">
+              <h1 className="py-5">Product item screen</h1>
+              <hr className="mx-4" />
             </div>
             <div className="columns">
               <div className="column is-3 is-offset-1 is-8-mobile is-offset-2-mobile has-text-centered">
@@ -151,10 +155,12 @@ export default function CoffeeItemScreen(props) {
                     >
                       Add to cart
                     </button>
+                    <ToastComponent/>
                   </div>
                 </div>
               </div>
             </div>
+            <hr className="mx-4" />
             <div className="columns is-multiline">
               {coffeeUnit.comments.map((item) => (
                 <div className="column is-3">
@@ -174,7 +180,6 @@ export default function CoffeeItemScreen(props) {
                                       onClick={() =>
                                         commentDeleteHandler(item._id)
                                       }
-                                      href="/#"
                                     >
                                       Delete
                                     </a>{" "}
@@ -188,7 +193,6 @@ export default function CoffeeItemScreen(props) {
                                       onClick={() =>
                                         commentDeleteHandler(item._id)
                                       }
-                                      href="/#"
                                     >
                                       Delete
                                     </a>{" "}
@@ -211,7 +215,9 @@ export default function CoffeeItemScreen(props) {
 
             {userInfo && (
               <div class="columns has-text-centered">
+                
                 <div className="column is-6 is-offset-3 is-10-mobile is-offset-1-mobile ">
+                <hr className="mx-4" />
                   <div class="field">
                     <p class="control">
                       <textarea

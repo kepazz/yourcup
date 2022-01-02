@@ -120,11 +120,11 @@ orderRouter.put(
             res.send(order);
           }
         } else {
-          res.status(404).send({ message: `MIAU` });
+          res.status(404).send({ message: `error` });
         }
       }
     } else {
-      res.status(404).send({ message: `rawr` });
+      res.status(404).send({ message: `error` });
     }
   })
 );

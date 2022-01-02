@@ -32,13 +32,17 @@ export default function HomeScreen() {
                       Find yourself a hot drink that suits your taste desires
                     </h2>
                     <div class="buttons">
-                      <Link to='/coffee' class="button  is-rounded btn-prim">Discover</Link>
-                      <Link to='/articles' class="button is-rounded btn-prim">Check articles</Link>
+                      <Link to="/beverages" class="button  is-rounded btn-prim">
+                        Discover
+                      </Link>
+                      <Link to="/articles" class="button is-rounded btn-prim">
+                        Check articles
+                      </Link>
                     </div>
                   </div>
                   <div class="column is-4">
                     <figure class="image is-4by3">
-                      <img src={'/images/homePageImage.png'} alt="coffee" />
+                      <img src={"/images/homePageImage.png"} alt="coffee" />
                     </figure>
                   </div>
                 </div>
@@ -55,41 +59,37 @@ export default function HomeScreen() {
                 <div class="is-centered"></div>
               </div>
 
-
               <div class="columns">
                 {coffee.map((item) => (
                   <div class="column is-one-third">
-                  <div class="card card-home has-text-centered ">
-                    <div class="card-title">
-                    
-                      <h3 className="title is-4 pt-5 pb-3">{item.name}</h3>
-                    </div>
-                    <div class="card-icon">
-                      <img src={item.image} alt="coffee" className="img-home" />
-                    </div>
-                    <div class="card-text pb-3">
-                      <p>
-                        Special from <Link to={`/brand/${item.brand}`}>{item.brand}</Link>
-                      </p>
-                    </div>
-                    <div class="card-action">
-                      <Link to={`/coffee/${item._id}`}>
-                        <button class="button is-rounded btn-prim mb-4">
-                          Check this out
-                        </button>
-                      </Link>
+                    <div class="card card-home has-text-centered ">
+                      <div class="card-title">
+                        <h3 className="title is-4 pt-5 pb-3">{item.name}</h3>
+                      </div>
+                      <div class="card-icon">
+                        <img
+                          src={item.image}
+                          alt="coffee"
+                          className="img-home"
+                        />
+                      </div>
+                      <div class="card-text pb-3">
+                        <p>
+                          Special from{" "}
+                          <Link to={`/brand/${item.brand}`}>{item.brand}</Link>
+                        </p>
+                      </div>
+                      <div class="card-action">
+                        <Link to={`/product/${item._id}`}>
+                          <button class="button is-rounded btn-prim mb-4">
+                            Check this out
+                          </button>
+                        </Link>
+                      </div>
                     </div>
                   </div>
-                </div>
                 ))}
-                
               </div>
-
-
-
-
-
-              
             </div>
           </section>
         </div>

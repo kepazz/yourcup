@@ -30,7 +30,6 @@ if(process.env.NODE_ENV === "production"){
 } else {
   mongoose.connect("mongodb://localhost/yourcup");
 }
-//mongoose.connect(process.env.MONGO_URL || "mongodb://localhost/yourcup");
 app.use("/api/users", userRouter);
 app.use("/api/products", productRouter);
 app.use("/api/orders", orderRouter);
@@ -52,8 +51,6 @@ if(process.env.NODE_ENV === "production"){
 }
 
 
-
-
 app.use((err, req, res, next) => {
   res.status(500).send({ message: err.message });
 });
@@ -72,5 +69,5 @@ app.post("/create-payment-intent", async (req, res) => {
   });
 });
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT;
 app.listen(port);

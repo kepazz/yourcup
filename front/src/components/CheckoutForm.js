@@ -92,6 +92,10 @@ export default function CheckoutForm(props) {
         return_url: "https://yoourcup.herokuapp.com/checkout",
       },
     });
+    /* 
+    http://localhost:3000/checkout 
+    https://yoourcup.herokuapp.com/checkout
+    */
 
     if (error.type === "card_error" || error.type === "validation_error") {
       setMessage(error.message);
@@ -103,9 +107,9 @@ export default function CheckoutForm(props) {
   };
 
   return (
-    <div className="stripe-form">
+    <div className="stripe-form ">
       {isPaid !== true && (
-        <form id="payment-form" onSubmit={handleSubmit}>
+        <form id="payment-form " onSubmit={handleSubmit}>
           <PaymentElement id="payment-element" />
           <button
             disabled={isLoading || !stripe || !elements}

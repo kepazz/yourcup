@@ -23,6 +23,8 @@ import {
   PRODUCT_DELETE_REQUEST,
   PRODUCT_DELETE_SUCCESS,
   PRODUCT_DELETE_FAIL,
+  PRODUCT_COMMENT_REFRESH,
+  COMMENT_DELETE_REFRESH,
 } from "../constants/productConstants";
 import Axios from "axios";
 
@@ -80,7 +82,9 @@ export const createComment =
         comment,
         { headers: { Authorization: `Bearer ${userInfo.token}` } }
       );
-      dispatch({ type: PRODUCT_COMMENT_SUCCESS, payload: data.comment });
+      dispatch({ type: PRODUCT_COMMENT_SUCCESS });
+      dispatch({ type: PRODUCT_COMMENT_REFRESH, payload: data.comment });
+      console.log(data.comment);
     } catch (error) {
       const message =
         error.response && error.response.data.message
@@ -100,7 +104,7 @@ export const deleteComment =
     console.log(commentId);
     console.log(userInfo);
     try {
-      const { test } = await Axios.delete(
+      const { data } = await Axios.delete(
         `/api/products/${coffeeId}/comments`,
         {
           data: { commentId: commentId },
@@ -108,6 +112,8 @@ export const deleteComment =
         }
       );
       dispatch({ type: COMMENT_DELETE_SUCCESS });
+      dispatch({ type: COMMENT_DELETE_REFRESH, payload: data.commentId });
+      console.log(data.commentId);
     } catch (error) {
       const message =
         error.response && error.response.data.message
@@ -181,7 +187,7 @@ export const productDelete = (product, brand) => async (dispatch, getState) => {
   } = getState();
   try {
     const { data } = await Axios.delete(`/api/products/deleteProduct`, {
-      data: { productId: product, brandId : brand},
+      data: { productId: product, brandId: brand },
       headers: { Authorization: `Bearer ${userInfo.token}` },
     });
     dispatch({ type: PRODUCT_DELETE_SUCCESS });

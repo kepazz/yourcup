@@ -20,7 +20,7 @@ export default function ArticlesScreen() {
         <LoadingComponent></LoadingComponent>
       ) : (
         <div>
-          <hr />
+          <hr className="mx-4" />
           <div className="columns is-multiline">
             {articles.map((article) => (
               <div className="column is-one-third is-8-mobile is-offset-2-mobile">

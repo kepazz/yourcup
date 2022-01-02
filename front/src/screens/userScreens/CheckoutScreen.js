@@ -12,12 +12,17 @@ const stripePromise = loadStripe(
 export default function CheckoutScreen(props) {
   const cart = useSelector((state) => state.cart);
   const { shippingInformation } = cart;
+  const userSignIn = useSelector((state) => state.userSignIn);
+  const { userInfo } = userSignIn;
 
   const { cartItems } = cart;
   const [clientSecret, setClientSecret] = useState("");
 
   if (!shippingInformation) {
     props.history.push("/shipping");
+  }
+  if (!userInfo) {
+    props.history.push("/signin");
   }
 
   useEffect(() => {

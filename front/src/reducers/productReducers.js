@@ -23,6 +23,8 @@ import {
   PRODUCT_DELETE_REQUEST,
   PRODUCT_DELETE_SUCCESS,
   PRODUCT_DELETE_FAIL,
+  PRODUCT_COMMENT_REFRESH,
+  COMMENT_DELETE_REFRESH,
 } from "../constants/productConstants";
 
 export const productListReducer = (
@@ -61,6 +63,25 @@ export const productDetailsReducer = (state = { loading: true }, action) => {
       return { loading: false, coffeeUnit: action.payload };
     case PRODUCT_DETAILS_FAIL:
       return { loading: false, error: action.payload };
+    case PRODUCT_COMMENT_REFRESH:
+      return {
+        ...state,
+        coffeeUnit: {
+          ...state.coffeeUnit,
+          comments: [...state.coffeeUnit.comments, action.payload],
+        },
+      };
+    case COMMENT_DELETE_REFRESH:
+      return {
+        ...state,
+        coffeeUnit: {
+          ...state.coffeeUnit,
+          comments: state.coffeeUnit.comments.filter(
+            (x) => x._id !== action.payload
+          ),
+        },
+      };
+
     default:
       return state;
   }
@@ -71,7 +92,7 @@ export const productCommentCreateReducer = (state = {}, action) => {
     case PRODUCT_COMMENT_REQUEST:
       return { loading: true };
     case PRODUCT_COMMENT_SUCCESS:
-      return { loading: false, success: true, comment: action.payload };
+      return { loading: false, success: true };
     case PRODUCT_COMMENT_FAIL:
       return { loading: false, error: action.payload };
     default:

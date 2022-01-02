@@ -30,7 +30,7 @@ export default function CartScreen(props) {
         <div className="container">
           <div className="content is-medium has-text-centered">
             <h1 className="py-5">Cart</h1>
-            <hr />
+            <hr className="mx-4" />
           </div>
           {cartItems.map((item) => (
             <div>
@@ -74,7 +74,7 @@ export default function CartScreen(props) {
                   Total price: {(item.price * item.qty).toFixed(2)}€
                 </div>
               </div>
-              <hr />
+              <hr className="mx-4" />
             </div>
           ))}
 

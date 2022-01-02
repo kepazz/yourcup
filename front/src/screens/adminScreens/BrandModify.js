@@ -5,7 +5,8 @@ import { Link } from "react-router-dom";
 import { brandAdd, listBrands } from "../../actions/brandActions";
 import { productDelete } from "../../actions/productsActions";
 import LoadingComponent from "../../components/LoadingComponent";
-import Modal from "react-modal";
+
+import ToastComponent from "../../components/ToastComponent";
 
 export default function BrandModify() {
   const dispatch = useDispatch();
@@ -15,17 +16,6 @@ export default function BrandModify() {
   const [description, setDescription] = useState("");
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [modalData, setModalData] = useState(null);
-
-  const customStyles = {
-    content: {
-      top: "50%",
-      left: "50%",
-      right: "auto",
-      bottom: "auto",
-      marginRight: "-50%",
-      transform: "translate(-50%, -50%)",
-    },
-  };
 
   useEffect(() => {
     dispatch(listBrands());
@@ -51,18 +41,18 @@ export default function BrandModify() {
       {loading ? (
         <LoadingComponent></LoadingComponent>
       ) : error ? (
-        <p>KLAIDA</p>
+        <div className="content is-medium has-text-centered">
+          <h1 className="py-5">Error</h1>
+        </div>
       ) : (
         <div className="container">
           <div className="content is-medium has-text-centered">
             <h1 className="py-5">Brands screen</h1>
-           
           </div>
-          
 
           <div className="content is-medium has-text-centered">
             <h3 className="py-3">Brands and their products</h3>
-            <hr />
+            <hr className="mx-4" />
           </div>
 
           {brands.map((item, i, { length }) => (
@@ -121,50 +111,60 @@ export default function BrandModify() {
                 </table>
               ) : (
                 <div className="content is-medium has-text-centered">
-                <h5 className="">This brand has no products</h5>
-              </div>
+                  <h5 className="">This brand has no products</h5>
+                </div>
               )}
 
-              {i + 1 !== length && <hr />}
+              {i + 1 !== length && <hr className="mx-4" />}
             </div>
           ))}
 
-          <Modal
-            isOpen={modalIsOpen}
-            onRequestClose={() => setModalIsOpen(false)}
-            style={customStyles}
-            ariaHideApp={false}
-          >
-            {modalData && (
-              <div>
-                Are you sure you want to delete product named -{" "}
-                <strong>{modalData.name}</strong> ?
-                <div className="has-text-centered">
-                  <button
-                    className="button is-danger mr-2"
-                    onClick={() => {
-                      setModalIsOpen(false);
-                      deleteHandler(modalData._id, modalData.brand);
-                    }}
-                  >
-                    Yes
-                  </button>
-                  <button
-                    className="button is-success ml-2"
-                    onClick={() => setModalIsOpen(false)}
-                  >
-                    no
-                  </button>
+          {modalData && (
+            <div className={`modal  ${modalIsOpen ? "is-active" : ""}`}>
+              <div class="modal-background "></div>
+              <div class="modal-content box has-text-centered">
+                <div>
+                  <p className="title">
+                    Are you sure you want to delete product named -{" "}
+                    <strong>{modalData.name}</strong> ?
+                  </p>
+
+                  <div className="is-centered buttons">
+                    <button
+                      className="button is-rounded is-danger"
+                      onClick={() => {
+                        setModalIsOpen(false);
+                        deleteHandler(modalData._id, modalData.brand);
+                      }}
+                    >
+                      Yes
+                    </button>
+                    <button
+                      className="button is-rounded is-success "
+                      onClick={() => setModalIsOpen(false)}
+                    >
+                      no
+                    </button>
+                  </div>
                 </div>
               </div>
-            )}
-          </Modal>
+              <button
+                class="modal-close is-large"
+                aria-label="close"
+                onClick={() => {
+                  setModalIsOpen(!modalIsOpen);
+                  setModalData(null);
+                }}
+              ></button>
+            </div>
+          )}
+
           <div className="content is-medium has-text-centered">
             <h3 className="py-3">Include new brand</h3>
-            <hr />
+            <hr className="mx-4" />
           </div>
           <div className="columns   is-centered">
-            <div className="column is-5 ml-4">
+            <div className="column is-5 mx-4">
               <form onSubmit={submitHandler} autoComplete="off">
                 <div class="field">
                   <label htmlFor="name" class="label">
@@ -199,6 +199,7 @@ export default function BrandModify() {
                 </div>
                 <div class="field has-text-centered">
                   <button class="button is-success is-rounded">Submit</button>
+                  <ToastComponent />
                 </div>
               </form>
             </div>
