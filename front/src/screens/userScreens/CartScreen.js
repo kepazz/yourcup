@@ -71,7 +71,7 @@ export default function CartScreen(props) {
                   </button>
                 </div>
                 <div className="column is-size-5">
-                  Total price: {(item.price * item.qty)}€
+                  Total price: {((item.price * item.qty)).toFixed(2)}€
                 </div>
               </div>
               <hr className="mx-4" />
@@ -81,7 +81,7 @@ export default function CartScreen(props) {
           <div className="columns is-mobile">
             <div className="column is-three-fifths is-offset-one-fifth has-text-centered">
               <div className="is-size-3">
-                Total items: {cartItems.reduce((a, c) => a + c.qty, 0)}x
+                Total items: {(cartItems.reduce((a, c) => a + c.qty, 0)).toFixed(2)}x
               </div>
               <div className="is-size-3 ">
                 Total items price:{" "}
