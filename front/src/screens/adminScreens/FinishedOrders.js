@@ -5,7 +5,7 @@ import {
   OrderStatusChange,
 } from "../../actions/orderActions";
 import LoadingComponent from "../../components/LoadingComponent";
-import Modal from "react-modal";
+
 import { Link } from "react-router-dom";
 
 export default function FinishedOrders() {
