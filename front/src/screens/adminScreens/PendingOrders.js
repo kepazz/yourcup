@@ -162,7 +162,7 @@ export default function PendingOrders() {
                     {modalData.itemsPrice.toFixed(2)} €
                   </p>
                   <p>
-                    <strong>Total price:</strong>{" "}
+                    <strong>Total VAT price:</strong>{" "}
                     {modalData.priceVAT.toFixed(2)} €
                   </p>
                 <p>
