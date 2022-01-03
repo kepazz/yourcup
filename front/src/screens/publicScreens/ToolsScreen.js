@@ -68,7 +68,7 @@ export default function ToolsScreen() {
         <div>
           <div className="container">
             <div className="content is-medium has-text-centered">
-              <h1 className="py-5">Products screen</h1>
+              <h1 className="py-5">Tools screen</h1>
               <hr className="mx-4" />
             </div>
             <button

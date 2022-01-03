@@ -68,7 +68,7 @@ export default function BeveragesScreen() {
         <div>
           <div className="container">
             <div className="content is-medium has-text-centered">
-              <h1 className="py-5">Products screen</h1>
+              <h1 className="py-5">Beverages screen</h1>
               <hr className="mx-4"/>
             </div>
             <button
