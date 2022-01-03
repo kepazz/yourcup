@@ -75,8 +75,8 @@ export default function PendingOrders() {
                         </p>
                         <p>{item.shippingInformation.city}</p>
                       </td>
-                      <td>{item.itemsPrice}</td>
-                      <td>{item.priceVAT}</td>
+                      <td>{item.itemsPrice}{" "} €</td>
+                      <td>{item.priceVAT} {" "} €</td>
                       <td>
                         <Link to={`/user_summary/${item.user}`}>
                           <p>{item.user}</p>
