@@ -155,8 +155,8 @@ orderRouter.get(
         vat += item.priceVAT;
       });
       res.send({
-        totalSpend: spend,
-        totalVat: vat,
+        totalSpend: spend.toFixed(2),
+        totalVat: vat.toFixed(2),
         activeOrders: active,
         finishedOrders: finished,
         userEmail: userInfo.email,
