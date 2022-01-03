@@ -78,7 +78,7 @@ export default function BrandModify() {
                       <tr key={product._id}>
                         <td>{product.name}</td>
                         <td>
-                          <Link to={`/coffee/${product._id}`}>
+                          <Link to={`/product/${product._id}`}>
                             {product._id}
                           </Link>
                         </td>
