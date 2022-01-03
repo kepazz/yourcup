@@ -40,11 +40,11 @@ export default function UserOrderSummary(props) {
               </div>
               <div className="column is-size-5">{item.name}</div>
               <div className="column is-size-5">
-                Unit price: {item.price.toFixed(2)} €
+                Unit price: {item.price} €
               </div>
               <div className="column is-size-5">{item.qty} x </div>
               <div className="column is-size-5">
-                Total price: {(item.price * item.qty).toFixed(2)}€
+                Total price: {(item.price * item.qty)}€
               </div>
             </div>
             <hr className="mx-4" />
@@ -61,9 +61,11 @@ export default function UserOrderSummary(props) {
               Total items price:{" "}
               {orderData.orderItems
                 .reduce((a, c) => a + c.price * c.qty, 0)
-                .toFixed(2)}{" "}
+                }{" "}
               €
             </div>
+            <div className="is-size-3 ">Total items VAT price: {orderData.priceVAT} {" "}
+              €</div>
           </div>
         </div>
       </div>

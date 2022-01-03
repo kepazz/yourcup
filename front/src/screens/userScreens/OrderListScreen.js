@@ -44,6 +44,7 @@ export default function OrderListScreen(props) {
             <th>Order id</th>
             <th>Order paid at</th>
             <th>Total order price</th>
+            <th>Total order VAT price</th>
           </tr>
         </thead>
         <tbody>
@@ -57,7 +58,8 @@ export default function OrderListScreen(props) {
               </td>
 
               <td>{dateHandler(order.paidAt)}</td>
-              <td>{order.itemsPrice.toFixed(2)} €</td>
+              <td>{order.itemsPrice} €</td>
+              <td>{order.priceVAT} €</td>
             </tr>
           ))}
         </tbody>

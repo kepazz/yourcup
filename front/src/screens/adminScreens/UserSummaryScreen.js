@@ -61,11 +61,13 @@ export default function UserSummaryScreen(props) {
               </li>
               <li>
                 <strong>Total spend: </strong>
-                {summary.totalSpend}
+                {summary.totalSpend} {" "}
+              €
               </li>
               <li>
                 <strong>Total VAT: </strong>
-                {summary.totalVat}
+                {summary.totalVat} {" "}
+              €
               </li>
             </ul>
             <hr className="mx-4" />
