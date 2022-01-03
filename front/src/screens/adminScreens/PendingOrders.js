@@ -15,7 +15,6 @@ export default function PendingOrders() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [modalData, setModalData] = useState(null);
 
-
   useEffect(() => {
     dispatch(listOrdersByStatus("succeeded"));
   }, [dispatch]);
@@ -38,7 +37,9 @@ export default function PendingOrders() {
       {loading ? (
         <LoadingComponent></LoadingComponent>
       ) : error ? (
-        <p>sorry mate there is an error </p>
+        <div className="content is-medium has-text-centered">
+          <h1 className="py-5">Unexpected error</h1>
+        </div>
       ) : (
         <>
           <div className="container">
@@ -121,7 +122,6 @@ export default function PendingOrders() {
               </table>
             </div>
           </div>
-         
 
           {modalData && (
             <div className={`modal  ${modalIsOpen ? "is-active" : ""}`}>
@@ -158,21 +158,22 @@ export default function PendingOrders() {
                   </>
                 )}
                 <p>
-                    <strong>Total price:</strong>{" "}
-                    {modalData.itemsPrice.toFixed(2)} €
-                  </p>
-                  <p>
-                    <strong>Total VAT price:</strong>{" "}
-                    {modalData.priceVAT.toFixed(2)} €
-                  </p>
+                  <strong>Total price:</strong>{" "}
+                  {modalData.itemsPrice.toFixed(2)} €
+                </p>
                 <p>
-                    <strong>Status: </strong>
-                    <span className="line-through has-text-danger-dark ">
-                      {modalData.paymentResult.status}
-                    </span>{" "}
-                    changes into <span className="has-text-success-dark">Send</span>{" "}
-                    after the confirm
-                  </p>
+                  <strong>Total VAT price:</strong>{" "}
+                  {modalData.priceVAT.toFixed(2)} €
+                </p>
+                <p>
+                  <strong>Status: </strong>
+                  <span className="line-through has-text-danger-dark ">
+                    {modalData.paymentResult.status}
+                  </span>{" "}
+                  changes into{" "}
+                  <span className="has-text-success-dark">Send</span> after the
+                  confirm
+                </p>
                 <div class="buttons is-centered">
                   <button
                     class="button is-success is-rounded "

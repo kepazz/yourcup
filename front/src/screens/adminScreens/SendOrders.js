@@ -43,7 +43,9 @@ export default function SendOrders() {
       {loading ? (
         <LoadingComponent></LoadingComponent>
       ) : error ? (
-        <p>There is an error </p>
+        <div className="content is-medium has-text-centered">
+          <h1 className="py-5">Unexpected error</h1>
+        </div>
       ) : (
         <>
           <div className="container">

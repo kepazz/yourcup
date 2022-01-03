@@ -39,7 +39,9 @@ export default function FinishedOrders() {
       {loading ? (
         <LoadingComponent></LoadingComponent>
       ) : error ? (
-        <p>sorry mate there is an error </p>
+        <div className="content is-medium has-text-centered">
+          <h1 className="py-5">Unexpected error</h1>
+        </div>
       ) : (
         <>
           <div className="container">
