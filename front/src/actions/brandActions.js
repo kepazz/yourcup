@@ -10,6 +10,7 @@ import {
   BRAND_LIST_REQUEST,
   BRAND_LIST_SUCCESS,
 } from "../constants/brandConstants";
+import { PRODUCT_DELETE_FAIL, PRODUCT_DELETE_REQUEST, PRODUCT_DELETE_SUCCESS } from "../constants/productConstants";
 
 
 
@@ -58,5 +59,25 @@ export const listBrandDetails = (brand) => async (dispatch) => {
     dispatch({ type: BRAND_DETAILS_SUCCESS, payload: data });
   } catch (error) {
     dispatch({ type: BRAND_DETAILS_FAIL, payload: error.message });
+  }
+};
+
+export const brandDelete = (brand) => async (dispatch, getState) => {
+  dispatch({ type: PRODUCT_DELETE_REQUEST });
+  const {
+    userSignIn: { userInfo },
+  } = getState();
+  try {
+     await Axios.delete(`/api/brand/brandDelete`, {
+      data: {  brandId: brand },
+      headers: { Authorization: `Bearer ${userInfo.token}` },
+    });
+    dispatch({ type: PRODUCT_DELETE_SUCCESS });
+  } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+    dispatch({ type: PRODUCT_DELETE_FAIL, payload: message });
   }
 };

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { brandAdd, listBrands } from "../../actions/brandActions";
+import { brandAdd, brandDelete, listBrands } from "../../actions/brandActions";
 import { productDelete } from "../../actions/productsActions";
 import LoadingComponent from "../../components/LoadingComponent";
 
@@ -36,6 +36,11 @@ export default function BrandModify() {
     dispatch(listBrands());
   };
 
+  const deleteBrandHandler = (brandId) => {
+    dispatch(brandDelete(brandId));
+    dispatch(listBrands());
+  };
+
   return (
     <>
       {loading ? (
@@ -58,7 +63,7 @@ export default function BrandModify() {
           {brands.map((item, i, { length }) => (
             <div className="table-container mb-1">
               <div className="content is-medium has-text-centered">
-                <h3 className="">{item.name}</h3>
+                <h3 className="">{item.name}</h3> 
               </div>
               {item.products.length !== 0 ? (
                 <table className="table is-fullwidth is-bordered">
@@ -111,7 +116,8 @@ export default function BrandModify() {
                 </table>
               ) : (
                 <div className="content is-medium has-text-centered">
-                  <h5 className="">This brand has no products</h5>
+                  <h5 className="">This brand has no products </h5>
+                  <button className="button btn-prim is-rounded" onClick={()=>deleteBrandHandler(item._id)}>Delete</button>
                 </div>
               )}
 

@@ -71,7 +71,8 @@ export default function CartScreen(props) {
                   </button>
                 </div>
                 <div className="column is-size-5">
-                  Total price: {((item.price * item.qty)).toFixed(2)}€
+                Total price: {((item.price * item.qty)).toFixed(2)} {" "}€
+                  
                 </div>
               </div>
               <hr className="mx-4" />
@@ -85,7 +86,7 @@ export default function CartScreen(props) {
               </div>
               <div className="is-size-3 ">
                 Total items price:{" "}
-                {cartItems.reduce((a, c) => a + c.price * c.qty, 0)}{" "}
+                {cartItems.reduce((a, c) => a + c.price * c.qty, 0).toFixed(2)}{" "}
                 €
               </div>
               <div className="is-size-3 ">
