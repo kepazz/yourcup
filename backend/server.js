@@ -22,7 +22,8 @@ app.use(express.urlencoded({limit: "30mb",extended:true}));
 app.use(cors())
 
 const calculateOrderAmount = (items) => {
-  return items.reduce((a, c) => a + c.price * c.qty, 0) * 100 || 50;
+  return Math.round(items.reduce((a, c) => a + c.price * c.qty, 0) * 100) || 50;
+  
 };
 
 if(process.env.NODE_ENV === "production"){

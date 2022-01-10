@@ -21,7 +21,6 @@ brandRouter.post(
   isAuth,
   isAdmin,
   expressAsyncHandler(async (req, res) => {
-    console.log(req.body.content);
     const brandNew = new Brand({
       name: req.body.name,
       description: req.body.description,
@@ -35,12 +34,11 @@ brandRouter.get(
   "/:brand",
   expressAsyncHandler(async (req, res) => {
     console.log(req.params.brand);
-    //const brandInfo = await Brand.findOne({ name: req.params.brand });
+
     const brandInfo = await Brand.findOne({ name: req.params.brand }).populate(
       "products"
     );
     if (brandInfo) {
-      
       res.send(brandInfo);
     } else {
       res.status(404).send({ message: "Brand does not exist " });
@@ -53,7 +51,6 @@ brandRouter.post(
   isAuth,
   isAdmin,
   expressAsyncHandler(async (req, res) => {
-    
     const brand = await Brand.findOne({ name: req.body.brand });
 
     brand.save(function (err) {
@@ -78,8 +75,26 @@ brandRouter.post(
       brand.products.push(newProduct._id);
       brand.save();
     });
-    
+
     res.send(brand);
+  })
+);
+
+brandRouter.delete(
+  "/brandDelete",
+  isAuth,
+  isAdmin,
+  expressAsyncHandler(async (req, res) => {
+    const brandDelete = Brand.findOne({ _id: req.body.brandId });
+
+    if (brandDelete) {
+      Brand.findByIdAndRemove({ _id: req.body.brandId }, (err) => {
+        if (err) res.status(404).send(err);
+        else res.send({ message: `Deleted ${req.body.brandId}` });
+      });
+    } else {
+      res.status(404).send({ message: "Something went wrong " });
+    }
   })
 );
 
