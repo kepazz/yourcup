@@ -5,3 +5,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 # Link to website
 
 [Link](https://yoourcup.herokuapp.com/)
+
+<details>
+<summary><b>Additional info</b></summary>
+
+admin credentials: mail: admin@gmail.com , passw: admin
+
+</details>
